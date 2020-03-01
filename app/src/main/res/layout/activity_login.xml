@@ -6,124 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <VideoView
+        android:id="@+id/videoLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="Welcome to Sallefy"
-        android:textColor="@android:color/black"
+        android:textColor="#c4bdab"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginTop="50sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
             android:hint="Email"
-            android:backgroundTint="@android:color/transparent"
             android:padding="15dp"
-            android:layout_marginStart="30dp"
-            android:textColorHint="#797979"
             android:textColor="#292929"
-            android:layout_marginEnd="30dp"/>
+            android:textColorHint="#c4bdab" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
             android:layout_marginTop="4dp"
-            android:background="#494949"
-            />
+            android:layout_marginEnd="30dp"
+            android:background="#494949" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:backgroundTint="@android:color/transparent"
-            android:padding="15dp"
             android:layout_marginStart="30dp"
-            android:textColorHint="#797979"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Password"
+            android:padding="15dp"
             android:textColor="#292929"
-            android:layout_marginEnd="30dp"/>
+            android:textColorHint="#c4bdab" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
             android:layout_marginTop="4dp"
-            android:background="#494949"
-            />
+            android:layout_marginEnd="30dp"
+            android:background="#494949" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:clipToPadding="false">
+            
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:text="Login"
+                android:textColor="#fff"
+                android:background="@drawable/button"/>
+
+            
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabCustomSize="80dp"
-                android:layout_alignParentEnd="true"
-                app:elevation="0dp"
-                android:elevation="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="30dp"
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sing in"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="#191919"
-                android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="30dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="30dp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign up"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:padding="16sp"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="30dp"
-                android:layout_centerInParent="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginLeft="30dp"
-                android:layout_alignParentLeft="true" />
+                android:padding="16sp"
+                android:text="Sign up"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#ea9085"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot password"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:padding="16sp"
-                android:layout_marginEnd="30dp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp" />
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:padding="16sp"
+                android:text="Forgot password"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#ea9085"/>
         </RelativeLayout>
 
     </LinearLayout>
 
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>
