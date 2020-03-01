@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sallefy</string>
+    <string name="welcome_to_sallefy">Bienvenido a Sallefy</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password">¿Contraseña olvidada?</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="sign_up">Registrarse</string>
+</resources>
