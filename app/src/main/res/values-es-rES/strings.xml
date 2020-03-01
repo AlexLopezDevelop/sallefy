@@ -7,4 +7,6 @@
     <string name="forgot_password">¿Contraseña olvidada?</string>
     <string name="login">Iniciar Sesión</string>
     <string name="sign_up">Registrarse</string>
+    <string name="username">Usuario</string>
+    <string name="i_already_have_an_account">Ya tengo una cuenta</string>
 </resources>

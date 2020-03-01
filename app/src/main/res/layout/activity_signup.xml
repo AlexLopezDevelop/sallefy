@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupActivity">
 
-    <VideoView
-        android:id="@+id/videoLogin"
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:background="@drawable/signup"/>
+    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_to_sallefy"
+        android:text="The sound starts here"
         android:textColor="#c4bdab"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -29,6 +29,25 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@android:color/transparent"
+        android:hint="@string/username"
+        android:padding="15dp"
+        android:textColor="#292929"
+        android:textColorHint="#c4bdab" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="#494949" />
 
         <EditText
             android:layout_width="match_parent"
@@ -49,61 +68,41 @@
             android:layout_marginEnd="30dp"
             android:background="#494949" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:backgroundTint="@android:color/transparent"
-            android:hint="@string/password"
-            android:padding="15dp"
-            android:textColor="#292929"
-            android:textColorHint="#c4bdab" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@android:color/transparent"
+        android:hint="@string/password"
+        android:padding="15dp"
+        android:textColor="#292929"
+        android:textColorHint="#c4bdab" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="30dp"
-            android:background="#494949" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:clipToPadding="false">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="30dp"
-                android:layout_marginRight="30dp"
-                android:padding="16sp"
-                android:text="@string/forgot_password"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#ea9085"/>
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="#494949" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="5dp"
+            android:layout_marginTop="20dp"
             android:clipToPadding="false">
-            
+
             <Button
                 android:layout_width="220dp"
                 android:layout_height="45dp"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textColor="#fff"
                 android:background="@drawable/button"/>
 
-            
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -115,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16sp"
-                android:text="@string/sign_up"
+                android:text="@string/i_already_have_an_account"
                 android:textColor="#ea9085"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -123,6 +122,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
