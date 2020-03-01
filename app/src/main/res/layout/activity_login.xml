@@ -71,37 +71,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="20dp"
+            android:gravity="right"
             android:clipToPadding="false">
-            
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:text="Login"
-                android:textColor="#fff"
-                android:background="@drawable/button"/>
-
-            
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:padding="16sp"
-                android:text="Sign up"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#ea9085"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,6 +87,39 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#ea9085"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:clipToPadding="false">
+            
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="45dp"
+                android:text="Login"
+                android:textColor="#fff"
+                android:background="@drawable/button"/>
+
+            
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16sp"
+                android:text="Sign up"
+                android:textColor="#ea9085"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
         </RelativeLayout>
 
     </LinearLayout>
