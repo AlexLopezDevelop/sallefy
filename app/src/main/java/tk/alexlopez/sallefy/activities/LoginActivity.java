@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvForgotPassword;
     private Button btLogin;
     private TextView tvSignUp;
+    private ImageView ivBackground;
 
 
     @Override
@@ -28,11 +30,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initViews();
+    }
 
-        // Video background configuration
-        String videoLoginPath = "android.resource://"+getPackageName()+"/"+R.raw.login_video;
-        vvLogin.setVideoPath(videoLoginPath);
-        vvLogin.start();
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // Set background image
+        ivBackground = findViewById(R.id.login_background);
+        ivBackground .setVisibility(View.VISIBLE);
     }
 
     private void initViews() {
@@ -56,12 +62,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Start login
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doLogin(etUsername.getText().toString(), etPassword.getText().toString());
             }
         });
+
+
+        // Video background configuration
+        String videoLoginPath = "android.resource://"+getPackageName()+"/"+R.raw.login_video;
+        vvLogin.setVideoPath(videoLoginPath);
+        vvLogin.start();
 
     }
 
