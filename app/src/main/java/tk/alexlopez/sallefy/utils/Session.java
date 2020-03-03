@@ -2,9 +2,9 @@ package tk.alexlopez.sallefy.utils;
 
 import android.content.Context;
 
-import salle.android.projects.registertest.model.User;
-import salle.android.projects.registertest.model.UserRegister;
-import salle.android.projects.registertest.model.UserToken;
+import tk.alexlopez.sallefy.models.User;
+import tk.alexlopez.sallefy.models.UserRegister;
+import tk.alexlopez.sallefy.models.UserToken;
 
 public class Session {
 

@@ -9,11 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.models.User;
+import tk.alexlopez.sallefy.models.UserToken;
+import tk.alexlopez.sallefy.network.callback.UserCallback;
+import tk.alexlopez.sallefy.network.manager.UserManager;
+import tk.alexlopez.sallefy.utils.Session;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements UserCallback {
 
     private VideoView vvLogin;
     private EditText etUsername;
@@ -79,6 +85,41 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void doLogin(String username, String userpassword) {
-        // TODO: Create login
+        UserManager.getInstance(getApplicationContext())
+                .loginAttempt(username, userpassword, LoginActivity.this);
     }
+
+    @Override
+    public void onLoginSuccess(UserToken userToken) {
+        Session.getInstance(getApplicationContext())
+                .setUserToken(userToken);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLoginFailure(Throwable throwable) {
+        Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRegisterSuccess() {
+
+    }
+
+    @Override
+    public void onRegisterFailure(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onUserInfoReceived(User userData) {
+
+    }
+
+    @Override
+    public void onFailure(Throwable throwable) {
+
+    }
+
 }
