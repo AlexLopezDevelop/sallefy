@@ -8,4 +8,7 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="i_already_have_an_account">I already have an account</string>
+    <string name="tracks">Tracks</string>
+    <string name="advance_list">Advance list</string>
+    <string name="track_list">Track list</string>
 </resources>

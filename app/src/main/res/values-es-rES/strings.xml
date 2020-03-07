@@ -9,4 +9,7 @@
     <string name="sign_up">Registrarse</string>
     <string name="username">Usuario</string>
     <string name="i_already_have_an_account">Ya tengo una cuenta</string>
+    <string name="tracks">Canciones</string>
+    <string name="advance_list">Lista avanzada</string>
+    <string name="track_list">Lista de canciones</string>
 </resources>
