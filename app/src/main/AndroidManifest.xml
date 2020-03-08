@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.TrackListActivity"></activity>
+        <activity android:name=".CreatePlaylistActivity"></activity>
+        <activity android:name=".activities.AdvancedListActivity" />
+        <activity android:name=".activities.TrackListActivity" />
         <activity
             android:name=".activities.SignupActivity"
             android:theme="@style/AppTheme.NoActionBar" />

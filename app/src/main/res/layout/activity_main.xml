@@ -7,10 +7,21 @@
     tools:context=".activities.MainActivity">
 
     <Button
+        android:id="@+id/show_advanced_tracks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/advance_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_tracks" />
+
+    <Button
         android:id="@+id/show_tracks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="228dp"
         android:text="@string/tracks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -18,13 +29,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/show_advanced_tracks"
+        android:id="@+id/show_add_track_playlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="292dp"
-        android:text="@string/advance_list"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="12dp"
+        android:text="@string/add_track_to_playlist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_create_playlist" />
+
+    <Button
+        android:id="@+id/show_playlists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/playlists"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_add_track_playlist" />
+
+    <Button
+        android:id="@+id/show_create_playlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/create_playlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_advanced_tracks" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

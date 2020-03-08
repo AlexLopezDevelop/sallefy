@@ -11,4 +11,10 @@
     <string name="tracks">Tracks</string>
     <string name="advance_list">Advance list</string>
     <string name="track_list">Track list</string>
+    <string name="default_track_title">Track title</string>
+    <string name="default_track_author">Autor</string>
+    <string name="create_playlist">Create playlist</string>
+    <string name="add_track_to_playlist">Add track to playlist</string>
+    <string name="playlists">Playlists</string>
+    <string name="playlist_name">Playlist name</string>
 </resources>

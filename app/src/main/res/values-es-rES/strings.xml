@@ -12,4 +12,10 @@
     <string name="tracks">Canciones</string>
     <string name="advance_list">Lista avanzada</string>
     <string name="track_list">Lista de canciones</string>
+    <string name="default_track_title">Título canción</string>
+    <string name="default_track_author">Autor/a</string>
+    <string name="create_playlist">Crear lista</string>
+    <string name="add_track_to_playlist">Añadir cancion a una playlist</string>
+    <string name="playlists">Playlists</string>
+    <string name="playlist_name">Nombre de la playlist</string>
 </resources>
