@@ -82,7 +82,27 @@ public class PlaylistManager {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
         Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<List<Playlist>>() {
+            @Override
+            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
 
+                int code = response.code();
+
+                if (response.isSuccessful()){
+                    playlistCallback.onPlaylistReceived(response.body());
+                } else {
+                    Log.d(TAG, "Error Not Successful: " + code);
+                    playlistCallback.onNoPlaylists(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
 
     }
 }
