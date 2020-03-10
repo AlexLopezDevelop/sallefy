@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
 
     private RecyclerView mRecyclerView;
     private ArrayList<Track> mTracks;
+    private TextView mPlaylistTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,9 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
     }
 
     private void initViews() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        mPlaylistTitle = findViewById(R.id.playlist_title);
+        mRecyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         TrackListAdapter adapter = new TrackListAdapter(this, null);
         mRecyclerView.setLayoutManager(manager);
@@ -38,8 +44,18 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
     }
 
     private void getData() {
-        TrackManager.getInstance(this).getAllTracks(this);
-        mTracks = new ArrayList<>();
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+
+        if (id != -1) {
+            TrackManager.getInstance(this).getAllTracksByPlaylistId(id, this);
+            mTracks = new ArrayList<>();
+        } else {
+            TrackManager.getInstance(this).getAllTracks(this);
+            mTracks = new ArrayList<>();
+        }
+
     }
 
     @Override

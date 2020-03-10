@@ -37,7 +37,10 @@ public class CreatePlaylistActivity extends AppCompatActivity implements Playlis
             @Override
             public void onClick(View v) {
                 String playlistName = etPlaylistName.getText().toString();
-                PlaylistManager.getInstance(getApplicationContext()).createPlaylist(playlistName, this);
+
+                Playlist playlist = new Playlist(playlistName);
+
+                PlaylistManager.getInstance(getApplicationContext()).createPlaylist(playlist, this);
             }
         });
 

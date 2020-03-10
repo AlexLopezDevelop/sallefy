@@ -48,11 +48,11 @@ public class PlaylistManager {
         mPlaylistService = mRetrofit.create(PlaylistService.class);
     }
 
-    public synchronized void createPlaylist(String playlistName, final View.OnClickListener playlistCallback) {
+    public synchronized void createPlaylist(Playlist playlist, final View.OnClickListener playlistCallback) {
 
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Playlist> call = mPlaylistService.createPlaylist(new Playlist(playlistName), "Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mPlaylistService.createPlaylist(playlist, "Bearer " + userToken.getIdToken());
         call.enqueue(new Callback<Playlist>() {
 
 

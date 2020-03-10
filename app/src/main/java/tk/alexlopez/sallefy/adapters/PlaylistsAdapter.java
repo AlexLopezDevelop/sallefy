@@ -1,6 +1,7 @@
 package tk.alexlopez.sallefy.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.AdvancedListActivity;
+import tk.alexlopez.sallefy.activities.TrackListActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 
 public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.ViewHolder> {
@@ -39,6 +43,7 @@ public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvTitle.setText(mPlaylists.get(position).getName());
         holder.tvAuthor.setText(mPlaylists.get(position).getOwner().getFirstName());
+        holder.idPlaylist = mPlaylists.get(position).getId();
         if (mPlaylists.get(position).getThumbnail() != null) {
             Glide.with(mContext)
                     .asBitmap()
@@ -58,12 +63,22 @@ public class PlaylistsAdapter extends RecyclerView.Adapter<PlaylistsAdapter.View
         TextView tvTitle;
         TextView tvAuthor;
         ImageView ivPicture;
+        int idPlaylist;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.playlist_title);
             tvAuthor = itemView.findViewById(R.id.playlist_author);
             ivPicture = itemView.findViewById(R.id.playlist_img);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AdvancedListActivity.class);
+                    intent.putExtra("id", idPlaylist);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
