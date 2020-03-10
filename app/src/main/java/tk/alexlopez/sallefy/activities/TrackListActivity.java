@@ -10,6 +10,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
@@ -46,6 +47,11 @@ public class TrackListActivity extends AppCompatActivity implements TrackCallbac
             res.append(t.getName() + " - " + t.getUser().getLogin() + "\n");
         }
         updateList(res.toString());
+    }
+
+    @Override
+    public void onTracksReceivedByPlaylistId(Playlist playlist) {
+
     }
 
     @Override

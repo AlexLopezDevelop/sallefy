@@ -44,10 +44,15 @@ public class PlaylistsActivity extends AppCompatActivity implements PlaylistCall
     }
 
     @Override
-    public void onPlaylistReceived(List<Playlist> playlists) {
+    public void onPlaylistsReceived(List<Playlist> playlists) {
         mPlaylists = (ArrayList) playlists;
         PlaylistsAdapter adapter = new PlaylistsAdapter(this, mPlaylists);
         mRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onPlaylistReceived(Playlist playlist) {
+
     }
 
     @Override

@@ -1,12 +1,12 @@
 package tk.alexlopez.sallefy.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
@@ -24,19 +25,18 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
     private ArrayList<Track> mTracks;
     private TextView mPlaylistTitle;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advanced_list);
-
         initViews();
         getData();
     }
 
     private void initViews() {
-
-        mPlaylistTitle = findViewById(R.id.playlist_title);
         mRecyclerView = findViewById(R.id.recyclerView);
+        mPlaylistTitle = findViewById(R.id.playlist_title);
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         TrackListAdapter adapter = new TrackListAdapter(this, null);
         mRecyclerView.setLayoutManager(manager);
@@ -50,17 +50,23 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
 
         if (id != -1) {
             TrackManager.getInstance(this).getAllTracksByPlaylistId(id, this);
-            mTracks = new ArrayList<>();
         } else {
             TrackManager.getInstance(this).getAllTracks(this);
-            mTracks = new ArrayList<>();
         }
+
+        mTracks = new ArrayList<>();
 
     }
 
     @Override
     public void onTracksReceived(List<Track> tracks) {
         mTracks = (ArrayList) tracks;
+        TrackListAdapter adapter = new TrackListAdapter(this, mTracks);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    public void onTracksReceivedByPlaylistId(Playlist playlist) {
+        mTracks = (ArrayList) playlist.getTracks();
         TrackListAdapter adapter = new TrackListAdapter(this, mTracks);
         mRecyclerView.setAdapter(adapter);
     }

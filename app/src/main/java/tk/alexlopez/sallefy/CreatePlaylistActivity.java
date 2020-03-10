@@ -47,8 +47,13 @@ public class CreatePlaylistActivity extends AppCompatActivity implements Playlis
     }
 
     @Override
-    public void onPlaylistReceived(List<Playlist> playlists) {
+    public void onPlaylistsReceived(List<Playlist> playlists) {
         Toast.makeText(getApplicationContext(), "OKEY", Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void onPlaylistReceived(Playlist playlist) {
+
     }
 
     @Override
@@ -69,5 +74,10 @@ public class CreatePlaylistActivity extends AppCompatActivity implements Playlis
     @Override
     public void onFailure(Throwable throwable) {
         Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

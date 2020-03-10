@@ -11,12 +11,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import tk.alexlopez.sallefy.PlaylistsActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
 import tk.alexlopez.sallefy.network.service.PlaylistService;
-import tk.alexlopez.sallefy.network.service.UserTokenService;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -89,7 +87,7 @@ public class PlaylistManager {
                 int code = response.code();
 
                 if (response.isSuccessful()){
-                    playlistCallback.onPlaylistReceived(response.body());
+                    playlistCallback.onPlaylistsReceived(response.body());
                 } else {
                     Log.d(TAG, "Error Not Successful: " + code);
                     playlistCallback.onNoPlaylists(new Throwable("ERROR " + code + ", " + response.raw().message()));
@@ -103,6 +101,6 @@ public class PlaylistManager {
                 playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
-
     }
+
 }

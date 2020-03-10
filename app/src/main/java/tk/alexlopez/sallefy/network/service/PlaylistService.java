@@ -21,7 +21,4 @@ public interface PlaylistService {
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String token);
 
-    @GET("playlists/{id}/")
-    Call<List<Track>> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
-
 }
