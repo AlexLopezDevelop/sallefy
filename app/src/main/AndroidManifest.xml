@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreatePlaylistActivity"></activity>
+        <activity android:name=".PlaylistsActivity"></activity>
+        <activity android:name=".CreatePlaylistActivity" />
         <activity android:name=".activities.AdvancedListActivity" />
         <activity android:name=".activities.TrackListActivity" />
         <activity

@@ -11,6 +11,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tk.alexlopez.sallefy.PlaylistsActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
@@ -28,7 +29,6 @@ public class PlaylistManager {
     private Context mContext;
 
     private PlaylistService mPlaylistService;
-    private UserTokenService mTokenService;
 
 
     public static PlaylistManager getInstance(Context context) {
@@ -52,7 +52,7 @@ public class PlaylistManager {
 
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Playlist> call = mPlaylistService.createPlaylist(playlistName, "Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mPlaylistService.createPlaylist(new Playlist(playlistName), "Bearer " + userToken.getIdToken());
         call.enqueue(new Callback<Playlist>() {
 
 
@@ -75,5 +75,14 @@ public class PlaylistManager {
                 //playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
+    }
+
+    public synchronized void getAllPlaylists(final PlaylistCallback playlistCallback) {
+
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+
+        Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
+
+
     }
 }
