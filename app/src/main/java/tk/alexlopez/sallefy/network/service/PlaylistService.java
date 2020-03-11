@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
@@ -21,4 +22,9 @@ public interface PlaylistService {
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String token);
 
+    @PUT("playlists")
+    Call<Playlist> addTrackToPlaylist(@Header("Authorization") String token);
+
+    @GET("playlists/8")
+    Call<Playlist> getPlaylistById(@Header("Authorization") String token);
 }

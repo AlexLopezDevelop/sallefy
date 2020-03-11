@@ -7,7 +7,7 @@ import java.util.List;
 public class Playlist {
 
     @SerializedName("id")
-    private int id;
+    private Integer id;
 
     @SerializedName("name")
     private String name;

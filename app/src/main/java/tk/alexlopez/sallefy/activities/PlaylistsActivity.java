@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy;
+package tk.alexlopez.sallefy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.PlaylistsAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;

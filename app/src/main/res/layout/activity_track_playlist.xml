@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreatePlaylistActivity">
-
+    tools:context=".TrackPlaylistActivity">
 
     <EditText
-        android:id="@+id/playlist_name"
+        android:id="@+id/id_playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
         android:backgroundTint="@android:color/transparent"
-        android:hint="@string/playlist_name"
-        android:inputType="text"
+        android:hint="Playlist id"
+        android:inputType="number"
         android:padding="15dp"
         android:textColor="#292929"
         android:textColorHint="#c4bdab"
@@ -24,26 +23,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#494949"
-        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        app:layout_constraintTop_toBottomOf="@+id/id_playlist"
+        tools:layout_editor_absoluteX="-16dp" />
+
+    <EditText
+        android:id="@+id/id_track"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:backgroundTint="@android:color/transparent"
+        android:hint="Track id"
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColor="#292929"
+        android:textColorHint="#c4bdab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_playlist" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#494949"
+        app:layout_constraintTop_toBottomOf="@+id/id_track"
         tools:layout_editor_absoluteX="-16dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:clipToPadding="false"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/playlist_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+
         tools:layout_editor_absoluteX="0dp">
 
         <Button
-            android:id="@+id/create_playlist_button"
+            android:id="@+id/add_track_to_playlist"
             android:layout_width="220dp"
             android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/button"
             android:text="@string/create_playlist"
             android:textColor="#fff" />

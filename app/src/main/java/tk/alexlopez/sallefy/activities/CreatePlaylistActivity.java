@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy;
+package tk.alexlopez.sallefy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
 import tk.alexlopez.sallefy.network.manager.PlaylistManager;
@@ -36,11 +37,10 @@ public class CreatePlaylistActivity extends AppCompatActivity implements Playlis
         btCreatePlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String playlistName = etPlaylistName.getText().toString();
-
                 Playlist playlist = new Playlist(playlistName);
-
-                PlaylistManager.getInstance(getApplicationContext()).createPlaylist(playlist, this);
+                PlaylistManager.getInstance(getApplicationContext()).createPlaylist(playlist, CreatePlaylistActivity.this);
             }
         });
 
@@ -48,17 +48,17 @@ public class CreatePlaylistActivity extends AppCompatActivity implements Playlis
 
     @Override
     public void onPlaylistsReceived(List<Playlist> playlists) {
-        Toast.makeText(getApplicationContext(), "OKEY", Toast.LENGTH_LONG);
+
     }
 
     @Override
     public void onPlaylistReceived(Playlist playlist) {
-
+        Toast.makeText(getApplicationContext(), "Playlist creada", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onNoPlaylists(Throwable throwable) {
-        Toast.makeText(getApplicationContext(), "Call failed!", Toast.LENGTH_LONG);
+        Toast.makeText(getApplicationContext(), "Call failed!", Toast.LENGTH_LONG).show();
     }
 
     @Override
