@@ -55,6 +55,16 @@ public class TrackListActivity extends AppCompatActivity implements TrackCallbac
     }
 
     @Override
+    public void onPlaylistUpdated(Playlist playlist) {
+
+    }
+
+    @Override
+    public void onTrackReceived(Track track) {
+
+    }
+
+    @Override
     public void onNoTracks(Throwable throwable) {
         Toast.makeText(getApplicationContext(), "Call failed!", Toast.LENGTH_LONG);
     }

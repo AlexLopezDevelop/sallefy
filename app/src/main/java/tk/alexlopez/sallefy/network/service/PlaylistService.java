@@ -22,9 +22,4 @@ public interface PlaylistService {
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String token);
 
-    @PUT("playlists")
-    Call<Playlist> addTrackToPlaylist(@Header("Authorization") String token);
-
-    @GET("playlists/8")
-    Call<Playlist> getPlaylistById(@Header("Authorization") String token);
 }

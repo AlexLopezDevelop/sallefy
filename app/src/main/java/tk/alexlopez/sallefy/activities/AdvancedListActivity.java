@@ -72,6 +72,16 @@ public class AdvancedListActivity extends AppCompatActivity implements TrackCall
     }
 
     @Override
+    public void onPlaylistUpdated(Playlist playlist) {
+
+    }
+
+    @Override
+    public void onTrackReceived(Track track) {
+
+    }
+
+    @Override
     public void onNoTracks(Throwable throwable) {
 
     }

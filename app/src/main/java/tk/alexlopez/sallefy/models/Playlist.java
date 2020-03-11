@@ -97,4 +97,8 @@ public class Playlist {
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
+
+    public void addTrack (Track track) {
+        this.tracks.add(track);
+    }
 }
