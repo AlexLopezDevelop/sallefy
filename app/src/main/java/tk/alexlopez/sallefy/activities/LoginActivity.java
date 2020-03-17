@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
             }
         });
 
-        // Start login
+        // Start login view
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
