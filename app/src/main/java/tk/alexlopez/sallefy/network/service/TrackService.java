@@ -3,8 +3,10 @@ package tk.alexlopez.sallefy.network.service;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
@@ -23,4 +25,9 @@ public interface TrackService {
     @GET("playlists/{id}/")
     Call<Playlist> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
 
+    @GET("tracks/{id}/")
+    Call<Track> getTrackById(@Path("id") int id, @Header("Authorization") String token);
+
+    @PUT("playlists")
+    Call<Playlist> addTrackToPlaylist(@Body Playlist playlist, @Header("Authorization") String token);
 }

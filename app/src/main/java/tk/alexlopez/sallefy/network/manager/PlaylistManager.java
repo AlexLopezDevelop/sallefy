@@ -76,31 +76,6 @@ public class PlaylistManager {
         });
     }
 
-    public synchronized void addTrackToPlaylist(Playlist playlist, final PlaylistCallback playlistCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<Playlist> call = mPlaylistService.createPlaylist(playlist, "Bearer " + userToken.getIdToken());
-        call.enqueue(new Callback<Playlist>() {
-
-            @Override
-            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
-                int code = response.code();
-
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "Successful: " + code);
-                    playlistCallback.onPlaylistReceived(response.body());
-                } else {
-                    Log.d(TAG, "Error Not Successful: " + code);
-                    playlistCallback.onNoPlaylists(new Throwable("ERROR " + code + ", " + response.raw().message()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Playlist> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-            }
-        });
-    }
-
     public synchronized void getAllPlaylists(final PlaylistCallback playlistCallback) {
 
         UserToken userToken = Session.getInstance(mContext).getUserToken();
@@ -127,35 +102,5 @@ public class PlaylistManager {
                 playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
-    }
-
-    public synchronized void getPlaylistById(int playlistId, final PlaylistCallback playlistCallback) {
-
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
-
-        Call<Playlist> call = mPlaylistService.getPlaylistById("Bearer " + userToken.getIdToken());
-        call.enqueue(new Callback<Playlist>() {
-
-
-            @Override
-            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
-                int code = response.code();
-
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "Successful: " + code);
-                    playlistCallback.onPlaylistReceived(response.body());
-                } else {
-                    Log.d(TAG, "Error Not Successful: " + code);
-                    playlistCallback.onNoPlaylists(new Throwable("ERROR " + code + ", " + response.raw().message()));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Playlist> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                //playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
-            }
-        });
-
     }
 }

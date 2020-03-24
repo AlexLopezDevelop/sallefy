@@ -6,18 +6,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
+import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
+import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.PlaylistManager;
+import tk.alexlopez.sallefy.network.manager.TrackManager;
 
-public class TrackPlaylistActivity extends AppCompatActivity implements PlaylistCallback {
+public class TrackPlaylistActivity extends AppCompatActivity implements TrackCallback {
 
     private EditText etPlaylistId;
     private EditText etTrackId;
     private Button btAddTrackToPlaylist;
+
+    private Playlist mPlaylist;
+    private Track mTrack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,45 +47,65 @@ public class TrackPlaylistActivity extends AppCompatActivity implements Playlist
             @Override
             public void onClick(View v) {
 
-                Playlist playlist = new Playlist("paco");
-
                 int playlistId = Integer.parseInt(etPlaylistId.getText().toString());
-                int trackId = Integer.parseInt(etTrackId.getText().toString());
 
-                PlaylistManager.getInstance(getApplicationContext()).getPlaylistById(playlistId, TrackPlaylistActivity.this);
 
-                //PlaylistManager.getInstance(getApplicationContext()).addTrackToPlaylist(playlist, TrackPlaylistActivity.this);
+                TrackManager.getInstance(getApplicationContext()).getAllTracksByPlaylistId(playlistId, TrackPlaylistActivity.this);
+
+
+
+
+
             }
         });
     }
 
-    @Override
-    public void onPlaylistsReceived(List<Playlist> playlists) {
 
-    }
-
-    @Override
-    public void onPlaylistReceived(Playlist playlist) {
-
-    }
-
-    @Override
-    public void onNoPlaylists(Throwable throwable) {
-
-    }
-
-    @Override
-    public void onPersonalPlaylists(List<Playlist> playlists) {
-
-    }
-
-    @Override
-    public void onUserPlaylistsReceived(List<Playlist> playlists) {
-
-    }
 
     @Override
     public void onFailure(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onTracksReceived(List<Track> tracks) {
+
+    }
+
+    @Override
+    public void onTracksReceivedByPlaylistId(Playlist playlist) {
+        mPlaylist = playlist;
+        int trackId = Integer.parseInt(etTrackId.getText().toString());
+        TrackManager.getInstance(getApplicationContext()).getTrackById(trackId, TrackPlaylistActivity.this);
+    }
+
+    @Override
+    public void onPlaylistUpdated(Playlist playlist) {
+        Toast.makeText(getApplicationContext(), "Playlist updated", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onTrackReceived(Track track) {
+        mTrack = track;
+        if (mPlaylist != null && mTrack != null) {
+            TrackManager.getInstance(getApplicationContext()).addTrackToPlaylist(mPlaylist, mTrack, TrackPlaylistActivity.this);
+        } else {
+            // TODO: Show error
+        }
+    }
+
+    @Override
+    public void onNoTracks(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onPersonalTracksReceived(List<Track> tracks) {
+
+    }
+
+    @Override
+    public void onUserTracksReceived(List<Track> tracks) {
 
     }
 }

@@ -8,6 +8,8 @@ import tk.alexlopez.sallefy.models.Track;
 public interface TrackCallback extends FailureCallback {
     void onTracksReceived(List<Track> tracks);
     void onTracksReceivedByPlaylistId(Playlist playlist);
+    void onPlaylistUpdated(Playlist playlist);
+    void onTrackReceived(Track track);
     void onNoTracks(Throwable throwable);
     void onPersonalTracksReceived(List<Track> tracks);
     void onUserTracksReceived(List<Track> tracks);
