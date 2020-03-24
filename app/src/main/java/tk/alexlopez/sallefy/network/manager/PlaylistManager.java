@@ -71,7 +71,7 @@ public class PlaylistManager {
             @Override
             public void onFailure(Call<Playlist> call, Throwable t) {
                 Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                //playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+                /*playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()))*/
             }
         });
     }
