@@ -8,4 +8,19 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="i_already_have_an_account">I already have an account</string>
+    <!--recovery pass-->
+
+    <string name="action_decline" />
+    <string name="action_accept" />
+    <string name="create_song_file" />
+    <string name="action_cloudinary" />
+    <string name="create_song_titulo" />
+    <string name="create_song_genre" />
+    <string name="url_static" />
+    <string name="action_static_playback" />
+    <string name="state_with_connection" />
+    <string name="action_login" />
+    <string name="action_backend_playback" />
+
+
 </resources>

@@ -17,6 +17,7 @@ import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.UserCallback;
 import tk.alexlopez.sallefy.network.manager.UserManager;
+import tk.alexlopez.sallefy.utils.PreferenceUtils;
 import tk.alexlopez.sallefy.utils.Session;
 
 public class LoginActivity extends AppCompatActivity implements UserCallback {
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
         setContentView(R.layout.activity_login);
 
         initViews();
+        checkForSavedData();
     }
 
     @Override
@@ -67,6 +69,11 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
                 startActivity(intent);
             }
         });
+        // go to recovery pass
+        tvForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RecoveryPass.class);
+            startActivity(intent);
+        });
 
         // Start login
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
     public void onLoginSuccess(UserToken userToken) {
         Session.getInstance(getApplicationContext())
                 .setUserToken(userToken);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
         startActivity(intent);
     }
 
@@ -110,6 +117,16 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
     @Override
     public void onRegisterFailure(Throwable throwable) {
 
+    }
+    private void checkForSavedData() {
+        if (checkExistingPreferences()) {
+            btLogin.setText(PreferenceUtils.getUser(this));
+            etPassword.setText(PreferenceUtils.getPassword(this));
+        }
+    }
+    private boolean checkExistingPreferences () {
+        return PreferenceUtils.getUser(this) != null
+                && PreferenceUtils.getPassword(this) != null;
     }
 
     @Override

@@ -52,7 +52,7 @@
         android:background="#494949" />
 
         <EditText
-            android:id="@+id/sign_up_email"
+            android:id="@+id/recovery_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

@@ -38,7 +38,7 @@ public class SignupActivity extends AppCompatActivity implements UserCallback {
 
         // Component association
         etUsername = findViewById(R.id.sign_up_username);
-        etEmail = findViewById(R.id.sign_up_email);
+        etEmail = findViewById(R.id.recovery_email);
         etPassword = findViewById(R.id.sign_up_password);
         btSignUp = findViewById(R.id.sign_up);
         tvBackLogin = findViewById(R.id.sign_up_login);

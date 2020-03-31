@@ -13,4 +13,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="settings_title"></style>
+
 </resources>
