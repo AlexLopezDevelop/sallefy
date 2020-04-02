@@ -50,7 +50,8 @@ public class TracksListActivity extends AppCompatActivity implements TrackCallba
         if (id != -1) {
             TrackManager.getInstance(this).getAllTracksByPlaylistId(id, this);
         } else {
-            TrackManager.getInstance(this).getAllTracks(this);
+            //TrackManager.getInstance(this).getAllTracks(this);
+            // TODO: Error
         }
 
         mTracks = new ArrayList<>();
