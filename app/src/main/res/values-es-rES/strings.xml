@@ -9,4 +9,50 @@
     <string name="sign_up">Registrarse</string>
     <string name="username">Usuario</string>
     <string name="i_already_have_an_account">Ya tengo una cuenta</string>
+    <string name="track_list">Lista</string>
+
+
+    <!-- DEFAULT TRACK -->
+    <string name="default_track_title">Título canción</string>
+    <string name="default_track_author">Autor/a</string>
+
+
+    <!-- ACTION -->
+    <string name="action_login_new">Login</string>
+    <string name="action_login">Iniciar sesión</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="action_register">Registrarse</string>
+    <string name="action_advance_list">Mostrat Tracks (avanzado)</string>
+    <string name="action_list">Mostrar Tracks</string>
+    <string name="create_playlist">Crear Playlist</string>
+    <string name="add_song_playlist_main_button">Añadir Canción Playlist</string>
+    <string name="show_songs_by_playlist">Ver canciones de la playlist</string>
+
+    <!-- INFO STATE -->
+    <string name="state_wait">Porfavor espere..</string>
+    <string name="state_task_in_progress">Tarea en proceso</string>
+    <string name="state_error_connexion">Error de conexión!</string>
+    <string name="state_success_title">Éxito</string>
+    <string name="state_task_completed">Tarea completada con éxito!</string>
+    <string name="state_error_title">Error</string>
+    <string name="state_error_default">Algo salió mal!</string>
+
+
+    <!-- ACTIVITY [ Login ] -->
+    <string name="login_username">Nombre usuario</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_email">Correo electrónico</string>
+    <string name="login_yetIdentified">Todavía no estás registrad@ ?</string>
+    <string name="login_register_here">Regístrate aquí</string>
+
+    <!--ACTIVITY [Playlist create]-->
+    <string name="playlist_name">Nombre playlist</string>
+    <string name="create_playlist_name">Crear playlist</string>
+
+    <!--ACTIVITY [Add song to playlist]-->
+    <string name="add_song_playlist">Añadir canción</string>
+    <string name="numero_id_playlist">ID playlist</string>
+    <string name="numero_id_song">ID canción</string>
+
+
 </resources>
