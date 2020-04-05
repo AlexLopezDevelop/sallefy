@@ -1,5 +1,6 @@
 package tk.alexlopez.sallefy.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,12 +40,15 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
     }
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.tvTitle.setText(mTracks.get(position).getName());
-        holder.tvAuthor.setText(mTracks.get(position).getUserLogin());
+
+        Track track = mTracks.get(position);
+
+        holder.tvTitle.setText(track.getName());
+        holder.tvAuthor.setText(track.getUserLogin());
         if (mTracks.get(position).getThumbnail() != null) {
             Glide.with(mContext)
                     .asBitmap()
-                    //.placeholder(R.drawable.ic_audiotrack)
+                    //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
                     .load(mTracks.get(position).getThumbnail())
                     .into(holder.ivPicture);
         }

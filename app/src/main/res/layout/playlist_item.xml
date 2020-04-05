@@ -59,15 +59,6 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/album_field"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="Red Pill Blues (Deluxe)"
-                    android:textColor="#ffff"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
         </LinearLayout>
