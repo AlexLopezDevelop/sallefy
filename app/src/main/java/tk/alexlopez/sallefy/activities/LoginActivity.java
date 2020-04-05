@@ -95,7 +95,6 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
                 .setUserToken(userToken);
         //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("id", 8);
         startActivity(intent);
     }
 
