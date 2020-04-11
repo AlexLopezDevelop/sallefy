@@ -1,58 +1,134 @@
 package tk.alexlopez.sallefy.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import tk.alexlopez.sallefy.R;
-import tk.alexlopez.sallefy.adapters.PlaylistAdapter;
-import tk.alexlopez.sallefy.adapters.TrackListAdapter;
-import tk.alexlopez.sallefy.models.Playlist;
-import tk.alexlopez.sallefy.models.Track;
-import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
-import tk.alexlopez.sallefy.network.callback.TrackCallback;
-import tk.alexlopez.sallefy.network.manager.PlaylistManager;
-import tk.alexlopez.sallefy.network.manager.TrackManager;
+import tk.alexlopez.sallefy.fragments.HomeFragment;
+import tk.alexlopez.sallefy.network.callback.FragmentCallback;
+import tk.alexlopez.sallefy.utils.Constants;
+import tk.alexlopez.sallefy.utils.Session;
 
-public class MainActivity extends AppCompatActivity implements PlaylistCallback {
-    private RecyclerView mRecyclerView;
-    private ArrayList<Playlist> mPlaylist;
+public class MainActivity extends FragmentActivity implements FragmentCallback {
+
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mTransaction;
+
+    private BottomNavigationView mNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Comment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        getData();
+        setInitialFragment();
+        requestPermissions();
     }
+
     private void initViews() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.popularPlaylists);
-        LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter = new TrackListAdapter(this, null);
-        mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(adapter);
+        mFragmentManager = getSupportFragmentManager();
+        mTransaction = mFragmentManager.beginTransaction();
+
+        mNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        fragment = HomeFragment.getInstance();
+                        break;
+                }
+                replaceFragment(fragment);
+                return true;
+            }
+        });
     }
-    private void getData() {
-        PlaylistManager.getInstance(this).getAllPlaylists(this);
-        mPlaylist = new ArrayList<>();
+
+    private void setInitialFragment() {
+        mTransaction.add(R.id.fragment_container, HomeFragment.getInstance());
+        mTransaction.commit();
     }
-    @Override
-    public void onPlaylistReceived(List<Playlist> playlists) {
-        mPlaylist = (ArrayList) playlists;
-        PlaylistAdapter adapter = new PlaylistAdapter(this, mPlaylist);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+    private void requestPermissions() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO,
+                            Manifest.permission.MODIFY_AUDIO_SETTINGS}, Constants.PERMISSIONS.MICROPHONE);
+
+        } else {
+            Session.getInstance(this).setAudioEnabled(true);
+        }
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        String fragmentTag = getFragmentTag(fragment);
+        Fragment currentFragment = mFragmentManager.findFragmentByTag(fragmentTag);
+        if (currentFragment != null) {
+            if (!currentFragment.isVisible()) {
+
+                if (fragment.getArguments() != null) {
+                    currentFragment.setArguments(fragment.getArguments());
+                }
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, currentFragment, fragmentTag)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        } else {
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, fragmentTag)
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    private String getFragmentTag(Fragment fragment) {
+        if (fragment instanceof HomeFragment) {
+            return HomeFragment.TAG;
+        }
+        return HomeFragment.TAG; // PROVISIONAL
 
     }
 
     @Override
-    public void onPlaylistcreated() {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        System.out.println(requestCode);
+        if (requestCode == Constants.PERMISSIONS.MICROPHONE) {
 
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Session.getInstance(this).setAudioEnabled(true);
+            } else {
+            }
+            return;
+        }
     }
+
+    @Override
+    public void onChangeFragment(Fragment fragment) {
+        replaceFragment(fragment);
+    }
+
+
 }

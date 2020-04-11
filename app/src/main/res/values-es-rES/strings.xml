@@ -16,6 +16,9 @@
     <string name="default_track_title">Título canción</string>
     <string name="default_track_author">Autor/a</string>
 
+    <!-- FRAGMENTS (LABELS) -->
+    <string name="fragment_playlists">Playlists</string>
+    <string name="fragment_songs">Songs</string>
 
     <!-- ACTION -->
     <string name="action_login_new">Login</string>
@@ -54,5 +57,9 @@
     <string name="numero_id_playlist">ID playlist</string>
     <string name="numero_id_song">ID canción</string>
 
+    <!-- MENU -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_search">Busqueda</string>
+    <string name="menu_library">Contenido</string>
 
 </resources>

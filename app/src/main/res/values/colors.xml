@@ -12,4 +12,14 @@
 
     <color name="colorWhite">#ffffff</color>
 
+    <color name="colorPrimaryLight">#3f3a3a</color>
+
+    <color name="colorSecondary">#6aade4</color>
+    <color name="colorSecondaryLight">#9edfff</color>
+    <color name="colorSecondaryDark">#327eb2</color>
+
+    <color name="colorError">#cc0000</color>
+
+    <color name="colorGrey">#D1D1D1</color>
+
 </resources>
