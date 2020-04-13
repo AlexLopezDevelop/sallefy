@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
     public static final String TAG = HomeFragment.class.getName();
     private RecyclerView mRecyclerView;
     private RecyclerView mMyPlaylists;
+    private RecyclerView mListasSeguidas;
     private PlaylistAdapter mAdapter;
     private ArrayList<Playlist> mPlaylist;
 
@@ -48,7 +49,7 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        //Add the new view
+
         initViews(v);
         return v;
     }
@@ -72,6 +73,12 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
         TrackListAdapter adapter_playlist = new TrackListAdapter(getContext(), null);
         mMyPlaylists.setLayoutManager(manager_playlist);
         mMyPlaylists.setAdapter(adapter_playlist);
+
+        mListasSeguidas = (RecyclerView) v.findViewById(R.id.listas_seguidas);
+        LinearLayoutManager manager_listas_seguidas = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        TrackListAdapter adapter_listas_seguidas = new TrackListAdapter(getContext(), null);
+        mListasSeguidas.setLayoutManager(manager_listas_seguidas);
+        mListasSeguidas.setAdapter(adapter_listas_seguidas);
     }
 
     private void getData() {
@@ -93,7 +100,6 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
         PlaylistAdapter adapter = new PlaylistAdapter(getContext(), mPlaylist);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
     }
     @Override
     public void myPlaylistReceived(List<Playlist> playlists) {
@@ -101,6 +107,13 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
         PlaylistAdapter my_adapter = new PlaylistAdapter(getContext(), mPlaylist);
         mMyPlaylists.setAdapter(my_adapter);
         mMyPlaylists.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+    }
+    @Override
+    public void myFollowingPlaylistReceived(List<Playlist> playlists) {
+        mPlaylist = (ArrayList) playlists;
+        PlaylistAdapter adapter_list = new PlaylistAdapter(getContext(), mPlaylist);
+        mListasSeguidas.setAdapter(adapter_list);
+        mListasSeguidas.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 }
 

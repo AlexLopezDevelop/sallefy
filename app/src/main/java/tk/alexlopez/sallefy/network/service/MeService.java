@@ -15,5 +15,7 @@ public interface MeService {
 
     @GET("me/playlists")
     Call<List<Playlist>> getMyPlaylist(@Header("Authorization") String token);
+    @GET("me/playlists/following")
+    Call<List<Playlist>> getMyFollowingPlaylist(@Header("Authorization") String token);
 
 }

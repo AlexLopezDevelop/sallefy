@@ -82,9 +82,9 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Genres"
+            android:id="@+id/listas_seguidas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="0dp"
             android:scrollbars="vertical"
             android:textColor="@color/colorWhite">

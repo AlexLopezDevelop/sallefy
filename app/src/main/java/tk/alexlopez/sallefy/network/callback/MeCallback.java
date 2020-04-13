@@ -7,5 +7,6 @@ import tk.alexlopez.sallefy.models.Playlist;
 public interface MeCallback {
 
     void myPlaylistReceived(List<Playlist> tracks);
+    void myFollowingPlaylistReceived(List<Playlist> tracks);
 
 }
