@@ -21,10 +21,12 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.PlaylistAdapter;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
+import tk.alexlopez.sallefy.network.callback.MeCallback;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
+import tk.alexlopez.sallefy.network.manager.MeManager;
 import tk.alexlopez.sallefy.network.manager.PlaylistManager;
 
-public class HomeFragment extends Fragment implements PlaylistCallback {
+public class HomeFragment extends Fragment implements PlaylistCallback, MeCallback {
 
     public static final String TAG = HomeFragment.class.getName();
     private RecyclerView mRecyclerView;
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment implements PlaylistCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        //Add the new view
         initViews(v);
         return v;
     }
@@ -57,7 +60,6 @@ public class HomeFragment extends Fragment implements PlaylistCallback {
     }
 
     private void initViews(View v) {
-
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.popularPlaylists);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
@@ -74,6 +76,8 @@ public class HomeFragment extends Fragment implements PlaylistCallback {
 
     private void getData() {
         PlaylistManager.getInstance(getContext()).getAllPlaylists(this);
+        MeManager.getInstance(getContext()).getMyPlaylists(this);
+
         mPlaylist = new ArrayList<>();
     }
 
@@ -90,7 +94,12 @@ public class HomeFragment extends Fragment implements PlaylistCallback {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        mMyPlaylists.setAdapter(adapter);
+    }
+    @Override
+    public void myPlaylistReceived(List<Playlist> playlists) {
+        mPlaylist = (ArrayList) playlists;
+        PlaylistAdapter my_adapter = new PlaylistAdapter(getContext(), mPlaylist);
+        mMyPlaylists.setAdapter(my_adapter);
         mMyPlaylists.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 }
