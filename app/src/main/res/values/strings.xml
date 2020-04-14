@@ -8,19 +8,27 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="i_already_have_an_account">I already have an account</string>
-    <!--recovery pass-->
 
-    <string name="action_decline" />
-    <string name="action_accept" />
-    <string name="create_song_file" />
-    <string name="action_cloudinary" />
-    <string name="create_song_titulo" />
-    <string name="create_song_genre" />
-    <string name="url_static" />
-    <string name="action_static_playback" />
-    <string name="state_with_connection" />
-    <string name="action_login" />
-    <string name="action_backend_playback" />
+    <!--ayda hayagh nakkijd -->
+
+    <string name="action_decline" translatable="false" />
+    <string name="action_accept" translatable="false" />
+    <string name="create_song_file" translatable="false"/>
+    <string name="action_cloudinary" translatable="false"/>
+    <string name="create_song_titulo" translatable="false"/>
+    <string name="create_song_genre" translatable="false"/>
+    <string name="url_static" translatable="false"/>
+    <string name="action_static_playback" translatable="false"/>
+    <string name="state_with_connection" translatable="false"/>
+    <string name="action_login" translatable="false"/>
+    <string name="action_backend_playback" translatable="false"/>
+
+    <string name="name">Title</string>
+    <string name="genre">Genre</string>
+    <string name="selectFile">Select ...</string>
+    <string name="cancel">Calcel</string>
+    <string name="uploadSong">Upload</string>
+    <string name="upload_info">Upload Song</string>
 
 
 </resources>

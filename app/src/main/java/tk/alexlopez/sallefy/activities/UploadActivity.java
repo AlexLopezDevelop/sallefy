@@ -46,19 +46,19 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_song);
+        setContentView(R.layout.activity_upload_song);
         mContext = getApplicationContext();
         initViews();
         getData();
     }
 
     private void initViews() {
-        etTitle = (EditText) findViewById(R.id.create_song_title);
-        mFilename = (TextView) findViewById(R.id.create_song_file_name);
+        etTitle = (EditText) findViewById(R.id.upload_song_title);
+        mFilename = (TextView) findViewById(R.id.upload_song_file_name);
 
-        mSpinner = (Spinner) findViewById(R.id.create_song_genre);
+        mSpinner = (Spinner) findViewById(R.id.upload_song_spinner);
 
-        btnFind = (Button) findViewById(R.id.create_song_file);
+        btnFind = (Button) findViewById(R.id.upload_song_find_file);
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +66,7 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
             }
         });
 
-        btnCancel = (Button) findViewById(R.id.create_song_cancel);
+        btnCancel = (Button) findViewById(R.id.upload_song_cancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
             }
         });
 
-        btnAccept = (Button) findViewById(R.id.create_song_accept);
+        btnAccept = (Button) findViewById(R.id.upload_song_done);
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -23,7 +23,6 @@ import tk.alexlopez.sallefy.utils.Constants;
 public class MainActivity extends AppCompatActivity {
 
 
-
     private Button btnStaticUrl;
     private Button btnLogin;
     private Button btnList;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        requestPermissions(); // Microphone permission for Audio Visualizer
+        requestPermissions();
         enableInitialButtons();
     }
 
@@ -70,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO,
-                            Manifest.permission.MODIFY_AUDIO_SETTINGS}, Constants.PERMISSIONS.MICROPHONE);
+                            Manifest.permission.MODIFY_AUDIO_SETTINGS},
+                                Constants.PERMISSIONS.MICROPHONE);
 
         }
     }
