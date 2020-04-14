@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.TracksListActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 
@@ -54,8 +55,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
             public void onClick(View v) {
                 Log.d("Paco: ", String.valueOf(position));
                 int playlistId = mPlaylist.get(position).getId();
-                //Intent intent = new Intent(this, TrackListActivity.class);
-                //intent.putExtra("id", playlistId);
+                Intent intent = new Intent(mContext.getApplicationContext(), TracksListActivity.class);
+                intent.putExtra("id", playlistId);
+                mContext.startActivity(intent);
             }
         });
     }

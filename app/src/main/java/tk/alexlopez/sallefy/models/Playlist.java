@@ -2,25 +2,34 @@ package tk.alexlopez.sallefy.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Playlist {
-
-    @SerializedName("name")
-    private String name;
 
     @SerializedName("id")
     private Integer id;
 
+    @SerializedName("name")
+    private String name;
+
     @SerializedName("description")
     private String description;
 
-    @SerializedName("tracks")
-    private ArrayList<Track> tracks;
+    @SerializedName("cover")
+    private String cover;
+
     @SerializedName("thumbnail")
     private String thumbnail;
 
-    public Playlist(){}
+    @SerializedName("publicAccessible")
+    private boolean publicAccessible;
+
+    @SerializedName("owner")
+    private User owner;
+
+    @SerializedName("tracks")
+    private List<Track> tracks = null;
+
     public Playlist(String name) {
         this.name = name;
     }
@@ -29,12 +38,16 @@ public class Playlist {
         return name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getDescription() {
@@ -45,16 +58,28 @@ public class Playlist {
         this.description = description;
     }
 
-    public void setId(Integer id) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public ArrayList<Track> getTrack() {
-        return tracks;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setTracks(ArrayList<Track> tracks) {
-        this.tracks = tracks;
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public boolean isPublicAccessible() {
+        return publicAccessible;
+    }
+
+    public void setPublicAccessible(boolean publicAccessible) {
+        this.publicAccessible = publicAccessible;
     }
 
     public String getThumbnail() {
@@ -65,11 +90,15 @@ public class Playlist {
         this.thumbnail = thumbnail;
     }
 
-    @Override
-    public String toString() {
-        return "Playlist{" +
-                "name='" + name + '\'' +
-                '}';
+    public List<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
+    }
+
+    public void addTrack (Track track) {
+        this.tracks.add(track);
     }
 }
-

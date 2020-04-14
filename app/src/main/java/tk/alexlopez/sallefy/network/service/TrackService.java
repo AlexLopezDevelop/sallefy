@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 
 public interface TrackService {
@@ -18,5 +19,8 @@ public interface TrackService {
 
     @GET("users/{login}/tracks")
     Call<List<Track>> getUserTracks(@Path("login") String login, @Header("Authorization") String token);
+
+    @GET("playlists/{id}/")
+    Call<Playlist> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
 
 }
