@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
+import tk.alexlopez.sallefy.fragments.SearchFragment;
 import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
@@ -53,6 +54,9 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         fragment = HomeFragment.getInstance();
+                        break;
+                    case R.id.action_search:
+                        fragment = SearchFragment.getInstance();
                         break;
                 }
                 replaceFragment(fragment);

@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
     private void getData() {
         PlaylistManager.getInstance(getContext()).getAllPlaylists(this);
         MeManager.getInstance(getContext()).getMyPlaylists(this);
+        MeManager.getInstance(getContext()).getMyFollowingPlaylist(this);
 
         mPlaylist = new ArrayList<>();
     }

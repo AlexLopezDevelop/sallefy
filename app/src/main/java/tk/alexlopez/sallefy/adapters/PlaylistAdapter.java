@@ -1,6 +1,7 @@
 package tk.alexlopez.sallefy.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
                     .load(mPlaylist.get(position).getThumbnail())
                     .into(holder.ivPicture);
         }
+        holder.ivPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Paco: ", String.valueOf(position));
+                int playlistId = mPlaylist.get(position).getId();
+                //Intent intent = new Intent(this, TrackListActivity.class);
+                //intent.putExtra("id", playlistId);
+            }
+        });
     }
 
     @Override
