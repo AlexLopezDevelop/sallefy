@@ -3,6 +3,7 @@ package tk.alexlopez.sallefy.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
             Glide.with(mContext)
                     .asBitmap()
                     //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
-                    .load(mTracks.get(position).getThumbnail())
+                    .load(track.getThumbnail())
                     .into(holder.ivPicture);
         }
 
@@ -60,8 +61,10 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext.getApplicationContext(), TrackOptionsActivity.class);
-                // TODO: send song id
-                intent.putExtra("id", track.getId());
+                // TODO: send track
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("trackData", track);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
