@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/more_horiz"
+        android:id="@+id/track_options"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TrackOptionsActivity"></activity>
+        <activity android:name=".activities.TrackOptionsActivity"></activity>
         <activity android:name=".activities.TracksListActivity" />
         <activity
             android:name=".activities.SignupActivity"
