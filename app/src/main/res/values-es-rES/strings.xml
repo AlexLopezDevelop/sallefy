@@ -14,6 +14,9 @@
     <string name="show_artist">Ver artista</string>
     <string name="delete">Eliminar</string>
 
+    <string name="track_list">Lista</string>
+
+
     <!-- DEFAULT TRACK -->
     <string name="default_track_title">Título canción</string>
     <string name="default_track_author">Autor/a</string>
@@ -63,4 +66,5 @@
     <string name="menu_home">Inicio</string>
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
+
 </resources>
