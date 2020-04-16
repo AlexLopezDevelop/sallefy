@@ -2,6 +2,8 @@ package tk.alexlopez.sallefy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//Prueba Alfredo
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -68,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
             }
         });
 
-        // Start login
+        // Start login view
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
     public void onLoginSuccess(UserToken userToken) {
         Session.getInstance(getApplicationContext())
                 .setUserToken(userToken);
+        //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

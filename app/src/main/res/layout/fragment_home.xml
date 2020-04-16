@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+
+    android:background="@color/colorGrayDark"
+    tools:context=".activities.MainActivity">
+
+    <com.scwang.wave.MultiWaveHeader
+        android:id="@+id/multiWaveHeader"
+        android:layout_width="470dp"
+        android:layout_height="423dp"
+        android:rotation="-20"
+        android:scaleX="2"
+        android:scaleY="1.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mwhCloseColor="@color/colorGrayLight"
+        app:mwhStartColor="@color/colorGrayDark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="28dp"
+            android:text="Listas más populares"
+            app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
+            app:layout_constraintVertical_bias="0.8"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popularPlaylists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:scrollbars="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader">
+
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"
+            android:text="Mis Listas "
+            android:textColor="@color/colorWhite"
+            android:textSize="28dp"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/MyPlaylists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:scrollbars="horizontal"
+            android:textColor="@color/colorWhite">
+
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"
+            android:text="Listas seguidas"
+            android:textColor="@color/colorWhite"
+            android:textSize="28dp"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listas_seguidas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorWhite">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Tus playlist favoritas"
+                android:textColor="@color/colorWhite"
+                android:textSize="28dp"
+                app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
+                app:layout_constraintVertical_bias="0.8"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoritePlaylists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader">
+
+            </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
