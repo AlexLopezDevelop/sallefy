@@ -2,10 +2,13 @@ package tk.alexlopez.sallefy.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.TrackOptionsActivity;
 import tk.alexlopez.sallefy.models.Track;
 
 public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.ViewHolder> {
@@ -41,17 +45,30 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        Track track = mTracks.get(position);
+        final Track track = mTracks.get(position);
 
         holder.tvTitle.setText(track.getName());
         holder.tvAuthor.setText(track.getUserLogin());
-        if (mTracks.get(position).getThumbnail() != null) {
+        if (track.getThumbnail() != null) {
             Glide.with(mContext)
                     .asBitmap()
                     //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
-                    .load(mTracks.get(position).getThumbnail())
+                    .load(track.getThumbnail())
                     .into(holder.ivPicture);
         }
+
+        holder.ibOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext.getApplicationContext(), TrackOptionsActivity.class);
+                // TODO: send track
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("trackData", track);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -69,12 +86,14 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
         TextView tvTitle;
         TextView tvAuthor;
         ImageView ivPicture;
+        ImageButton ibOptions;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.track_title);
             tvAuthor = itemView.findViewById(R.id.track_author);
             ivPicture = itemView.findViewById(R.id.track_img);
+            ibOptions = itemView.findViewById(R.id.track_options);
         }
     }
 }

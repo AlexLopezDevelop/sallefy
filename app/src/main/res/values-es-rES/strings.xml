@@ -9,6 +9,11 @@
     <string name="sign_up">Registrarse</string>
     <string name="username">Usuario</string>
     <string name="i_already_have_an_account">Ya tengo una cuenta</string>
+    <string name="i_liked">Me gusta</string>
+    <string name="add_to_playlist">Añadir a playlist</string>
+    <string name="show_artist">Ver artista</string>
+    <string name="delete">Eliminar</string>
+
     <string name="track_list">Lista</string>
 
 
