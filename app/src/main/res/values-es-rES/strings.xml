@@ -15,4 +15,6 @@
     <string name="cancel">Cancelar</string>
     <string name="uploadSong">Subir</string>
     <string name="upload_info">Subir canción</string>
+
+    <string name="songTitle">Nombre de la canción</string>
 </resources>

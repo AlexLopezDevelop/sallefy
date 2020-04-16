@@ -26,9 +26,12 @@
     <string name="name">Title</string>
     <string name="genre">Genre</string>
     <string name="selectFile">Select ...</string>
-    <string name="cancel">Calcel</string>
+    <string name="cancel">Cancel</string>
     <string name="uploadSong">Upload</string>
     <string name="upload_info">Upload Song</string>
+    <string name="songTitle">Song name</string>
+
+
 
 
 </resources>

@@ -19,12 +19,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="395dp"
+        android:layout_height="400dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="80dp"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_marginTop="20dp"
+
+            android:text="@string/songTitle"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/upload_song_title"
@@ -32,7 +40,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/name"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -47,19 +54,19 @@
             android:id="@+id/upload_song_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/upload_song_find_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="@string/selectFile" />
 
         <TextView
             android:id="@+id/upload_song_file_name"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="41dp"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white" />
 
