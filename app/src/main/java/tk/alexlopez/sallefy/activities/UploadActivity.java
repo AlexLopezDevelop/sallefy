@@ -1,5 +1,7 @@
 package tk.alexlopez.sallefy.activities;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -116,6 +118,7 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
             }
         }
         CloudinaryManager.getInstance(this, this).uploadAudioFile(mFileUri, etTitle.getText().toString(), genre);
+        uploadDialog();
     }
 
     @Override
@@ -197,6 +200,19 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
     @Override
     public void onTrackSelected(int index) {
 
+    }
+
+    private void uploadDialog (){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Upload song to Cloudinary");
+        builder.setMessage("The song has been uploaded correctly");
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }
 

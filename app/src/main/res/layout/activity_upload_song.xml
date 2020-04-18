@@ -66,7 +66,7 @@
         <TextView
             android:id="@+id/upload_song_file_name"
             android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_height="31dp"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white" />
 

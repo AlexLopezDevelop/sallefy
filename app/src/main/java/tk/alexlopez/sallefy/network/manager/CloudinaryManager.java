@@ -1,7 +1,10 @@
 package tk.alexlopez.sallefy.network.manager;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,6 +65,7 @@ public class CloudinaryManager extends AppCompatActivity {
         @Override
         public void onProgress(String requestId, long bytes, long totalBytes) {
             Double progress = (double) bytes/totalBytes;
+            System.out.println(progress);
         }
         @Override
         public void onSuccess(String requestId, Map resultData) {
@@ -73,6 +77,8 @@ public class CloudinaryManager extends AppCompatActivity {
             genres.add(mGenre);
             track.setGenres(genres);
             TrackManager.getInstance(mContext).createTrack(track, mCallback);
+
+
         }
         @Override
         public void onError(String requestId, ErrorInfo error) {
@@ -81,4 +87,6 @@ public class CloudinaryManager extends AppCompatActivity {
         public void onReschedule(String requestId, ErrorInfo error) {
         }
     }
+
+
 }
