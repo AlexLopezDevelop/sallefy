@@ -18,7 +18,8 @@
         android:scaleY="1.7"
         app:layout_constraintTop_toTopOf="parent"
         app:mwhCloseColor="@color/colorGrayLight"
-        app:mwhStartColor="@color/colorGrayDark" />
+        app:mwhStartColor="@color/colorGrayDark"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
