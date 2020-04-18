@@ -79,7 +79,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
-                Log.d(TAG, "HAY CAMBIOOOOOOOOOOOOOOOOOOOOO " );
+                Log.d(TAG, "HAY CAMBIOOOOOOOOOOOOOOOOOOOOO " + input_search.getText());
+
 
                 // you can call or do what you want with your EditText here
 
