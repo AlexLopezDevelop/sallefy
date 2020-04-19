@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
@@ -267,5 +268,10 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
         currentTrack = index;
         updateTrack(mTracks.get(currentTrack));
     }
-}
+
+     @Override
+     public void onTracksReceivedByPlaylistId(Playlist playlist) {
+
+     }
+ }
 

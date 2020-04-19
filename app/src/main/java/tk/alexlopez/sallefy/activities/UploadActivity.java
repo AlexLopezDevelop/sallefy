@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Genre;
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.GenreCallback;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
@@ -216,6 +217,11 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
 
     @Override
     public void onTrackSelected(int index) {
+
+    }
+
+    @Override
+    public void onTracksReceivedByPlaylistId(Playlist playlist) {
 
     }
 

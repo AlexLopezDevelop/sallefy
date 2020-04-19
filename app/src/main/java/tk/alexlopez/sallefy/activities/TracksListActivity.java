@@ -87,6 +87,21 @@ public class TracksListActivity extends AppCompatActivity implements TrackCallba
     }
 
     @Override
+    public void onCreateTrack() {
+
+    }
+
+    @Override
+    public void onTrackSelected(Track track) {
+
+    }
+
+    @Override
+    public void onTrackSelected(int index) {
+
+    }
+
+    @Override
     public void onFailure(Throwable throwable) {
 
     }
