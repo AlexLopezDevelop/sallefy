@@ -38,6 +38,8 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
     private ArrayList<String> mGenres;
     private ArrayList<Genre> mGenresObjs;
     private Uri mFileUri;
+    private ArrayList<Track> mTracksObjs;
+    private ArrayList<String> mTracks;
 
     private Context mContext;
 
@@ -79,7 +81,7 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
             public void onClick(View v) {
                 if (checkParameters()) {
                     etTitle.setFocusable(false);
-                    showStateDialog(false);
+                    //showStateDialog(false);
                     uploadToCloudinary();
                 }
             }
@@ -97,12 +99,24 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
                 return true;
             }
         }
+        uploadDialog("Error","Parameter missing");
         return false;
     }
 
-    private void showStateDialog(boolean completed) {
+    /*private void showStateDialog(boolean completed) {
+    }*/
+    private void uploadDialog (String title, String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
-
     private void getAudioFromStorage() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -118,7 +132,7 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
             }
         }
         CloudinaryManager.getInstance(this, this).uploadAudioFile(mFileUri, etTitle.getText().toString(), genre);
-        uploadDialog();
+        uploadDialog("Upload song to Cloudinary","The song has been uploaded correctly");
     }
 
     @Override
@@ -153,9 +167,12 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
         mSpinner.setAdapter(adapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onTracksByGenre(ArrayList<Track> tracks) {
-
+        mTracksObjs = tracks;
+        mTracks = (ArrayList<String>) tracks.stream().map(Track->Track.getName()).collect(Collectors.toList());
+        // ikhasa ad hayagh recyclerview diis
     }
 
     @Override
@@ -202,17 +219,5 @@ public class UploadActivity extends AppCompatActivity implements GenreCallback, 
 
     }
 
-    private void uploadDialog (){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Upload song to Cloudinary");
-        builder.setMessage("The song has been uploaded correctly");
-        builder.setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        builder.show();
-    }
 }
 

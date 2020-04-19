@@ -25,13 +25,14 @@
 
     <string name="name">Title</string>
     <string name="genre">Genre</string>
-    <string name="selectFile">Select ...</string>
+    <string name="selectFile">Select...</string>
     <string name="cancel">Cancel</string>
     <string name="uploadSong">Upload</string>
     <string name="upload_info">Upload Song</string>
     <string name="songTitle">Song name</string>
-
-
+    <string name="selectFile_show">Song file</string>
+    <string name="uploadImg">Select...</string>
+    <string name="selectImg_show">Image file</string>
 
 
 </resources>
