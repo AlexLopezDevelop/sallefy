@@ -18,20 +18,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.activities.SignupActivity;
+import tk.alexlopez.sallefy.adapters.PlaylistAdapter;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
+import tk.alexlopez.sallefy.models.Playlist;
+import tk.alexlopez.sallefy.models.Search;
+import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
+import tk.alexlopez.sallefy.network.callback.SearchCallback;
 import tk.alexlopez.sallefy.network.manager.MeManager;
 import tk.alexlopez.sallefy.network.manager.PlaylistManager;
+import tk.alexlopez.sallefy.network.manager.SearchManager;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements PlaylistCallback, SearchCallback {
 
     public static final String TAG = SearchFragment.class.getName();
     private EditText input_search;
-
-
+    private Search mSearch;
+    private RecyclerView mRecyclerView;
 
     public static SearchFragment getInstance() {
         return new SearchFragment();
@@ -48,7 +55,6 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         initViews(v);
-        getData();
         return v;
     }
 
@@ -64,6 +70,12 @@ public class SearchFragment extends Fragment {
 
     private void initViews(View v) {
 
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPlaylist);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        TrackListAdapter adapter = new TrackListAdapter(getContext(), null);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setAdapter(adapter);
+
         input_search = (EditText) v.findViewById(R.id.input_search);
         input_search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,10 +90,9 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String keyword = input_search.getText().toString();
                 Log.d(TAG, "HAY CAMBIOOOOOOOOOOOOOOOOOOOOO " + input_search.getText());
-
-
+                getData(keyword);
                 // you can call or do what you want with your EditText here
 
                 // yourEditText...
@@ -89,11 +100,29 @@ public class SearchFragment extends Fragment {
         });
     }
 
-    private void getData() {
+    private void getData(String keyword) {
+        SearchManager.getInstance(getContext()).searchByKeyword(keyword, this);
+        mSearch = new Search();
 
     }
 
+    @Override
+    public void onPlaylistcreated() {
 
+    }
+
+    @Override
+    public void onPlaylistReceived(List<Playlist> tracks) {
+
+    }
+
+    @Override
+    public void onTracksReceived(Search search) {
+        mSearch = search;
+        TrackListAdapter adapter = new TrackListAdapter(getContext(), mSearch.getTracks());
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    }
 
 
 

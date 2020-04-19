@@ -30,6 +30,8 @@ public class Playlist {
     @SerializedName("tracks")
     private List<Track> tracks = null;
 
+    public Playlist() {
+    }
     public Playlist(String name) {
         this.name = name;
     }
