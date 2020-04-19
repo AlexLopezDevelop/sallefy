@@ -18,7 +18,8 @@
         android:scaleY="1.7"
         app:layout_constraintTop_toTopOf="parent"
         app:mwhCloseColor="@color/colorGrayLight"
-        app:mwhStartColor="@color/colorGrayDark" />
+        app:mwhStartColor="@color/colorGrayDark"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             android:layout_marginTop="32dp"
             android:textColor="@color/colorWhite"
             android:textSize="28dp"
-            android:text="Listas más populares"
+            android:text="Todas las listas"
             app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
@@ -56,7 +57,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:text="Mis Listas "
+            android:text="Mis Listas"
             android:textColor="@color/colorWhite"
             android:textSize="28dp"
             tools:ignore="MissingConstraints" />
@@ -76,7 +77,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:text="Listas seguidas"
+            android:text="Mis favoritas"
             android:textColor="@color/colorWhite"
             android:textSize="28dp"
             tools:ignore="MissingConstraints" />

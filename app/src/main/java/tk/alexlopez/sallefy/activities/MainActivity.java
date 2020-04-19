@@ -55,9 +55,16 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                     case R.id.action_home:
                         fragment = HomeFragment.getInstance();
                         break;
+                    case R.id.action_songs:
+                        //fragment = SongsFragment.getInstance();
+                        break;
                     case R.id.action_search:
                         fragment = SearchFragment.getInstance();
                         break;
+                    case R.id.action_content:
+                       // fragment = ContentFragment.getInstance();
+                        break;
+
                 }
                 replaceFragment(fragment);
                 return true;
@@ -66,7 +73,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     }
 
     private void setInitialFragment() {
-        mTransaction.add(R.id.fragment_container, HomeFragment.getInstance());
+        mTransaction.add(R.id.fragment_container, SearchFragment.getInstance());
         mTransaction.commit();
     }
 
