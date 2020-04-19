@@ -27,6 +27,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.UploadActivity"/>
+        <activity android:name=".activities.DynamicPlaybackActivity"/>
+        <activity android:name=".activities.RecoveryPass"/>
+
     </application>
 
 </manifest>

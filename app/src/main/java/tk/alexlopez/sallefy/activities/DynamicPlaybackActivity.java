@@ -273,5 +273,10 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
      public void onTracksReceivedByPlaylistId(Playlist playlist) {
 
      }
+
+     @Override
+     public void onPointerCaptureChanged(boolean hasCapture) {
+
+     }
  }
 
