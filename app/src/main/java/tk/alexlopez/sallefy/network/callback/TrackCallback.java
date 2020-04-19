@@ -2,6 +2,7 @@ package tk.alexlopez.sallefy.network.callback;
 
 import java.util.List;
 
+import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 
 public interface TrackCallback extends FailureCallback {
@@ -14,4 +15,5 @@ public interface TrackCallback extends FailureCallback {
     void onTrackSelected(Track track);
 
     void onTrackSelected(int index);
+    void onTracksReceivedByPlaylistId(Playlist playlist);
 }
