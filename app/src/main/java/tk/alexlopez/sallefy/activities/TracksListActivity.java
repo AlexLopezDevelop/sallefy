@@ -66,6 +66,9 @@ public class TracksListActivity extends AppCompatActivity implements TrackCallba
     }
 
     public void onTracksReceivedByPlaylistId(Playlist playlist) {
+        // set title
+        mPlaylistsTitle.setText(playlist.getName());
+
         mTracks = (ArrayList) playlist.getTracks();
         TrackListAdapter adapter = new TrackListAdapter(this, mTracks);
         mRecyclerView.setAdapter(adapter);

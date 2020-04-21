@@ -2,6 +2,10 @@ package tk.alexlopez.sallefy.utils;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
+import tk.alexlopez.sallefy.models.Playlist;
+import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.models.UserRegister;
 import tk.alexlopez.sallefy.models.UserToken;
@@ -17,6 +21,14 @@ public class Session {
     private User mUser;
     private UserToken mUserToken;
 
+    private boolean audioEnabled;
+
+    private Track mTrack;
+    private Playlist mPlaylist;
+    private ArrayList<Track> mTracks;
+    private int mIndex;
+    private boolean isPlaying;
+
     public static Session getInstance(Context context) {
         Session result = sSession;
         if (result == null) {
@@ -31,10 +43,12 @@ public class Session {
 
     private Session() {}
 
-    public Session(Context context) {
+    public Session (Context context) {
         this.mContext = context;
         this.mUserRegister = null;
         this.mUserToken = null;
+        this.isPlaying = false;
+        this.audioEnabled = false;
     }
 
     public void resetValues() {
@@ -64,5 +78,8 @@ public class Session {
 
     public void setUserToken(UserToken userToken) {
         this.mUserToken = userToken;
+    }
+
+    public void setAudioEnabled(boolean b) {
     }
 }

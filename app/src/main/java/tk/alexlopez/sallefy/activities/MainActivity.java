@@ -1,66 +1,80 @@
 package tk.alexlopez.sallefy.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
+import android.view.MenuItem;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.fragments.HomeFragment;
+import tk.alexlopez.sallefy.fragments.SearchFragment;
+import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
+import tk.alexlopez.sallefy.utils.Session;
 
+public class MainActivity extends FragmentActivity implements FragmentCallback {
 
-public class MainActivity extends AppCompatActivity {
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mTransaction;
 
-
-    private Button btnStaticUrl;
-    private Button btnLogin;
-    private Button btnList;
-    private Button btnUpload;
+    private BottomNavigationView mNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        setInitialFragment();
         requestPermissions();
-        enableInitialButtons();
     }
 
     private void initViews() {
-        btnStaticUrl = findViewById(R.id.btn_static_url);
-        btnStaticUrl.setEnabled(false);
-        btnStaticUrl.setOnClickListener(v -> {
-        });
+        mFragmentManager = getSupportFragmentManager();
+        mTransaction = mFragmentManager.beginTransaction();
 
-        btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setEnabled(false);
-        btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivityForResult(intent, Constants.NETWORK.LOGIN_OK);
-        });
+        mNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        fragment = HomeFragment.getInstance();
+                        break;
+                    case R.id.action_songs:
+                        //fragment = SongsFragment.getInstance();
+                        break;
+                    case R.id.action_search:
+                        fragment = SearchFragment.getInstance();
+                        break;
+                    case R.id.action_content:
+                       // fragment = ContentFragment.getInstance();
+                        break;
 
-        btnList = findViewById(R.id.btn_backend);
-        btnList.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), DynamicPlaybackActivity.class);
-            startActivity(intent);
+                }
+                replaceFragment(fragment);
+                return true;
+            }
         });
+    }
 
-        btnUpload = findViewById(R.id.btn_upload);
-        btnUpload.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
-            startActivity(intent);
-        });
+    private void setInitialFragment() {
+        mTransaction.add(R.id.fragment_container, SearchFragment.getInstance());
+        mTransaction.commit();
     }
 
     private void requestPermissions() {
@@ -69,52 +83,63 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO,
-                            Manifest.permission.MODIFY_AUDIO_SETTINGS},
-                                Constants.PERMISSIONS.MICROPHONE);
+                            Manifest.permission.MODIFY_AUDIO_SETTINGS}, Constants.PERMISSIONS.MICROPHONE);
 
+        } else {
+            Session.getInstance(this).setAudioEnabled(true);
         }
     }
 
+    private void replaceFragment(Fragment fragment) {
+        String fragmentTag = getFragmentTag(fragment);
+        Fragment currentFragment = mFragmentManager.findFragmentByTag(fragmentTag);
+        if (currentFragment != null) {
+            if (!currentFragment.isVisible()) {
 
-    private void enableInitialButtons() {
-        btnLogin.setEnabled(true);
-        btnStaticUrl.setEnabled(true);
-    }
+                if (fragment.getArguments() != null) {
+                    currentFragment.setArguments(fragment.getArguments());
+                }
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, currentFragment, fragmentTag)
+                        .addToBackStack(null)
+                        .commit();
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void enableNetworkButtons() {
-        btnUpload.setEnabled(true);
-        btnList.setEnabled(true);
-        btnLogin.setEnabled(false);
-    }
-
-    private void enableAllButtons() {
-        btnUpload.setEnabled(true);
-        btnList.setEnabled(true);
-        btnLogin.setEnabled(true);
-        btnStaticUrl.setEnabled(true);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constants.NETWORK.LOGIN_OK) {
-            enableNetworkButtons();
-            if (resultCode == RESULT_OK) {
             }
+        } else {
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, fragmentTag)
+                    .addToBackStack(null)
+                    .commit();
         }
+    }
+
+    private String getFragmentTag(Fragment fragment) {
+        if (fragment instanceof HomeFragment) {
+            return HomeFragment.TAG;
+        }
+        return HomeFragment.TAG; // PROVISIONAL
 
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        System.out.println(requestCode);
+        if (requestCode == Constants.PERMISSIONS.MICROPHONE) {
+
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Session.getInstance(this).setAudioEnabled(true);
+            } else {
+            }
+            return;
+        }
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onChangeFragment(Fragment fragment) {
+        replaceFragment(fragment);
     }
+
+
 }
-
