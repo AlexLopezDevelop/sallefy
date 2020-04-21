@@ -22,12 +22,12 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:text="Add new song to PlayList" />
+            android:text="Add song to PlayList" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:text="Select a new song"
+            android:text="Select a song"
             />
         <EditText
             android:id="@+id/newlist"
@@ -35,7 +35,7 @@
             android:layout_height="47dp"/>
 
         <Button
-            android:id="@+id/add_new_song_playlist_button"
+            android:id="@+id/add_song_button"
             android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:text="Add" />
