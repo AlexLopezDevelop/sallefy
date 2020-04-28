@@ -1,10 +1,7 @@
 package tk.alexlopez.sallefy.network.manager;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import tk.alexlopez.sallefy.activities.UploadActivity;
 import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
@@ -29,7 +27,7 @@ public class CloudinaryManager extends AppCompatActivity {
     private Genre mGenre;
     private TrackCallback mCallback;
 
-    public static CloudinaryManager getInstance(Context context, TrackCallback callback) {
+    public static CloudinaryManager getInstance(UploadActivity context, TrackCallback callback) {
         if (sManager == null) {
             sManager = new CloudinaryManager(context, callback);
         }

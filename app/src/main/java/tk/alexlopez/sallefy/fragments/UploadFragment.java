@@ -1,5 +1,6 @@
-package tk.alexlopez.sallefy.activities;
-import android.app.Activity;
+/* package tk.alexlopez.sallefy.fragments;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,30 +8,42 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.GenreCallback;
+
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.CloudinaryManager;
 import tk.alexlopez.sallefy.network.manager.GenreManager;
 import tk.alexlopez.sallefy.utils.Constants;
 
+public class UploadFragment extends Fragment implements GenreCallback, TrackCallback {
+    private static final int RESULT_OK = -1;
 
-public class UploadActivity extends Activity implements GenreCallback, TrackCallback {
+    public static SearchFragment getInstance() {
+        return new SearchFragment();
+    }
 
     private EditText etTitle;
     private Spinner mSpinner;
@@ -38,30 +51,47 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     private Button btnFind, btnCancel, btnAccept;
 
     private ArrayList<String> mGenres;
+
     private ArrayList<Genre> mGenresObjs;
     private Uri mFileUri;
     private ArrayList<Track> mTracksObjs;
     private ArrayList<String> mTracks;
-
+    private RecyclerView mRecyclerView;
     private Context mContext;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_upload_song);
-        mContext = getApplicationContext();
-        initViews();
-        getData();
     }
 
-    private void initViews() {
-        etTitle = (EditText) findViewById(R.id.upload_song_title);
-        mFilename = (TextView) findViewById(R.id.upload_song_file_name);
 
-        mSpinner = (Spinner) findViewById(R.id.upload_song_spinner);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_upload_song, container, false);
+        initViews(v);
+        return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
-        btnFind = (Button) findViewById(R.id.upload_song_find_file);
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+
+    @SuppressLint("WrongViewCast")
+    private void initViews(View v) {
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.upload_song_done);
+
+        etTitle = (EditText) v.findViewById(R.id.upload_song_title);
+        mFilename = (TextView) v.findViewById(R.id.upload_song_file_name);
+
+        mSpinner = (Spinner) v.findViewById(R.id.upload_song_spinner);
+
+        btnFind = (Button) v.findViewById(R.id.upload_song_find_file);
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,15 +99,15 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
             }
         });
 
-        btnCancel = (Button) findViewById(R.id.upload_song_cancel);
+        btnCancel = (Button) v.findViewById(R.id.upload_song_cancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
             }
         });
 
-        btnAccept = (Button) findViewById(R.id.upload_song_done);
+        btnAccept = (Button) v.findViewById(R.id.upload_song_done);
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +121,7 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     }
 
-    private void getData() {
+    protected void getData() {
         GenreManager.getInstance(this).getAllGenres(this);
     }
 
@@ -105,14 +135,17 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         return false;
     }
 
-    /*private void showStateDialog(boolean completed) {
-    }*/
-    protected void uploadDialog (String title, String msg){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    private void showStateDialog(boolean completed) {
+    }
+    private void uploadDialog (String title, String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
         builder.setTitle(title);
         builder.setMessage(msg);
         builder.setCancelable(false);
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
         });
         builder.show();
     }
@@ -135,34 +168,26 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.STORAGE.SONG_SELECTED && resultCode == RESULT_OK) {
             mFileUri = data.getData();
             mFilename.setText(mFileUri.toString());
         }
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+/*
 
     /**********************************************************************************************
      *   *   *   *   *   *   *   *   GenreCallback   *   *   *   *   *   *   *   *   *
      **********************************************************************************************/
-
+/*
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onGenresReceive(ArrayList<Genre> genres) {
-        mGenresObjs = genres;
+        View v;
+        mGenresObjs = genres;    // v.findViewById(R.id.upload_song_done);
         mGenres = (ArrayList<String>) genres.stream().map(Genre -> Genre.getName()).collect(Collectors.toList());
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, mGenres);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,  R.layout.support_simple_spinner_dropdown_item, mGenres);
         mSpinner.setAdapter(adapter);
     }
 
@@ -175,35 +200,52 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     }
 
     @Override
-    public void onFailure(Throwable throwable) { }
+    public void onFailure(Throwable throwable) {
 
+    }
+*/
     /**********************************************************************************************
      *   *   *   *   *   *   *   *   TrackCallback   *   *   *   *   *   *   *   *   *
      **********************************************************************************************/
+/*
+    @Override
+    public void onTracksReceived(List<Track> tracks) {
+
+    }
 
     @Override
-    public void onTracksReceived(List<Track> tracks) { }
+    public void onNoTracks(Throwable throwable) {
+
+    }
 
     @Override
-    public void onNoTracks(Throwable throwable) { }
+    public void onPersonalTracksReceived(List<Track> tracks) {
+
+    }
 
     @Override
-    public void onPersonalTracksReceived(List<Track> tracks) { }
+    public void onUserTracksReceived(List<Track> tracks) {
+
+    }
 
     @Override
-    public void onUserTracksReceived(List<Track> tracks) { }
+    public void onCreateTrack() {
+
+    }
 
     @Override
-    public void onCreateTrack() { }
+    public void onTrackSelected(Track track) {
+
+    }
 
     @Override
-    public void onTrackSelected(Track track) { }
+    public void onTrackSelected(int index) {
+
+    }
 
     @Override
-    public void onTrackSelected(int index) { }
+    public void onTracksReceivedByPlaylistId(Playlist playlist) {
 
-    @Override
-    public void onTracksReceivedByPlaylistId(Playlist playlist) { }
-
+    }
 }
-
+*/

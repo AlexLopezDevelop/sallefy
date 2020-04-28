@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements UserCallback {
         Session.getInstance(getApplicationContext())
                 .setUserToken(userToken);
         //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 

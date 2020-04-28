@@ -11,7 +11,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import tk.alexlopez.sallefy.models.Genre;
+import tk.alexlopez.sallefy.activities.UploadActivity;
+ import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.GenreCallback;
@@ -29,7 +30,7 @@ public class GenreManager {
 
     private GenreService mService;
 
-    public static GenreManager getInstance(Context context) {
+    public static GenreManager getInstance(UploadActivity context) {
         if (sGenreManager == null) {
             sGenreManager = new GenreManager(context);
         }
