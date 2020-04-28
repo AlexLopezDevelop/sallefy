@@ -17,20 +17,10 @@
         <ImageView
             android:id="@+id/track_img"
             android:layout_width="120dp"
-            android:layout_height="70dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:background="@drawable/ic_playlist_add"/>
 
-        <TextView
-            android:id="@+id/track_title"
-            style="@style/ItemTitleTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/fragment_playlists"
-            android:textColor="@color/colorPrimary"
-            android:textSize="10sp" />
         <!-- <TextView
                     android:id="@+id/item_playlist_author"
                     style="@style/ItemAuthorTheme"
@@ -41,6 +31,18 @@
                     android:textColor="@color/colorPrimaryDark" />-->
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/track_title"
+        style="@style/ItemTitleTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_margin="@dimen/mtrl_card_spacing"
+        android:layout_marginBottom="10dp"
+        android:text="@string/fragment_playlists"
+        android:textColor="@color/colorWhite"
+        android:textSize="10sp" />
 
 
 </LinearLayout>
