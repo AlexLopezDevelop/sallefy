@@ -13,7 +13,6 @@ import tk.alexlopez.sallefy.network.callback.UserCallback
 import tk.alexlopez.sallefy.network.manager.UserManager
 import tk.alexlopez.sallefy.utils.Session
 
-//Prueba Alfredo
 class LoginActivity : AppCompatActivity(), UserCallback {
 
 
