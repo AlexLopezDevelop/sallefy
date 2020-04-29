@@ -28,8 +28,8 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
     private fun iniViews() {
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         val adapter = TrackListAdapter(this, null)
-        recycler_view.setLayoutManager(manager)
-        recycler_view.setAdapter(adapter)
+        recycler_view.layoutManager = manager
+        recycler_view.adapter = adapter
     }
 
     //TrackManager.getInstance(this).getAllTracks(this);
@@ -50,15 +50,15 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
     override fun onTracksReceived(tracks: List<Track>) {
         mTracks = tracks as ArrayList<Track>
         val adapter = TrackListAdapter(this, mTracks)
-        recycler_view!!.adapter = adapter
+        recycler_view?.adapter = adapter
     }
 
     override fun onTracksReceivedByPlaylistId(playlist: Playlist) {
         // set title
-        playlist_title!!.text = playlist.name
+        playlist_title?.text = playlist.name
         mTracks = playlist.tracks as ArrayList<Track>
         val adapter = TrackListAdapter(this, mTracks)
-        recycler_view!!.adapter = adapter
+        recycler_view?.adapter = adapter
     }
 
     override fun onNoTracks(throwable: Throwable) {}

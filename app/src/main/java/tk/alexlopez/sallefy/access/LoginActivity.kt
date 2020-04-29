@@ -1,12 +1,16 @@
-package tk.alexlopez.sallefy.activities
+package tk.alexlopez.sallefy.access
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_login.*
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.activities.MainActivity
+import tk.alexlopez.sallefy.databinding.ActivityLoginBinding
 import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.models.UserToken
 import tk.alexlopez.sallefy.network.callback.UserCallback
@@ -17,12 +21,21 @@ class LoginActivity : AppCompatActivity(), UserCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+//        setContentView(R.layout.activity_login)
+        // Binding is the reference to the R.layout.activity_login
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+        // ViewModelFactory create a new instance when it create the activity.
+        val model = ViewModelProvider.NewInstanceFactory().create(LoginViewModel::class.java)
+
+        binding.model = model
+        model.path.value = "android.resource://" + packageName + "/" + R.raw.login_video
+        binding.lifecycleOwner = this
     }
+
 
     override fun onResume() {
         super.onResume()
-        initViews()
+//        initViews()
     }
 
     override fun onRestart() {
@@ -50,8 +63,8 @@ class LoginActivity : AppCompatActivity(), UserCallback {
     }
 
     private fun doLogin(username: String, password: String) =
-        UserManager.getInstance(applicationContext)
-                .loginAttempt(username, password, this@LoginActivity)
+            UserManager.getInstance(applicationContext)
+                    .loginAttempt(username, password, this@LoginActivity)
 
     override fun onLoginSuccess(userToken: UserToken) {
         Session.getInstance(applicationContext).userToken = userToken
