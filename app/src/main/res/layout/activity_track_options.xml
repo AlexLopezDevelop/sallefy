@@ -54,7 +54,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/detail_save_layout"
+        android:id="@+id/like_track_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -77,7 +77,7 @@
             android:layout_marginLeft="10dp" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/detail_add_playlist_layout"
+        android:id="@+id/add_song_to_playlist_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -100,7 +100,7 @@
             android:layout_marginLeft="10dp" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/detail_share_layout"
+        android:id="@+id/show_artist_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -123,7 +123,7 @@
             android:layout_marginLeft="10dp" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/detail_radio_layout"
+        android:id="@+id/delete_song_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
