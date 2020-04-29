@@ -15,7 +15,6 @@ import tk.alexlopez.sallefy.utils.Session
 
 class LoginActivity : AppCompatActivity(), UserCallback {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
