@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_login.*
 import tk.alexlopez.sallefy.R
@@ -26,16 +27,21 @@ class LoginActivity : AppCompatActivity(), UserCallback {
         val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
         // ViewModelFactory create a new instance when it create the activity.
         val model = ViewModelProvider.NewInstanceFactory().create(LoginViewModel::class.java)
-
         binding.model = model
-        model.path.value = "android.resource://" + packageName + "/" + R.raw.login_video
         binding.lifecycleOwner = this
+
+        model.userManager = UserManager.getInstance(application)
+
+        model.path.value = "android.resource://" + packageName + "/" + R.raw.login_video
+        model.userToken.observe(this, Observer {
+            onLoginSuccess(it)
+        })
     }
 
 
     override fun onResume() {
         super.onResume()
-//        initViews()
+        initViews()
     }
 
     override fun onRestart() {
@@ -51,20 +57,8 @@ class LoginActivity : AppCompatActivity(), UserCallback {
             startActivity(intent)
         }
 
-        // Start login view
-        login_button.setOnClickListener {
-            doLogin(login_username.text.toString(), login_password.text.toString())
-        }
-
-        // Video background configuration
-        val videoLoginPath = "android.resource://" + packageName + "/" + R.raw.login_video
-        videoLogin.setVideoPath(videoLoginPath)
-        videoLogin.start()
     }
 
-    private fun doLogin(username: String, password: String) =
-            UserManager.getInstance(applicationContext)
-                    .loginAttempt(username, password, this@LoginActivity)
 
     override fun onLoginSuccess(userToken: UserToken) {
         Session.getInstance(applicationContext).userToken = userToken

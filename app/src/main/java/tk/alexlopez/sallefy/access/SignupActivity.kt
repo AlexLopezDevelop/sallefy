@@ -2,6 +2,7 @@ package tk.alexlopez.sallefy.access
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -37,7 +38,12 @@ class SignupActivity : AppCompatActivity(), UserCallback {
 
     private fun doLogin(username: String, userpassword: String) {
         UserManager.getInstance(applicationContext)
-                .loginAttempt(username, userpassword, this@SignupActivity)
+                .loginAttempt(username, userpassword)
+                .subscribe ({
+                    onLoginSuccess(it)
+                }, {
+                    Log.e("", "", it)
+                })
     }
 
     override fun onLoginSuccess(userToken: UserToken) {
