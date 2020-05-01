@@ -20,11 +20,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{model.isVideoVisible()}"
-            app:path="@{model.path}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:path="@{model.path}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/login_background"
@@ -65,17 +65,11 @@
 
             <EditText
                 android:id="@+id/login_username"
+                style="@style/LoginEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:backgroundTint="@android:color/transparent"
                 android:hint="@string/username"
-                android:inputType="text"
-                android:padding="15dp"
-                android:text="@={model.username}"
-                android:textColor="#292929"
-                android:textColorHint="#c4bdab" />
+                android:text="@={model.username}" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -87,17 +81,12 @@
 
             <EditText
                 android:id="@+id/login_password"
+                style="@style/LoginEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:backgroundTint="@android:color/transparent"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:padding="15dp"
-                android:text="@={model.password}"
-                android:textColor="#292929"
-                android:textColorHint="#c4bdab" />
+                android:text="@={model.password}" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -157,6 +146,7 @@
                     android:id="@+id/login_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> model.goToSignUp()}"
                     android:padding="16sp"
                     android:text="@string/sign_up"
                     android:textColor="#ea9085"

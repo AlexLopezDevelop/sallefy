@@ -14,6 +14,8 @@ class LoginViewModel : ViewModel() {
     val password = MutableLiveData<String>()
     val path = MutableLiveData<String>()
     val userToken = MutableLiveData<UserToken>()
+    val doSignUp = MutableLiveData<Boolean>()
+
     lateinit var userManager: UserManager
 
     companion object {
@@ -42,6 +44,10 @@ class LoginViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun goToSignUp() {
+        doSignUp.postValue(true)
     }
 
     fun isVideoVisible(): Int {

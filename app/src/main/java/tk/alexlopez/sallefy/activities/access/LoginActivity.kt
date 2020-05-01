@@ -33,41 +33,38 @@ class LoginActivity : AppCompatActivity(), UserCallback {
         model.userManager = UserManager.getInstance(application)
 
         // random video in login screen
-        val videoNum = (1..2).random()
-        val id = resources.getIdentifier("raw/login_video$videoNum", null, this.packageName)
-        model.path.value = "android.resource://$packageName/$id"
+        model.path.value = getRandomVideoPath()
 
         model.userToken.observe(this, Observer {
             onLoginSuccess(it)
         })
+
+        model.doSignUp.observe(this, Observer {
+            val intent = Intent(applicationContext, SignupActivity::class.java)
+            startActivity(intent)
+        })
+    }
+
+    private fun getRandomVideoPath(): String {
+        val videoNum = (1..2).random()
+        val id = resources.getIdentifier("raw/login_video$videoNum", null, this.packageName)
+        return "android.resource://$packageName/$id"
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        initViews()
-    }
 
     override fun onRestart() {
         super.onRestart()
         login_background.visibility = View.VISIBLE
     }
 
-    private fun initViews() {
-
-        // Go to registration page
-        login_sign_up.setOnClickListener {
-            val intent = Intent(applicationContext, SignupActivity::class.java)
-            startActivity(intent)
-        }
-
-    }
-
 
     override fun onLoginSuccess(userToken: UserToken) {
-        Session.getInstance(applicationContext).userToken = userToken
-        val intent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(intent)
+        if (userToken.idToken.isNotEmpty()) {
+            Session.getInstance(applicationContext).userToken = userToken
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onLoginFailure(throwable: Throwable) {

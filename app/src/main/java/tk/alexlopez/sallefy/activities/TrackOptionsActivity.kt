@@ -38,17 +38,22 @@ class TrackOptionsActivity : AppCompatActivity() {
 
     //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
     private val data: Unit
-        private get() {
+        get() {
             val intent = this.intent
             val bundle = intent.extras
-            val track = bundle!!.getSerializable("trackData") as Track?
-            if (track!!.thumbnail != null) {
-                Glide.with(this)
-                        .asBitmap() //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
-                        .load(track.thumbnail)
-                        .into(track_cover!!)
+            bundle?.let { b ->
+                (b.getSerializable("trackData") as Track?)?.let { track ->
+
+                    if (track.thumbnail != null) {
+                        Glide.with(this)
+                                .asBitmap() //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
+                                .load(track.thumbnail)
+                                .into(track_cover!!)
+                    }
+                    track_title?.text = track.name
+                    track_author?.text = track.userLogin
+                }
             }
-            track_title!!.text = track.name
-            track_author!!.text = track.userLogin
+            //TODO: you MUST be return DATA
         }
 }
