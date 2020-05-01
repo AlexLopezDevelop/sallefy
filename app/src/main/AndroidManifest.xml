@@ -16,10 +16,10 @@
         <activity android:name=".activities.TrackOptionsActivity"></activity>
         <activity android:name=".activities.TracksListActivity" />
         <activity
-            android:name=".access.SignupActivity"
+            android:name=".activities.access.SignupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".access.LoginActivity"
+            android:name=".activities.access.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

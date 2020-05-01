@@ -1,9 +1,9 @@
-package tk.alexlopez.sallefy.access
+package tk.alexlopez.sallefy.activities.access
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -32,7 +32,11 @@ class LoginActivity : AppCompatActivity(), UserCallback {
 
         model.userManager = UserManager.getInstance(application)
 
-        model.path.value = "android.resource://" + packageName + "/" + R.raw.login_video
+        // random video in login screen
+        val videoNum = (1..2).random()
+        val id = resources.getIdentifier("raw/login_video$videoNum", null, this.packageName)
+        model.path.value = "android.resource://$packageName/$id"
+
         model.userToken.observe(this, Observer {
             onLoginSuccess(it)
         })

@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy.access
+package tk.alexlopez.sallefy.activities.access
 
 import android.view.View
 import android.widget.VideoView
