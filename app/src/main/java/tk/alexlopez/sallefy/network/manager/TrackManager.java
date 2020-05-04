@@ -37,7 +37,7 @@ public class TrackManager {
     private TrackService mTrackService;
 
 
-    public static TrackManager getInstance (Context context) {
+    public static TrackManager getInstance(Context context) {
         if (sTrackManager == null) {
             sTrackManager = new TrackManager(context);
         }
@@ -63,7 +63,7 @@ public class TrackManager {
     public synchronized void getAllTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mTrackService.getAllTracks( "Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getAllTracks("Bearer " + userToken.getIdToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
@@ -88,7 +88,7 @@ public class TrackManager {
     public synchronized void getAllTracksByPlaylistId(int playlistId, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId,"Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId, "Bearer " + userToken.getIdToken());
         call.enqueue(new Callback<Playlist>() {
             @Override
             public void onResponse(Call<Playlist> call, Response<Playlist> response) {
@@ -137,29 +137,10 @@ public class TrackManager {
     }
 
     public Observable<TrackLike> userLikeTrack(int idTrack) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        return mTrackService.userLikeTrack(idTrack, "Bearer " + userToken.getIdToken())
+        return mTrackService.userLikeTrack(idTrack, getAuthToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
-        /*Call<Boolean> call = mTrackService.userLikeTrack(idTrack, "Bearer " + userToken.getIdToken());
-        call.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if(response.isSuccessful()) {
-                    trackCallback.onLikedTrack(response.body());
-                } else {
-                    trackCallback.onNoLikedTrack(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-
-            }
-        });*/
-
     }
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {
@@ -185,6 +166,7 @@ public class TrackManager {
             }
         });
     }
+
     public synchronized void createTrack(Track track, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
@@ -207,6 +189,20 @@ public class TrackManager {
                 trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
+    }
+
+    public Observable<TrackLike> getTrackLike(int idTrack) {
+        return mTrackService.getTrackLike(idTrack, getAuthToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    private String getAuthToken() {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        String idToken = String.format("Bearer %s", userToken.getIdToken());
+
+        return idToken;
     }
 
 }
