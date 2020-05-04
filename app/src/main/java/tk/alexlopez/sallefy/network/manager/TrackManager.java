@@ -3,10 +3,17 @@ package tk.alexlopez.sallefy.network.manager;
 import android.content.Context;
 import android.util.Log;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,6 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.TrackLike;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.service.TrackService;
@@ -39,9 +47,13 @@ public class TrackManager {
 
     public TrackManager(Context context) {
         mContext = context;
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -122,6 +134,32 @@ public class TrackManager {
                 trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
+    }
+
+    public Observable<TrackLike> userLikeTrack(int idTrack) {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+
+        return mTrackService.userLikeTrack(idTrack, "Bearer " + userToken.getIdToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        /*Call<Boolean> call = mTrackService.userLikeTrack(idTrack, "Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.isSuccessful()) {
+                    trackCallback.onLikedTrack(response.body());
+                } else {
+                    trackCallback.onNoLikedTrack(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });*/
+
     }
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {

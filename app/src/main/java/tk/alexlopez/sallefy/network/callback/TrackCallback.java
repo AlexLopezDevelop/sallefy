@@ -16,4 +16,7 @@ public interface TrackCallback extends FailureCallback {
 
     void onTrackSelected(int index);
     void onTracksReceivedByPlaylistId(Playlist playlist);
+
+    void onNoLikedTrack(Boolean response);
+    void onLikedTrack(Boolean response);
 }

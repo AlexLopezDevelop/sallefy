@@ -22,7 +22,10 @@ class LoginActivity : AppCompatActivity(), UserCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_login)
+        initViews()
+    }
+
+    private fun initViews() {
         // Binding is the reference to the R.layout.activity_login
         val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
         // ViewModelFactory create a new instance when it create the activity.
