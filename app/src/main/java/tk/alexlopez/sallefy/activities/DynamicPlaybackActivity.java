@@ -275,6 +275,16 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
      }
 
      @Override
+     public void onNoLikedTrack(Boolean response) {
+
+     }
+
+     @Override
+     public void onLikedTrack(Boolean response) {
+
+     }
+
+     @Override
      public void onPointerCaptureChanged(boolean hasCapture) {
 
      }
