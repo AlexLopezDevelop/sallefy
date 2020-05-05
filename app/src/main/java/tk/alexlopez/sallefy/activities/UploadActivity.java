@@ -205,5 +205,15 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     @Override
     public void onTracksReceivedByPlaylistId(Playlist playlist) { }
 
+    @Override
+    public void onNoLikedTrack(Boolean response) {
+
+    }
+
+    @Override
+    public void onLikedTrack(Boolean response) {
+
+    }
+
 }
 
