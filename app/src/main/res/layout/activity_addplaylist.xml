@@ -24,20 +24,21 @@
             android:layout_height="47dp"
             android:text="Add PlayList" />
 
-        <TextView
+        <EditText
+            android:id="@+id/editText"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:text="Play list:"
-            />
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
 
         <Button
-            android:id="@+id/add_new_playlist_button"
+            android:id="@+id/add_playlist_button"
             android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:text="Add" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/cancel_button"
             android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:text="Cancel" />
