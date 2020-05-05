@@ -77,5 +77,9 @@
     <string name="menu_home">Inicio</string>
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
+    <string name="menu_upload">Subir canción</string>
+
+    <!--menu songs -->
+    <string name="menu_share">Compartir</string>
 
 </resources>

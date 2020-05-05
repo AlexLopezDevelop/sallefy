@@ -92,5 +92,6 @@
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
     <string name="menu_upload">Subir canción</string>
+    <string name="menu_share">Share</string>
 
 </resources>
