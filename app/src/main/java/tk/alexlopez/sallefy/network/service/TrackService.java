@@ -2,15 +2,18 @@ package tk.alexlopez.sallefy.network.service;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.TrackLike;
 
 public interface TrackService {
 
@@ -28,5 +31,8 @@ public interface TrackService {
 
     @GET("playlists/{id}/")
     Call<Playlist> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
+
+    @PUT("tracks/{id}/like")
+    Observable<TrackLike> userLikeTrack(@Path("id") int id, @Header("Authorization") String token);
 
 }

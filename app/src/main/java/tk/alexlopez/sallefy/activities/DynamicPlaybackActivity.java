@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -271,6 +270,16 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
 
      @Override
      public void onTracksReceivedByPlaylistId(Playlist playlist) {
+
+     }
+
+     @Override
+     public void onNoLikedTrack(Boolean response) {
+
+     }
+
+     @Override
+     public void onLikedTrack(Boolean response) {
 
      }
 
