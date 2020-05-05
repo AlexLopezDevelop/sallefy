@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
