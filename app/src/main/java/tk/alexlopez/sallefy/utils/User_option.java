@@ -16,6 +16,12 @@ public class User_option extends AppCompatActivity {
     private Intent sendIntent = new Intent();
     private LinearLayout linearLayout;
 
+
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        shareContent();
+    }
+
     public void shareContent() {
 
         linearLayout = findViewById(R.id.share_layout);
@@ -23,6 +29,8 @@ public class User_option extends AppCompatActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                sendIntent.setType("text/plain");
 
                 sendIntent.setAction(Intent.ACTION_SEND);
 

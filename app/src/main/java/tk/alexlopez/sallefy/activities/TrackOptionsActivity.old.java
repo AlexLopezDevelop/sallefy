@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy.activities;
+/*package tk.alexlopez.sallefy.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,3 +92,4 @@ public class TrackOptionsActivity extends AppCompatActivity {
 
 
 }
+*/
