@@ -25,7 +25,6 @@
         tools:ignore="VectorDrawableCompat" />
 
 
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -115,6 +114,8 @@
                 android:text="@string/add_to_playlist"
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
+
+
         <LinearLayout
             android:id="@+id/show_artist_option"
             android:layout_width="match_parent"
@@ -202,5 +203,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
-
+</layout>
