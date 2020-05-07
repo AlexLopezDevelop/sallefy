@@ -92,5 +92,6 @@
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
     <string name="menu_upload">Subir canción</string>
+    <string name="error_problem_to_get_info">Ups! hemos tenido un problema a la hora de recuperar la información</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package tk.alexlopez.sallefy.activities.access
 
+import android.util.Log
 import android.view.View
 import android.widget.VideoView
 import androidx.databinding.BindingAdapter
@@ -38,9 +39,11 @@ class LoginViewModel : ViewModel() {
             password.value?.let { pwd ->
                 if (user.isNotEmpty() && pwd.isNotEmpty()) {
                     userManager.loginAttempt(user, pwd)
-                            .subscribe {
+                            .subscribe({
                                 userToken.value = it
-                            }
+                            }, {
+                                Log.e("LoginViewModel", "${it.message}")
+                            })
                 }
             }
         }
