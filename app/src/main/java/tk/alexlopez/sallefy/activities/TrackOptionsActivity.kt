@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_track_options.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playlist
@@ -28,9 +29,17 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
         val binding = DataBindingUtil.setContentView<ActivityTrackOptionsBinding>(this, R.layout.activity_track_options)
         val model= ViewModelProvider.NewInstanceFactory().create(TrackOptionsViewModel::class.java)
         binding.model = model
+        model.errorMessage.observe(this,  Observer {
+            val message = getString(it)
+            Alerter.create(this)
+                    .setTitle("Error")
+                    .setText(message)
+                    .show()
+
+        })
         binding.lifecycleOwner = this
 
-        model.trackManager = TrackManager.getInstance(application)
+        model.load(TrackManager.getInstance(application), 8)
 
         model.userLikeTrack.observe(this, Observer {
 

@@ -35,4 +35,6 @@ public interface TrackService {
     @PUT("tracks/{id}/like")
     Observable<TrackLike> userLikeTrack(@Path("id") int id, @Header("Authorization") String token);
 
+    @GET("tracks/{id}/like")
+    Observable<TrackLike> getTrackLike(@Path("id") int idTrack, @Header("Authorization") String authToken);
 }
