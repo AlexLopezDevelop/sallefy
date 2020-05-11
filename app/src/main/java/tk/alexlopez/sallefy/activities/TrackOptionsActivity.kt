@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_track_options.*
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.databinding.ActivityTrackOptionsBinding
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.network.callback.TrackCallback
