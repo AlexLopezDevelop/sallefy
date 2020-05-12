@@ -21,8 +21,6 @@ public class UserToken {
 
     @Override
     public String toString() {
-        return "UserTokenService{" +
-                "idToken='" + idToken + '\'' +
-                '}';
+        return "UserTokenService{" + "idToken='" + idToken + '\'' + '}';
     }
 }

@@ -1,7 +1,4 @@
-/*package tk.alexlopez.sallefy.activities;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+/* package tk.alexlopez.sallefy.activities;
 
 import android.content.Intent;
 import android.os.Build;
@@ -11,11 +8,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Track;
-import tk.alexlopez.sallefy.network.manager.TrackManager;
 
 public class TrackOptionsActivity extends AppCompatActivity {
 
@@ -92,4 +91,7 @@ public class TrackOptionsActivity extends AppCompatActivity {
 
 
 }
-*/
+
+
+
+ */
