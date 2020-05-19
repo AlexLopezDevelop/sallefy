@@ -53,7 +53,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         holder.ivPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Paco: ", String.valueOf(position));
                 int playlistId = mPlaylist.get(position).getId();
                 Intent intent = new Intent(mContext.getApplicationContext(), TracksListActivity.class);
                 intent.putExtra("id", playlistId);
