@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.PlayTrackActivity;
 import tk.alexlopez.sallefy.activities.TrackOptionsActivity;
 import tk.alexlopez.sallefy.models.Track;
 
@@ -68,6 +71,24 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
                 mContext.startActivity(intent);
             }
         });
+        holder.rlLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "CLICK ID: " + track.getId());
+                Intent intent = new Intent(mContext.getApplicationContext(), PlayTrackActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("trackData", track);
+                bundle.putSerializable("playlist", mTracks);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+
+               /* Toast toast=Toast.makeText(mContext.getApplicationContext(),track.getId(),Toast.LENGTH_SHORT);
+                toast.setMargin(50,50);
+                toast.show();*/
+                // TODO: send track
+
+            }
+        });
 
     }
 
@@ -87,6 +108,8 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
         TextView tvAuthor;
         ImageView ivPicture;
         ImageButton ibOptions;
+        RelativeLayout rlLayout;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +117,7 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.View
             tvAuthor = itemView.findViewById(R.id.track_author);
             ivPicture = itemView.findViewById(R.id.track_img);
             ibOptions = itemView.findViewById(R.id.track_options);
+            rlLayout = itemView.findViewById(R.id.track_layout);
         }
     }
 }

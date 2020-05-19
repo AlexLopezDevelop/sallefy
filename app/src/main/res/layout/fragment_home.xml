@@ -69,8 +69,8 @@
             android:layout_marginTop="0dp"
             android:scrollbars="horizontal"
             android:textColor="@color/colorWhite">
-
         </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

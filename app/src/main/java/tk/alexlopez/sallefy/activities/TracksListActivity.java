@@ -28,7 +28,6 @@ public class TracksListActivity extends AppCompatActivity implements TrackCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracks_list);
-
         iniViews();
         getData();
     }

@@ -1,26 +1,28 @@
 package tk.alexlopez.sallefy.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
- import tk.alexlopez.sallefy.network.callback.FragmentCallback;
+import tk.alexlopez.sallefy.fragments.SongsFragment;
+import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -55,7 +57,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         break;
                     case R.id.action_songs:
                         //fragment = SongsFragment.getInstance();
-                        break;
+                    break;
                     case R.id.action_search :
                         fragment = SearchFragment.getInstance();
                         break;
