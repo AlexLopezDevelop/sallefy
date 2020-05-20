@@ -43,7 +43,6 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     private Uri mFileUri;
     private ArrayList<Track> mTracksObjs;
     private ArrayList<String> mTracks;
-
     private Context mContext;
 
 
