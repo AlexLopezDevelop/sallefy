@@ -20,6 +20,7 @@ import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
 
+
 public class PlaylistManager {
 
     private static final String TAG = "PlaylistManager";
@@ -27,6 +28,8 @@ public class PlaylistManager {
     private static PlaylistManager sPlaylistManager;
     private Retrofit mRetrofit;
     private Context mContext;
+    private PlaylistService mService;
+    private UserToken userToken;
 
     private PlaylistService mPlaylistService;
 
@@ -161,5 +164,27 @@ public class PlaylistManager {
             }
         });
 
+    }
+
+    public synchronized void getPlaylistById(Integer id, final PlaylistCallback playlistCallback) {
+        Call<Playlist> call = mService.getPlaylist(id, "Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<Playlist>() {
+            @Override
+            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
+                int code = response.code();
+                if (response.isSuccessful()) {
+                    playlistCallback.onPlaylistById(response.body());
+                } else {
+                    Log.d(TAG, "Error Not Successful: " + code);
+                    playlistCallback.onFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Playlist> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                playlistCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
     }
 }

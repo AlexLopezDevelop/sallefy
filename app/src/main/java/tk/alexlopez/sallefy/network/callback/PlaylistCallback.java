@@ -4,9 +4,10 @@ import java.util.List;
 
 import tk.alexlopez.sallefy.models.Playlist;
 
-public interface PlaylistCallback {
+public interface PlaylistCallback extends FailureCallback {
 
     void onPlaylistcreated();
     void onPlaylistReceived(List<Playlist> tracks);
+    void onPlaylistById(Playlist playlist);
 
 }
