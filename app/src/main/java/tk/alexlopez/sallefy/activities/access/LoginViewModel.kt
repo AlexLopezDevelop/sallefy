@@ -16,6 +16,7 @@ class LoginViewModel : ViewModel() {
     val path = MutableLiveData<String>()
     val userToken = MutableLiveData<UserToken>()
     val doSignUp = MutableLiveData<Boolean>()
+    val doRecoverPass = MutableLiveData<Boolean>()
 
     lateinit var userManager: UserManager
 
@@ -53,6 +54,10 @@ class LoginViewModel : ViewModel() {
         doSignUp.postValue(true)
     }
 
+
+    fun goToRecoverPass() {
+        doRecoverPass.postValue(true)
+    }
     fun isVideoVisible(): Int {
         path.value?.let {
             return if (it.isNotEmpty()) View.VISIBLE else View.GONE

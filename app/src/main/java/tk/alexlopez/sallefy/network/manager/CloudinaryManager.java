@@ -63,7 +63,7 @@ public class CloudinaryManager extends AppCompatActivity {
         @Override
         public void onProgress(String requestId, long bytes, long totalBytes) {
             Double progress = (double) bytes/totalBytes;
-            System.out.println(progress);
+            //System.out.println(progress);
         }
         @Override
         public void onSuccess(String requestId, Map resultData) {
