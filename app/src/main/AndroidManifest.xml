@@ -30,7 +30,7 @@
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.UploadActivity"/>
         <activity android:name=".activities.DynamicPlaybackActivity"/>
-        <activity android:name=".activities.RecoveryPass"/>
+        <activity android:name=".activities.access.RecoveryPass"/>
 
     </application>
 

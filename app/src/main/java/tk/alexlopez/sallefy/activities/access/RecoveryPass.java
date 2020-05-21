@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy.activities;
+package tk.alexlopez.sallefy.activities.access;
 
 import android.widget.EditText;
 
