@@ -54,13 +54,10 @@ class LoginActivity : AppCompatActivity(), UserCallback {
         return "android.resource://$packageName/$id"
     }
 
-
-
     override fun onRestart() {
         super.onRestart()
         login_background.visibility = View.VISIBLE
     }
-
 
     override fun onLoginSuccess(userToken: UserToken) {
         if (userToken.idToken.isNotEmpty()) {

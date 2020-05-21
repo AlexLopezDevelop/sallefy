@@ -2,7 +2,7 @@ package tk.alexlopez.sallefy.utils;
 
 import java.util.HashMap;
 
-public class CloudinaryConfigs {
+public class CloudinaryParam {
 
     public static HashMap getConfigurations() {
         HashMap  config = new HashMap();

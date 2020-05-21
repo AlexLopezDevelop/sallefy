@@ -36,7 +36,7 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     private EditText etTitle;
     private Spinner mSpinner;
     private TextView mFilename;
-    private Button btnFind, btnCancel, btnAccept;
+    private Button btnFind, btnCancel, btnAccept, btnFindimg;
 
     private ArrayList<String> mGenres;
     private ArrayList<Genre> mGenresObjs;
@@ -66,6 +66,14 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
             @Override
             public void onClick(View v) {
                 getAudioFromStorage();
+            }
+        });
+
+        btnFindimg = (Button) findViewById(R.id.upload_song_find_img);
+        btnFindimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImageFromStorage();
             }
         });
 
@@ -142,7 +150,12 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
             mFilename.setText(mFileUri.toString());
         }
     }
-
+    private void getImageFromStorage() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/png");
+        startActivityForResult(Intent.createChooser(intent, "Choose a image"), Constants.STORAGE.SONG_SELECTED);
+    }
     @Override
     protected void onPause() {
         super.onPause();
