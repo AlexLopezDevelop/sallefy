@@ -115,7 +115,10 @@
                     android:text="@string/forgot_password"
                     android:textColor="#ea9085"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="@{() -> model.goToRecoverPass()}"
+
+                    />
 
             </RelativeLayout>
 

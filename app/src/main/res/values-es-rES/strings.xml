@@ -15,6 +15,7 @@
     <string name="cancel">Cancelar</string>
     <string name="uploadSong">Subir</string>
     <string name="upload_info">Subir canción</string>
+    <string name="send_mail">Enviar</string>
 
     <string name="songTitle">Nombre de la canción</string>
     <string name="selectFile_show">Fichero audio</string>
@@ -77,5 +78,9 @@
     <string name="menu_home">Inicio</string>
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
+    <string name="menu_upload">Subir canción</string>
+
+    <!--menu songs -->
+    <string name="menu_share">Compartir</string>
 
 </resources>

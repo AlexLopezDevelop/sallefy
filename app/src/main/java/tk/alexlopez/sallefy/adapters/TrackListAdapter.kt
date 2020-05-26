@@ -1,5 +1,5 @@
-package tk.alexlopez.sallefy.adapters
 
+package tk.alexlopez.sallefy.adapters
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle

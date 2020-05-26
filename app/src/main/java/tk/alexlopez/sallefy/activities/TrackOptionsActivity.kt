@@ -1,8 +1,7 @@
-package tk.alexlopez.sallefy.activities
 
+package tk.alexlopez.sallefy.activities
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_track_options.*
 import tk.alexlopez.sallefy.R
-import tk.alexlopez.sallefy.databinding.ActivityLoginBinding
 import tk.alexlopez.sallefy.databinding.ActivityTrackOptionsBinding
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
@@ -30,7 +28,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
     private fun initViews() {
 
         val binding = DataBindingUtil.setContentView<ActivityTrackOptionsBinding>(this, R.layout.activity_track_options)
-        val model = ViewModelProvider.NewInstanceFactory().create(TrackOptionsViewModel::class.java)
+        val model= ViewModelProvider.NewInstanceFactory().create(TrackOptionsViewModel::class.java)
         binding.model = model
         model.errorMessage.observe(this,  Observer {
             val message = getString(it)
@@ -56,9 +54,12 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
 
         }
 
-        delete_song_option.setOnClickListener {
-            
+        share_layout.setOnClickListener() {
+            fun onClick(v: View?) {
+                //
+            }
         }
+
     }
 
     //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
@@ -77,6 +78,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                     }
                     track_title?.text = track.name
                     track_author?.text = track.userLogin
+
                 }
             }
             //TODO: you MUST be return DATA

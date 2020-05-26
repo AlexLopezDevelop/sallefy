@@ -8,6 +8,7 @@
     <string name="sign_up">Sign up</string>
     <string name="username">Username</string>
     <string name="i_already_have_an_account">I already have an account</string>
+    <string name="send_mail">Send</string>
 
     <!--ayda hayagh nakkijd -->
 
@@ -92,6 +93,7 @@
     <string name="menu_search">Busqueda</string>
     <string name="menu_library">Contenido</string>
     <string name="menu_upload">Subir canción</string>
+    <string name="menu_share">Share</string>
     <string name="error_problem_to_get_info">Ups! hemos tenido un problema a la hora de recuperar la información</string>
 
 </resources>

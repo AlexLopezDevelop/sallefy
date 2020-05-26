@@ -17,7 +17,7 @@ import tk.alexlopez.sallefy.activities.UploadActivity;
 import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
-import tk.alexlopez.sallefy.utils.CloudinaryConfigs;
+import tk.alexlopez.sallefy.utils.CloudinaryParam;
 
 public class CloudinaryManager extends AppCompatActivity {
 
@@ -37,7 +37,7 @@ public class CloudinaryManager extends AppCompatActivity {
     public CloudinaryManager(Context context, TrackCallback callback) {
         mContext = context;
         mCallback = callback;
-        MediaManager.init(mContext, CloudinaryConfigs.getConfigurations());
+        MediaManager.init(mContext, CloudinaryParam.getConfigurations());
     }
 
     public synchronized void uploadAudioFile(Uri fileUri, String fileName, Genre genre) {
@@ -63,7 +63,7 @@ public class CloudinaryManager extends AppCompatActivity {
         @Override
         public void onProgress(String requestId, long bytes, long totalBytes) {
             Double progress = (double) bytes/totalBytes;
-            System.out.println(progress);
+            //System.out.println(progress);
         }
         @Override
         public void onSuccess(String requestId, Map resultData) {

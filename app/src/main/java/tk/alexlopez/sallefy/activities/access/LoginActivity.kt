@@ -46,6 +46,11 @@ class LoginActivity : AppCompatActivity(), UserCallback {
             val intent = Intent(applicationContext, SignupActivity::class.java)
             startActivity(intent)
         })
+
+        model.doRecoverPass.observe(this, Observer {
+            val intent = Intent(applicationContext, RecoveryPass::class.java)
+            startActivity(intent)
+        })
     }
 
     private fun getRandomVideoPath(): String {
@@ -54,13 +59,10 @@ class LoginActivity : AppCompatActivity(), UserCallback {
         return "android.resource://$packageName/$id"
     }
 
-
-
     override fun onRestart() {
         super.onRestart()
         login_background.visibility = View.VISIBLE
     }
-
 
     override fun onLoginSuccess(userToken: UserToken) {
         if (userToken.idToken.isNotEmpty()) {

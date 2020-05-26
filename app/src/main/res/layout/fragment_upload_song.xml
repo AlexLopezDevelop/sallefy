@@ -14,7 +14,7 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="30dp"
-        android:textStyle="bold"
+        android:textStyle=" "
         android:textColor="@android:color/white"
         />
 
@@ -33,7 +33,8 @@
             android:layout_marginTop="20dp"
 
             android:text="@string/songTitle"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            />
 
         <EditText
             android:id="@+id/upload_song_title"
@@ -49,61 +50,40 @@
             android:layout_marginTop="30dp"
             android:padding="10dp"
             android:text="@string/genre"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            />
 
         <Spinner
             android:id="@+id/upload_song_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/upload_song_file_name_show"
-                    android:layout_width="117dp"
-                    android:layout_height="wrap_content"
-                     android:text="@string/selectFile_show"
-                    android:textColor="@android:color/white"
-                    android:gravity="left"/>
-                <TextView
-                    android:id="@+id/upload_song_img_name_show"
-                    android:layout_width="117dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/selectImg_show"
-                    android:textColor="@android:color/white"
-                    android:gravity="right"
-                    />
-            </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@android:dimen/app_icon_size">
+
             <Button
                 android:id="@+id/upload_song_find_file"
-                android:layout_width="117dp"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="30dp"
-                android:text="@string/selectFile" />
+                android:background="@mipmap/ic_launcher_upload" />
 
             <Button
                 android:id="@+id/upload_song_find_img"
-                android:layout_width="117dp"
-                android:layout_height="wrap_content"
-                android:text="@string/uploadImg" />
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                 android:background="@mipmap/ic_launcher_foreground" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/upload_song_file_name"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@android:color/white" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,18 +93,24 @@
 
             <Button
                 android:id="@+id/upload_song_cancel"
-                android:layout_width="117dp"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
                 android:layout_marginRight="30dp"
-                android:text="@string/cancel" />
+                android:background="@mipmap/ic_launcher_upload_return" />
 
             <Button
                 android:id="@+id/upload_song_done"
-                android:layout_width="117dp"
-                android:layout_height="wrap_content"
-                android:text="@string/uploadSong" />
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:background="@mipmap/ic_launcher_done_upload" />
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/upload_song_file_name"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"
+            android:layout_margin="12dp"/>
     </LinearLayout>
 </LinearLayout>
