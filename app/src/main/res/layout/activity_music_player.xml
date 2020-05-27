@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/music_player"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_animation"
     tools:context=".music_player">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,6 +63,7 @@
             android:layout_marginRight="50dp"
             android:background="@null"
             android:src="@drawable/ic_shuffle"
+            android:tint="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonPrevious"
             app:layout_constraintTop_toBottomOf="@+id/playerSeekBar"
@@ -76,6 +79,7 @@
             android:layout_marginTop="17dp"
             android:background="@null"
             android:src="@drawable/ic_repeat"
+            android:tint="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonNext"
             app:layout_constraintTop_toBottomOf="@+id/playerSeekBar"
@@ -91,18 +95,18 @@
             android:thumbTint="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/buttonPlay"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteX="21dp"
             android:layout_marginBottom="30dp"/>
 
         <TextView
             android:id="@+id/textCurrentTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="4dp"
             android:text="0:00"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/playerSeekBar"
             app:layout_constraintStart_toStartOf="@id/playerSeekBar"
@@ -115,9 +119,9 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="21dp"
             android:text="0:00"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/playerSeekBar"
             app:layout_constraintEnd_toEndOf="@id/playerSeekBar"
