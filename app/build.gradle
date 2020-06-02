@@ -88,4 +88,7 @@ dependencies {
 
     // Image rounded
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //OKHTTP
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
 }
