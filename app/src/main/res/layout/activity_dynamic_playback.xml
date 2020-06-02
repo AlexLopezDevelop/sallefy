@@ -104,7 +104,12 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="horizontal">
-
+                <ImageButton
+                    android:id="@+id/dynamic_download_btn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_cloud_download_black_24dp" />
                 <ImageButton
                     android:id="@+id/dynamic_backward_btn"
                     android:layout_width="50dp"
