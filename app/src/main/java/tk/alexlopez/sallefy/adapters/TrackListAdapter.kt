@@ -9,13 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.activities.PlayTrackActivity
 import tk.alexlopez.sallefy.activities.TrackOptionsActivity
 import tk.alexlopez.sallefy.models.Track
 import java.util.*
+
 
 class TrackListAdapter(private val mContext: Context, private val mTracks: ArrayList<Track>?) : RecyclerView.Adapter<TrackListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,6 +45,16 @@ class TrackListAdapter(private val mContext: Context, private val mTracks: Array
             intent.putExtras(bundle)
             mContext.startActivity(intent)
         }
+        holder.rlLayout.setOnClickListener(View.OnClickListener {
+            Log.d(TAG, "CLICK ID: " + track.id)
+            val intent = Intent(mContext.applicationContext, PlayTrackActivity::class.java)
+            val bundle = Bundle()
+            bundle.putSerializable("trackData", track)
+            bundle.putSerializable("playlist", mTracks)
+            intent.putExtras(bundle)
+            mContext.startActivity(intent)
+
+        })
     }
 
     override fun getItemCount(): Int {
@@ -58,7 +71,7 @@ class TrackListAdapter(private val mContext: Context, private val mTracks: Array
         var tvAuthor: TextView = itemView.findViewById(R.id.track_author)
         var ivPicture: ImageView = itemView.findViewById(R.id.track_img)
         var ibOptions: ImageButton = itemView.findViewById(R.id.track_options)
-
+        var rlLayout: RelativeLayout = itemView.findViewById(R.id.track_layout)
     }
 
     companion object {

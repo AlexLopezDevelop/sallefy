@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.io.IOException;
@@ -43,6 +44,8 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private static final String STOP_VIEW = "StopIcon";
 
 
+    private TextView timeTotal;
+    private TextView timeCurrent;
     private TextView tvTitle;
     private TextView tvAuthor;
     private ImageView ivPhoto;
@@ -89,29 +92,57 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         if (mVisualizer != null)
             mVisualizer.release();
     }
+    public  String milliSecondsToTimer(long milliseconds) {
+        String finalTimerString = "";
+        String secondsString = "";
 
+        // Convert total duration into time
+        int hours = (int) (milliseconds / (1000 * 60 * 60));
+        int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
+        int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+        // Add hours if there
+        if (hours > 0) {
+            finalTimerString = hours + ":";
+        }
+
+        // Prepending 0 to seconds if it is one digit
+        if (seconds < 10) {
+            secondsString = "0" + seconds;
+        } else {
+            secondsString = "" + seconds;
+        }
+
+        finalTimerString = finalTimerString + minutes + ":" + secondsString;
+
+        // return timer string
+        return finalTimerString;
+    }
     private void initViews() {
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.dynamic_recyclerView);
+       /* mRecyclerView = (RecyclerView) findViewById(R.id.dynamic_recyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         TrackListAdapter adapter = new TrackListAdapter(this, null);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);*/
 
-        mVisualizer = findViewById(R.id.dynamic_barVisualizer);
+       // mVisualizer = findViewById(R.id.dynamic_barVisualizer);
 
         mPlayer = new MediaPlayer();
+
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mSeekBar.setMax(mPlayer.getDuration());
                 mDuration =  mPlayer.getDuration();
+
+                timeTotal.setText(milliSecondsToTimer(mDuration));
+
                 playAudio();
 
-                int audioSessionId = mPlayer.getAudioSessionId();
+              /*  int audioSessionId = mPlayer.getAudioSessionId();
                 if (audioSessionId != -1)
-                    mVisualizer.setAudioSessionId(audioSessionId);
+                    mVisualizer.setAudioSessionId(audioSessionId);*/
             }
         });
 
@@ -119,6 +150,9 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
         tvAuthor = findViewById(R.id.dynamic_artist);
         tvTitle = findViewById(R.id.dynamic_title);
+        timeTotal = findViewById(R.id.textTotalTime);
+        timeCurrent = findViewById(R.id.textCurrentTime);
+        ivPhoto = findViewById(R.id.roundedImageView2);
 
         btnDownload = (ImageButton)findViewById(R.id.dynamic_download_btn);
         btnDownload.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +200,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                 }
             }
         });
-
         mSeekBar = (SeekBar) findViewById(R.id.dynamic_seekBar);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -193,7 +226,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     }
     private void playAudio() {
         mPlayer.start();
-       // updateSeekBar();
+        updateSeekBar();
         btnPlayStop.setImageResource(R.drawable.ic_pause);
         btnPlayStop.setTag(STOP_VIEW);
         //Toast.makeText(getApplicationContext(), "Playing Audio", Toast.LENGTH_SHORT).show();
@@ -241,9 +274,10 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         });
 
     }
-    /*
+
         public void updateSeekBar() {
             mSeekBar.setProgress(mPlayer.getCurrentPosition());
+            timeCurrent.setText(milliSecondsToTimer(mPlayer.getCurrentPosition()));
 
             if(mPlayer.isPlaying()) {
                 mRunnable = new Runnable() {
@@ -255,13 +289,13 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                 mHandler.postDelayed(mRunnable, 1000);
             }
         }
-    */
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             // Esto es lo que hace mi botón al pulsar ir a atrás
             mPlayer.pause();
-
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -270,6 +304,17 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         //updateSessionMusicData(offset);
         tvAuthor.setText(track.getUserLogin());
         tvTitle.setText(track.getName());
+        if (track.getThumbnail() != null) {
+            Glide.with(this)
+                    .asBitmap() //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
+                    .load(track.getThumbnail())
+                    .into(ivPhoto);
+        }else{
+            Glide.with(this)
+                    .asBitmap() //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
+                    .load(track.getThumbnail())
+                    .into(ivPhoto);
+        }
         try {
             mPlayer.reset();
             mPlayer.setDataSource(track.getUrl());
@@ -280,8 +325,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
         }
     }
-
-
 
 
     private void getData() {
@@ -331,6 +374,16 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
     @Override
     public void onTracksReceivedByPlaylistId(Playlist playlist) {
+
+    }
+
+    @Override
+    public void onNoLikedTrack(Boolean response) {
+
+    }
+
+    @Override
+    public void onLikedTrack(Boolean response) {
 
     }
 

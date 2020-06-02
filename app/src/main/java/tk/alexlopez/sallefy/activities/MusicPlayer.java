@@ -1,4 +1,4 @@
-package tk.alexlopez.sallefy;
+package tk.alexlopez.sallefy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -6,7 +6,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 
-public class music_player extends AppCompatActivity {
+import tk.alexlopez.sallefy.R;
+
+public class MusicPlayer extends AppCompatActivity {
 
     ConstraintLayout clMainLayout;
     AnimationDrawable adAnimationDrawable;
