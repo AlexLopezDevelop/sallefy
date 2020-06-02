@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,8 +22,14 @@ import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
@@ -40,6 +47,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private TextView tvAuthor;
     private ImageView ivPhoto;
 
+    private ImageButton btnDownload;
     private ImageButton btnBackward;
     private ImageButton btnPlayStop;
     private ImageButton btnForward;
@@ -57,6 +65,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private MediaPlayer mPlayer;
     private ArrayList<Track> mTracks;
     private int currentTrack = 0;
+    private Track cTrack;
 
 
     @Override
@@ -110,6 +119,18 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
         tvAuthor = findViewById(R.id.dynamic_artist);
         tvTitle = findViewById(R.id.dynamic_title);
+
+        btnDownload = (ImageButton)findViewById(R.id.dynamic_download_btn);
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    donwloadSong(cTrack.getUrl());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         btnBackward = (ImageButton)findViewById(R.id.dynamic_backward_btn);
         btnBackward.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +191,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
             }
         });
     }
-
     private void playAudio() {
         mPlayer.start();
        // updateSeekBar();
@@ -178,14 +198,12 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         btnPlayStop.setTag(STOP_VIEW);
         //Toast.makeText(getApplicationContext(), "Playing Audio", Toast.LENGTH_SHORT).show();
     }
-
     private void pauseAudio() {
         mPlayer.pause();
         btnPlayStop.setImageResource(R.drawable.ic_play);
         btnPlayStop.setTag(PLAY_VIEW);
         //Toast.makeText(getApplicationContext(), "Pausing Audio", Toast.LENGTH_SHORT).show();
     }
-
     private void prepareMediaPlayer(final String url) {
         Thread connection = new Thread(new Runnable() {
             @Override
@@ -200,21 +218,54 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         });
         connection.start();
     }
-/*
-    public void updateSeekBar() {
-        mSeekBar.setProgress(mPlayer.getCurrentPosition());
+    private void donwloadSong(String URL) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(cTrack.getUrl())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
-        if(mPlayer.isPlaying()) {
-            mRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    updateSeekBar();
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    //response.body().bytes() AQUI recuperamos el byteArray que debemos guardarlo en fichero.
+                    // do something wih the result
                 }
-            };
-            mHandler.postDelayed(mRunnable, 1000);
-        }
+            }
+        });
+
     }
-*/
+    /*
+        public void updateSeekBar() {
+            mSeekBar.setProgress(mPlayer.getCurrentPosition());
+
+            if(mPlayer.isPlaying()) {
+                mRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        updateSeekBar();
+                    }
+                };
+                mHandler.postDelayed(mRunnable, 1000);
+            }
+        }
+    */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            // Esto es lo que hace mi botón al pulsar ir a atrás
+            mPlayer.pause();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     public void updateTrack(Track track) {
         //updateSessionMusicData(offset);
         tvAuthor.setText(track.getUserLogin());
@@ -237,7 +288,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         Track track = (Track) bundle.getSerializable("trackData");
-
+        cTrack = track;
         mTracks = (ArrayList<Track>) bundle.getSerializable("playlist");
         updateTrack(track);
 
