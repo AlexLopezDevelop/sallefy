@@ -37,4 +37,13 @@ public interface TrackService {
 
     @GET("tracks/{id}/like")
     Observable<TrackLike> getTrackLike(@Path("id") int idTrack, @Header("Authorization") String authToken);
+
+    @PUT("playlists")
+    Call<Playlist> updatePlaylist(@Header("Authorization") String authToken, @Body Playlist playlist);
+
+    @GET("playlists")
+    Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String authToken);
+
+    @GET("me/playlists")
+    Call<List<Playlist>> getAllMyPlaylists(@Header("Authorization") String authToken);
 }

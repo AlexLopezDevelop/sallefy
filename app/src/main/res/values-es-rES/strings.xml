@@ -81,9 +81,5 @@
 
     <!--menu songs -->
     <string name="menu_share">Compartir</string>
-    <string name="disover">Descubre</string>
-    <string name="error_problem_to_get_info">Ups! hemos tenido un problema a la hora de recuperar la información</string>
-    <string name="my_playlists">Mis playlists</string>
-    <string name="my_favourites">Mis favoritas</string>
 
 </resources>

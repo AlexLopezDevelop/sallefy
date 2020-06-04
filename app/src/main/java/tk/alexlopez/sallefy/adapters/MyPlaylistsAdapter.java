@@ -1,5 +1,6 @@
 package tk.alexlopez.sallefy.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -22,13 +23,13 @@ import tk.alexlopez.sallefy.activities.TracksListActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 
-public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHolder>{
+public class MyPlaylistsAdapter extends RecyclerView.Adapter<MyPlaylistsAdapter.ViewHolder>{
 
     private static final String TAG = "TrackListAdapter";
     private ArrayList<Playlist> mPlaylist;
     private Context mContext;
 
-    public PlaylistAdapter(Context context, ArrayList<Playlist> playlists) {
+    public MyPlaylistsAdapter(Context context, ArrayList<Playlist> playlists) {
         mContext = context;
         mPlaylist = playlists;
     }
@@ -38,7 +39,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called.");
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_playlist, parent, false);
-        return new PlaylistAdapter.ViewHolder(itemView);
+        return new MyPlaylistsAdapter.ViewHolder(itemView);
     }
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
@@ -53,10 +54,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         holder.ivPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent resultIntent = new Intent();
                 int playlistId = mPlaylist.get(position).getId();
-                Intent intent = new Intent(mContext.getApplicationContext(), TracksListActivity.class);
-                intent.putExtra("id", playlistId);
-                mContext.startActivity(intent);
+                resultIntent.putExtra("idPlaylist", playlistId);
+                ((Activity)mContext).setResult(Activity.RESULT_OK, resultIntent);
+                ((Activity)mContext).finish();
             }
         });
     }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_animation"
-    tools:context=".music_player">
+    tools:context=".activities.MusicPlayerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutPlayer"

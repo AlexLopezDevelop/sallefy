@@ -67,6 +67,10 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onPersonalTracksReceived(tracks: List<Track>) {}
+    override fun onPlaylistsReceived(playlists: MutableList<Playlist>?) {
+        TODO("Not yet implemented")
+    }
+
     override fun onUserTracksReceived(tracks: List<Track>) {}
     override fun onCreateTrack() {}
     override fun onNoLikedTrack(response: Boolean?) {
@@ -75,6 +79,10 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
     override fun onTrackSelected(track: Track) {}
     override fun onTrackSelected(index: Int) {}
+    override fun onPlaylistUpdated(response: Boolean?) {
+        TODO("Not yet implemented")
+    }
+
     override fun onFailure(throwable: Throwable) {}
 }
 

@@ -88,4 +88,7 @@ dependencies {
 
     // Image rounded
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

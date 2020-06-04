@@ -85,6 +85,32 @@ public class TrackManager {
         });
     }
 
+    public synchronized void getAllMyPlaylists(final TrackCallback trackCallback) {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+
+        Call<List<Playlist>> call = mTrackService.getAllMyPlaylists("Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<List<Playlist>>() {
+
+            @Override
+            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+                int code = response.code();
+
+                if (response.isSuccessful()) {
+                    trackCallback.onPlaylistsReceived(response.body());
+                } else {
+                    Log.d(TAG, "Error Not Successful: " + code);
+                    trackCallback.onNoTracks(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
+    }
+
     public synchronized void getAllTracksByPlaylistId(int playlistId, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
@@ -102,6 +128,47 @@ public class TrackManager {
                 }
             }
 
+
+            @Override
+            public void onFailure(Call<Playlist> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
+    }
+
+    public synchronized void getAllPlaylists(final TrackCallback trackCallback) {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        Call<List<Playlist>> call = mTrackService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<List<Playlist>>() {
+            @Override
+            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+                trackCallback.onPlaylistsReceived(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
+    }
+
+    public synchronized  void updatePlaylist(final TrackCallback trackCallback, Playlist playlist) {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        Call<Playlist> call = mTrackService.updatePlaylist("Bearer " + userToken.getIdToken(), playlist);
+        call.enqueue(new Callback<Playlist>() {
+            @Override
+            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
+                int code = response.code();
+
+                if (response.isSuccessful()) {
+                    trackCallback.onPlaylistUpdated(true);
+                } else {
+                    Log.d(TAG, "Error Not Successful: " + code);
+                    trackCallback.onNoTracks(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+            }
 
             @Override
             public void onFailure(Call<Playlist> call, Throwable t) {
@@ -142,6 +209,8 @@ public class TrackManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
