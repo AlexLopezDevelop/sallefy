@@ -16,7 +16,7 @@ class ChartsActivity : AppCompatActivity() {
 
     fun initViews() {
         buttonBarChart.setOnClickListener{
-            startActivity(Intent(this, BarChartActivity::class.java))
+            startActivity(Intent(this, TopTracksActivity::class.java))
         }
 
         buttonPieChart.setOnClickListener{

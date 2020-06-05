@@ -17,15 +17,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.charts.TopTracksActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.charts.ChartsActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".activities.charts.RadarChartActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.PieChartActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.BarChartActivity"
             android:theme="@style/AppTheme.NoActionBar" />

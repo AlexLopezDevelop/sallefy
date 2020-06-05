@@ -46,4 +46,7 @@ public interface TrackService {
 
     @GET("me/playlists")
     Call<List<Playlist>> getAllMyPlaylists(@Header("Authorization") String authToken);
+
+    @GET("tracks")
+    Call<List<Track>> getTopTracks(@Header("Authorization") String token);
 }
