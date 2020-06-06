@@ -42,6 +42,17 @@ public class Track implements Serializable {
     @SerializedName("likes")
     private int likes;
 
+    @SerializedName("plays")
+    private int plays;
+
+    public int getPlays() {
+        return plays;
+    }
+
+    public void setPlays(int plays) {
+        this.plays = plays;
+    }
+
     public String getColor() {
         return color;
     }

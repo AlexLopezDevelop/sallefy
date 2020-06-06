@@ -20,7 +20,7 @@ class ChartsActivity : AppCompatActivity() {
         }
 
         buttonPieChart.setOnClickListener{
-            startActivity(Intent(this, PieChartActivity::class.java))
+            startActivity(Intent(this, TopUserTracksActivity::class.java))
         }
 
         buttonRadarChart.setOnClickListener{

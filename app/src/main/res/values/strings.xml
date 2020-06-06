@@ -93,5 +93,7 @@
     <string name="menu_library">Contenido</string>
     <string name="menu_upload">Subir canción</string>
     <string name="menu_share">Share</string>
+    <string name="top_liked_tracks">Top liked tracks</string>
+    <string name="my_most_played_songs">My most played songs</string>
 
 </resources>

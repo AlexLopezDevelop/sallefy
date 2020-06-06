@@ -30,7 +30,7 @@ class PieChartActivity : AppCompatActivity() {
         colors.add(android.graphics.Color.rgb(149, 165, 124))
         colors.add(android.graphics.Color.rgb(217, 184, 162))
         colors.add(Color.rgb(191, 134, 134))
-        colors.add(android.graphics.Color.rgb(179, 48, 80))
+        colors.add(android.graphics.C
 
         val pieDataSet = PieDataSet(visitors, "Visitors")
         pieDataSet.colors = colors
