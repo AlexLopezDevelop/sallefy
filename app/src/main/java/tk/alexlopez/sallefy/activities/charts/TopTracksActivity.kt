@@ -54,8 +54,9 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         val pieData = PieData(pieDataSet)
         pieChart.data = pieData
         pieChart.description.text = "Bar Chart Example"
-        pieChart.centerText = "Visitors"
+        pieChart.centerText = "Top tracks"
         pieChart.animate()
+        pieChart.invalidate()
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {

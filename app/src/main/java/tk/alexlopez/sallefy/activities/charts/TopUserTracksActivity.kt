@@ -9,7 +9,9 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.tapadoo.alerter.Alerter
+import kotlinx.android.synthetic.main.activity_top_tracks.*
 import kotlinx.android.synthetic.main.activity_top_user_tracks.*
+import kotlinx.android.synthetic.main.activity_top_user_tracks.pieChart
 
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playlist
@@ -53,8 +55,9 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         val pieData = PieData(pieDataSet)
         pieChart.data = pieData
         pieChart.description.text = "Bar Chart Example"
-        pieChart.centerText = "Visitors"
+        pieChart.centerText = "Most played"
         pieChart.animate()
+        pieChart.invalidate()
     }
 
     override fun onPersonalTracksReceived(tracks: List<Track>) {
