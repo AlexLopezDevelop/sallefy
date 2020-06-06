@@ -30,13 +30,13 @@ class TrackListAdapter(private val mContext: Context, private val mTracks: Array
         holder.tvAuthor.text = track.userLogin
         if (track.thumbnail != null) {
             Glide.with(mContext)
-                    .asBitmap() //.placeholder(R.drawable.ic_audiotrack) TODO: Change default image
+                    .asBitmap() //.placeholder(R.drawable.ic_audiotrack)
                     .load(track.thumbnail)
                     .into(holder.ivPicture)
         }
         holder.ibOptions.setOnClickListener {
             val intent = Intent(mContext.applicationContext, TrackOptionsActivity::class.java)
-            // TODO: send track
+            //
             val bundle = Bundle()
             bundle.putSerializable("trackData", track)
             intent.putExtras(bundle)

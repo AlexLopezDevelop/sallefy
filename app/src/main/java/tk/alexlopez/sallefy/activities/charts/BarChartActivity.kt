@@ -19,7 +19,7 @@ class BarChartActivity : AppCompatActivity() {
     }
 
     fun fakeData() {
-        val visitors = arrayListOf<BarEntry>()
+        /*val visitors = arrayListOf<BarEntry>()
         visitors.add(BarEntry(2014f, 420f))
         visitors.add(BarEntry(2015f, 475f))
         visitors.add(BarEntry(2016f, 508f))
@@ -46,6 +46,6 @@ class BarChartActivity : AppCompatActivity() {
         barChart.setFitBars(true)
         barChart.data = barData
         barChart.description.text = "Bar Chart Example"
-        barChart.animateY(2000)
+        barChart.animateY(2000)*/
     }
 }

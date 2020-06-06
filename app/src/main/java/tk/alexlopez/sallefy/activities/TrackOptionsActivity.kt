@@ -141,11 +141,11 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onUserTracksReceived(tracks: MutableList<Track>?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onPlaylistsReceived(playlists: List<Playlist>) {
@@ -171,35 +171,35 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                     && playlist.tracks.indexOfFirst { it.id == playlistId } > -1
 
     override fun onTracksReceivedByPlaylistId(playlist: Playlist?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onCreateTrack() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onNoLikedTrack(response: Boolean?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onFailure(throwable: Throwable?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onNoTracks(throwable: Throwable?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onLikedTrack(response: Boolean?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onTrackSelected(track: Track?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onTrackSelected(index: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onPlaylistUpdated(response: Boolean?) {
@@ -220,6 +220,6 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onTracksReceived(tracks: MutableList<Track>?) {
-        TODO("Not yet implemented")
+
     }
 }

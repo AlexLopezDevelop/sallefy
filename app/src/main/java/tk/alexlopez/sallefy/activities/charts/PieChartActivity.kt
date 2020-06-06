@@ -17,7 +17,7 @@ class PieChartActivity : AppCompatActivity() {
     }
 
     fun fakeData() {
-        val visitors = arrayListOf<PieEntry>()
+       /* val visitors = arrayListOf<PieEntry>()
         visitors.add(PieEntry(508f, "2016"))
         visitors.add(PieEntry(600f, "2017"))
         visitors.add(PieEntry(750f, "2018"))
@@ -42,6 +42,6 @@ class PieChartActivity : AppCompatActivity() {
         pieChart.data = pieData
         pieChart.description.text = "Bar Chart Example"
         pieChart.centerText = "Visitors"
-        pieChart.animate()
+        pieChart.animate()*/
     }
 }

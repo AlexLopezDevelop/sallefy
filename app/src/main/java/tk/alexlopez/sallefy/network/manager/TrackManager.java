@@ -28,6 +28,7 @@ import tk.alexlopez.sallefy.models.TrackLike;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.service.TrackService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -38,6 +39,7 @@ public class TrackManager {
     private static TrackManager sTrackManager;
     private Retrofit mRetrofit;
     private TrackService mTrackService;
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
 
     public static TrackManager getInstance(Context context) {
@@ -56,6 +58,7 @@ public class TrackManager {
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
+                .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -277,10 +280,13 @@ public class TrackManager {
         return idToken;
     }
 
-    public synchronized void getTopTracks(final TrackCallback trackCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
+    public synchronized void getTopTracks(final TrackCallback trackCallback, boolean liked, int size) {
+        if (size < 0) {
+            return;
+        }
 
-        Call<List<Track>> call = mTrackService.getTopTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getTopTracks(authHeader.getToken(), liked, size);
+
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
