@@ -17,6 +17,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.charts.TopUserTracksActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.charts.TopTracksActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.charts.ChartsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.charts.RadarChartActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.charts.PieChartActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.charts.BarChartActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.MusicPlayer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -24,6 +42,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.TracksListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ArtistProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.MyPlaylistsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.access.SignupActivity"

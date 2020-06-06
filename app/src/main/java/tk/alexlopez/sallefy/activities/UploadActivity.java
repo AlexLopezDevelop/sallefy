@@ -228,5 +228,19 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     }
 
+    @Override
+    public void onPlaylistUpdated(Boolean response) {
+
+    }
+
+    @Override
+    public void onPlaylistsReceived(List<Playlist> playlists) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }
 

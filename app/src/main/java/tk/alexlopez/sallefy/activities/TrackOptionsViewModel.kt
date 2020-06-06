@@ -21,7 +21,7 @@ class TrackOptionsViewModel : ViewModel() {
                 .subscribe({
                     userLikeTrack.value = it.liked.toBoolean()
                 }, {
-                    errorMessage.value = R.string.error_problem_to_get_info
+
                     Log.e("TrackOptionsViewModel", "unexpected Alex error ${it.message}")
                 })
     }
@@ -32,7 +32,8 @@ class TrackOptionsViewModel : ViewModel() {
                     Log.d("TrackOptionsViewModel", " Modify liked ${it.liked}")
                     userLikeTrack.value = it.liked.toBoolean()
                 }, {
-                    errorMessage.value = R.string.error_problem_to_get_info
+
                 })
     }
+
 }

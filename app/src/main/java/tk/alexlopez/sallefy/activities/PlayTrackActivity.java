@@ -388,6 +388,16 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     }
 
     @Override
+    public void onPlaylistUpdated(Boolean response) {
+
+    }
+
+    @Override
+    public void onPlaylistsReceived(List<Playlist> playlists) {
+
+    }
+
+    @Override
     public void onFailure(Throwable throwable) {
 
     }

@@ -15,10 +15,16 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.charts.ChartsActivity;
+import tk.alexlopez.sallefy.activities.charts.TopTracksActivity;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
 import tk.alexlopez.sallefy.fragments.SongsFragment;
@@ -32,6 +38,8 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     private FragmentTransaction mTransaction;
 
     private BottomNavigationView mNav;
+
+    private Button btCharts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,13 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                 return true;
             }
         });
+
+        btCharts = findViewById(R.id.charts);
+        btCharts.setOnClickListener(v -> {
+            Intent tarea= new Intent(this, ChartsActivity.class);
+            startActivity(tarea);
+        });
+
     }
 
 

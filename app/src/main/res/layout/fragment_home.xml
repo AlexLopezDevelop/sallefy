@@ -35,7 +35,7 @@
             android:layout_marginTop="32dp"
             android:textColor="@color/colorWhite"
             android:textSize="28sp"
-            android:text="@string/disover"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
@@ -59,7 +59,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:text="@string/my_playlists"
+            android:text=""
             android:textColor="@color/colorWhite"
             android:textSize="28sp"
             tools:ignore="MissingConstraints" />
@@ -82,7 +82,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:text="@string/my_favourites"
+            android:text=""
             android:textColor="@color/colorWhite"
             android:textSize="28sp"
             tools:ignore="MissingConstraints" />

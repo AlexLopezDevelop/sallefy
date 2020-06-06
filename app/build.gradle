@@ -91,4 +91,7 @@ dependencies {
 
     //OKHTTP
     implementation 'com.squareup.okhttp:okhttp:2.5.0'
+
+    // Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -6,26 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorPrimary">
-
-
-    <com.scwang.wave.MultiWaveHeader
-        android:id="@+id/search_multiWaveHeader"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:rotation="-20"
-        android:scaleX="2"
-        android:scaleY="1.7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mwhCloseColor="@color/colorSecondary"
-        app:mwhStartColor="@color/colorPrimary" />
+    android:background="@color/colorBlack">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="15dp">
 
         <TextView
             android:id="@+id/textView"
@@ -35,7 +28,7 @@
             android:gravity="center"
             android:text="BUSCAR"
             android:textColor="@color/colorWhite"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/input_search"
@@ -47,7 +40,9 @@
             android:inputType="text"
             android:padding="10dp"
             android:textColor="#292929"
-            android:textColorHint="#c4bdab" />
+            android:textColorHint="#c4bdab"
+            android:layout_marginBottom="20dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchPlaylist"
             android:layout_width="match_parent"

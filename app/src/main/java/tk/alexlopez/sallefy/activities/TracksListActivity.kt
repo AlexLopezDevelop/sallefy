@@ -33,7 +33,7 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
     }
 
     //TrackManager.getInstance(this).getAllTracks(this);
-    // TODO: Error
+    //
     private val data: Unit
         private get() {
             val intent = intent
@@ -42,7 +42,7 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
                 TrackManager.getInstance(this).getAllTracksByPlaylistId(id, this)
             } else {
                 //TrackManager.getInstance(this).getAllTracks(this);
-                // TODO: Error
+                //
             }
             mTracks = ArrayList()
         }
@@ -63,18 +63,26 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
     override fun onNoTracks(throwable: Throwable) {}
     override fun onLikedTrack(response: Boolean?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onPersonalTracksReceived(tracks: List<Track>) {}
+    override fun onPlaylistsReceived(playlists: MutableList<Playlist>?) {
+
+    }
+
     override fun onUserTracksReceived(tracks: List<Track>) {}
     override fun onCreateTrack() {}
     override fun onNoLikedTrack(response: Boolean?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onTrackSelected(track: Track) {}
     override fun onTrackSelected(index: Int) {}
+    override fun onPlaylistUpdated(response: Boolean?) {
+
+    }
+
     override fun onFailure(throwable: Throwable) {}
 }
 
