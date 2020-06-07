@@ -37,7 +37,6 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
         return new SearchFragment();
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +83,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
             @Override
             public void afterTextChanged(Editable s) {
                 String keyword = input_search.getText().toString();
-                Log.d(TAG, "HAY CAMBIOOOOOOOOOOOOOOOOOOOOO " + input_search.getText());
                 getData(keyword);
-                // you can call or do what you want with your EditText here
-
-                // yourEditText...
             }
         });
     }

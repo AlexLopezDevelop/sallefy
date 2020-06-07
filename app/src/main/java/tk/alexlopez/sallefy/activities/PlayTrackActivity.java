@@ -1,10 +1,12 @@
 package tk.alexlopez.sallefy.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -21,19 +23,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
+import io.objectbox.android.AndroidObjectBrowser;
+import io.objectbox.query.Query;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import tk.alexlopez.sallefy.BuildConfig;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
+import tk.alexlopez.sallefy.models.MyObjectBox;
+import tk.alexlopez.sallefy.models.ObjectBox;
 import tk.alexlopez.sallefy.models.Playlist;
+import tk.alexlopez.sallefy.models.SavedTracks;
+import tk.alexlopez.sallefy.models.SavedTracks_;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
@@ -70,7 +86,11 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private ArrayList<Track> mTracks;
     private int currentTrack = 0;
     private Track cTrack;
+    private Box<SavedTracks> tracksBox;
+    private Query<SavedTracks> tracksQuery;
 
+    List<SavedTracks> listBox = new ArrayList<SavedTracks>();
+    private Object SavedTracks_;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -80,6 +100,8 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         mDuration = 0;
         initViews();
         getData();
+        tracksBox = ObjectBox.get().boxFor(SavedTracks.class);
+       // tracksQuery = tracksBox.query().order(SavedTracks_.id_song).build();
     }
 
     @Override
@@ -120,14 +142,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     }
     private void initViews() {
 
-       /* mRecyclerView = (RecyclerView) findViewById(R.id.dynamic_recyclerView);
-        LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter = new TrackListAdapter(this, null);
-        mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(adapter);*/
-
-       // mVisualizer = findViewById(R.id.dynamic_barVisualizer);
-
         mPlayer = new MediaPlayer();
 
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -140,10 +154,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                 timeTotal.setText(milliSecondsToTimer(mDuration));
 
                 playAudio();
-
-              /*  int audioSessionId = mPlayer.getAudioSessionId();
-                if (audioSessionId != -1)
-                    mVisualizer.setAudioSessionId(audioSessionId);*/
             }
         });
 
@@ -160,7 +170,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
             @Override
             public void onClick(View v) {
                 try {
-                    donwloadSong(cTrack.getUrl());
+                    downloadSong(cTrack.getUrl());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -230,13 +240,11 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         updateSeekBar();
         btnPlayStop.setImageResource(R.drawable.ic_pause);
         btnPlayStop.setTag(STOP_VIEW);
-        //Toast.makeText(getApplicationContext(), "Playing Audio", Toast.LENGTH_SHORT).show();
     }
     private void pauseAudio() {
         mPlayer.pause();
         btnPlayStop.setImageResource(R.drawable.ic_play);
         btnPlayStop.setTag(PLAY_VIEW);
-        //Toast.makeText(getApplicationContext(), "Pausing Audio", Toast.LENGTH_SHORT).show();
     }
     private void prepareMediaPlayer(final String url) {
         Thread connection = new Thread(new Runnable() {
@@ -244,7 +252,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
             public void run() {
                 try {
                     mPlayer.setDataSource(url);
-                    mPlayer.prepare(); // might take long! (for buffering, etc)
+                    mPlayer.prepare();
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(),"Error, couldn't play the music\n" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -252,7 +260,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         });
         connection.start();
     }
-    private void donwloadSong(String URL) throws IOException {
+    private void downloadSong(String URL) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(cTrack.getUrl())
@@ -268,29 +276,46 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    //response.body().bytes() AQUI recuperamos el byteArray que debemos guardarlo en fichero.
-                    // do something wih the result
+                    final byte[] input = response.body().bytes();
+
+                    Log.i(TAG, getFilesDir().toString());
+                    File file = new File(getFilesDir(),"mydir");
+                    if(!file.exists()){
+                        file.mkdir();
+                    }
+                    try{
+                        String filePath = cTrack.getId()+"track.txt";
+                        File gpxfile = new File(file, filePath);
+                        FileWriter writer = new FileWriter(gpxfile);
+                        writer.write(String.valueOf(input));
+                        writer.flush();
+                        writer.close();
+
+                        SavedTracks save = new SavedTracks(cTrack.getId(),cTrack.getName(),filePath, cTrack.getThumbnail());
+                        tracksBox.put(save);
+                        Log.d(TAG, "Inserted new note, ID: " + save.getId());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         });
-
     }
+    public void updateSeekBar() {
+        mSeekBar.setProgress(mPlayer.getCurrentPosition());
+        timeCurrent.setText(milliSecondsToTimer(mPlayer.getCurrentPosition()));
 
-        public void updateSeekBar() {
-            mSeekBar.setProgress(mPlayer.getCurrentPosition());
-            timeCurrent.setText(milliSecondsToTimer(mPlayer.getCurrentPosition()));
-
-            if(mPlayer.isPlaying()) {
-                mRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        updateSeekBar();
-                    }
-                };
-                mHandler.postDelayed(mRunnable, 1000);
-            }
+        if(mPlayer.isPlaying()) {
+            mRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    updateSeekBar();
+                }
+            };
+            mHandler.postDelayed(mRunnable, 1000);
         }
-
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -407,4 +432,5 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     public void onFailure(Throwable throwable) {
 
     }
+
 }
