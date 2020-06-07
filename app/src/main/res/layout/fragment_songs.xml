@@ -26,18 +26,15 @@
         android:textColor="@color/colorWhite"
         android:textSize="25dp" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/downloadSongs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/multiWaveHeader2"
-            android:scrollbars="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorWhite">
 
-            <TextView
-                android:id="@+id/tracks_string_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"/>
-        </ScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>
