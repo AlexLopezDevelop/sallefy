@@ -1,11 +1,15 @@
 package tk.alexlopez.sallefy.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Serializable {
+public class User implements Serializable, Parcelable {
 
     @SerializedName("activated")
     private Boolean activated;
@@ -216,4 +220,36 @@ public class User implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public User(Parcel in) {
+        id = in.readInt();
+        imageUrl = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(imageUrl);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(email);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

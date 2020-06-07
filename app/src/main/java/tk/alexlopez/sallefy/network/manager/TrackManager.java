@@ -6,11 +6,14 @@ import android.util.Log;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
@@ -161,7 +164,7 @@ public class TrackManager {
         });
     }
 
-    public synchronized  void updatePlaylist(final TrackCallback trackCallback, Playlist playlist) {
+    public synchronized void updatePlaylist(final TrackCallback trackCallback, Playlist playlist) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
         Call<Playlist> call = mTrackService.updatePlaylist("Bearer " + userToken.getIdToken(), playlist);
         call.enqueue(new Callback<Playlist>() {
@@ -216,7 +219,6 @@ public class TrackManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-
 
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {
@@ -335,5 +337,45 @@ public class TrackManager {
                 trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
+    }
+
+    public Observable<Boolean> delete(int playlistId, @Nullable Integer trackId) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+
+                mTrackService.getAllTracksByPlaylistIdStream(playlistId, authHeader.getToken())
+                        .map(playlist -> {
+                            List<Track> tracks = playlist.getTracks();
+                            if (tracks != null && tracks.size() > 0) {
+                                for (int i = 0; i < tracks.size(); i++) {
+                                    Track track = tracks.get(i);
+                                    if (track.getId().equals(trackId)) {
+                                        tracks.remove(i);
+                                        playlist.setTracks(tracks);
+
+                                        return playlist;
+                                    }
+                                }
+                            }
+                            throw new Exception("Not found");
+                        }).subscribe(modifiedPlaylist -> {
+
+                    mTrackService.updatePlaylistStream(authHeader.getToken(), modifiedPlaylist)
+                            .subscribe(updatedPlaylist -> {
+
+                                emitter.onNext(updatedPlaylist != null);
+                                emitter.onComplete();
+                            }, err -> {
+                                emitter.onError(err);
+                            });
+
+                }, err -> {
+                    emitter.onError(err);
+                });
+            }
+        });
+
     }
 }

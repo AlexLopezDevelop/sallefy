@@ -1,5 +1,5 @@
-
 package tk.alexlopez.sallefy.adapters
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +17,7 @@ import tk.alexlopez.sallefy.activities.TrackOptionsActivity
 import tk.alexlopez.sallefy.models.Track
 import java.util.*
 
-class TrackListAdapter(private val mContext: Context, private val mTracks: ArrayList<Track>?) : RecyclerView.Adapter<TrackListAdapter.ViewHolder>() {
+class TrackListAdapter(private val mContext: Context, private val mTracks: ArrayList<Track>?, private val playListId: Int) : RecyclerView.Adapter<TrackListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.d(TAG, "onCreateViewHolder: called.")
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.playlist_item, parent, false)
@@ -40,6 +40,7 @@ class TrackListAdapter(private val mContext: Context, private val mTracks: Array
             val bundle = Bundle()
             bundle.putSerializable("trackData", track)
             intent.putExtras(bundle)
+            intent.putExtra("playListId", playListId)
             mContext.startActivity(intent)
         }
     }

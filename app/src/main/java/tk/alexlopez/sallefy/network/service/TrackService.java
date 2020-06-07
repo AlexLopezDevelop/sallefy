@@ -30,6 +30,9 @@ public interface TrackService {
     @GET("playlists/{id}/")
     Call<Playlist> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
 
+    @GET("playlists/{id}/")
+    Observable<Playlist> getAllTracksByPlaylistIdStream(@Path("id") int id, @Header("Authorization") String token);
+
     @PUT("tracks/{id}/like")
     Observable<TrackLike> userLikeTrack(@Path("id") int id, @Header("Authorization") String token);
 
@@ -38,6 +41,9 @@ public interface TrackService {
 
     @PUT("playlists")
     Call<Playlist> updatePlaylist(@Header("Authorization") String authToken, @Body Playlist playlist);
+
+    @PUT("playlists")
+    Observable<Playlist> updatePlaylistStream(@Header("Authorization") String authToken, @Body Playlist playlist);
 
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String authToken);

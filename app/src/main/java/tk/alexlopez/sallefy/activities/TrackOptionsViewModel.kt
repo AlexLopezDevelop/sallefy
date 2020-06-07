@@ -10,7 +10,7 @@ import java.lang.Exception
 class TrackOptionsViewModel : ViewModel() {
 
     val trackId = MutableLiveData<Int>()
-    val userLikeTrack = MutableLiveData<Boolean>()
+    val  userLikeTrack = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<Int>()
     lateinit var trackManager: TrackManager
 
@@ -32,7 +32,7 @@ class TrackOptionsViewModel : ViewModel() {
                     Log.d("TrackOptionsViewModel", " Modify liked ${it.liked}")
                     userLikeTrack.value = it.liked.toBoolean()
                 }, {
-
+                    Log.d("TrackOptionsViewModel", "Chraz Modify liked")
                 })
     }
 
