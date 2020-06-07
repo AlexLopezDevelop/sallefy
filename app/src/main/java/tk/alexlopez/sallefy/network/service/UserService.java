@@ -23,5 +23,6 @@ public interface UserService {
     @POST("register")
     Call<ResponseBody> registerUser(@Body UserRegister user);
 
-
+    @GET("account")
+    Call<User> getUser(@Header("Authorization") String token);
 }

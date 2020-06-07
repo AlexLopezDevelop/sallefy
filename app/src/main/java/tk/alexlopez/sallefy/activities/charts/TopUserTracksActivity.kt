@@ -16,15 +16,17 @@ import kotlinx.android.synthetic.main.activity_top_user_tracks.pieChart
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
+import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
+import tk.alexlopez.sallefy.network.manager.UserManager
 
 class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top_user_tracks)
 
-        TrackManager.getInstance(this).getOwnTracks(this)
+        UserManager.getInstance(this).getAccount(this)
     }
 
     private fun buildChart(tracks: List<Track>) {
@@ -34,9 +36,9 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         val colorTemplates = ColorTemplate.COLORFUL_COLORS + ColorTemplate.MATERIAL_COLORS + ColorTemplate.PASTEL_COLORS + ColorTemplate.COLOR_SKIP + ColorTemplate.LIBERTY_COLORS + ColorTemplate.VORDIPLOM_COLORS
         val totalPastelColors = colorTemplates.count() - 1
 
-        val topTracksPlayed = tracks.sortedBy { it.plays }
-
-        topTracksPlayed.forEachIndexed { idx, track ->
+        tracks.sortedBy {
+            it.plays
+        }.forEachIndexed { idx, track ->
             rank = track.plays.toFloat()
             visitors.add(PieEntry(rank, track.name))
 
@@ -99,6 +101,10 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
 
     override fun onLikedTrack(response: Boolean?) {
 
+    }
+
+    override fun onUserInfoReceived(user: User) {
+        TrackManager.getInstance(this).getOwnTracks(this, user.login)
     }
 
     override fun onTrackSelected(track: Track?) {

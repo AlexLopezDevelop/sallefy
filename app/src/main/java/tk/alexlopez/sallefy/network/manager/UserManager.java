@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -17,10 +19,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tk.alexlopez.sallefy.activities.charts.TopUserTracksActivity;
 import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.models.UserLogin;
 import tk.alexlopez.sallefy.models.UserRegister;
 import tk.alexlopez.sallefy.models.UserToken;
+import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.callback.UserCallback;
 import tk.alexlopez.sallefy.network.service.UserService;
 import tk.alexlopez.sallefy.network.service.UserTokenService;
@@ -71,28 +75,6 @@ public class UserManager {
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
-//        call.enqueue(new Callback<UserToken>() {
-//            @Override
-//            public void onResponse(Call<UserToken> call, Response<UserToken> response) {
-//
-//                int code = response.code();
-//                UserToken userToken = response.body();
-//
-//                if (response.isSuccessful()) {
-//                    userCallback.onLoginSuccess(userToken);
-//                } else {
-//                    Log.d(TAG, "Error: " + code);
-//                    userCallback.onLoginFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserToken> call, Throwable t) {
-//                Log.d(TAG, "Error: " + t.getMessage());
-//                userCallback.onFailure(t);
-//            }
-//        });
     }
 
 
@@ -142,6 +124,30 @@ public class UserManager {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 userCallback.onFailure(t);
+            }
+        });
+    }
+
+    public void getAccount(final TrackCallback trackCallback) {
+        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        Call<User> call = mService.getUser("Bearer " + userToken.getIdToken());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                int code = response.code();
+                if (response.isSuccessful()) {
+                    trackCallback.onUserInfoReceived(response.body());
+                } else {
+                    Log.d(TAG, "Error NOT SUCCESSFUL: " + response.toString());
+                    trackCallback.onFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d(TAG, "Error: " + t.getMessage());
+                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
     }

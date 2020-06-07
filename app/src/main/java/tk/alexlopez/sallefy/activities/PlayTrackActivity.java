@@ -35,6 +35,7 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
 
@@ -394,6 +395,11 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
     @Override
     public void onPlaylistsReceived(List<Playlist> playlists) {
+
+    }
+
+    @Override
+    public void onUserInfoReceived(User body) {
 
     }
 

@@ -24,6 +24,7 @@ import java.util.List;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
 public class DynamicPlaybackActivity extends Activity implements TrackCallback {
@@ -287,7 +288,12 @@ public class DynamicPlaybackActivity extends Activity implements TrackCallback {
 
      }
 
-     @Override
+    @Override
+    public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
      public void onFailure(Throwable throwable) {
 
      }

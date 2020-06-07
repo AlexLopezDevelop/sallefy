@@ -218,9 +218,9 @@ public class TrackManager {
 
 
 
-    public synchronized void getOwnTracks(final TrackCallback trackCallback) {
+    public synchronized void getOwnTracks(final TrackCallback trackCallback, String userLogin) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Track>> call = mTrackService.getOwnTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getOwnTracks("Bearer " + userToken.getIdToken(), userLogin);
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
