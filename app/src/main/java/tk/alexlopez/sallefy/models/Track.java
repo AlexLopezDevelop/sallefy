@@ -45,6 +45,17 @@ public class Track implements Serializable {
     @SerializedName("plays")
     private int plays;
 
+    @SerializedName("followers")
+    private int followers;
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
     public int getPlays() {
         return plays;
     }

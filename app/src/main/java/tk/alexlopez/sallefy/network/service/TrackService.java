@@ -50,4 +50,7 @@ public interface TrackService {
 
     @GET("tracks")
     Call<List<Track>> getTopTracks(@Header("Authorization") String token, @Query("liked") boolean liked, @Query("size") int size);
+
+    @GET("playlists")
+    Call<List<Track>> getMoreTracksFollowed(@Header("Authorization") String token, @Query("popular") boolean popular, @Query("size") int size);
 }

@@ -22,6 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tk.alexlopez.sallefy.activities.charts.TopTracksActivity;
+import tk.alexlopez.sallefy.activities.charts.TracksMoreFollowedActivity;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.TrackLike;
@@ -286,6 +287,34 @@ public class TrackManager {
         }
 
         Call<List<Track>> call = mTrackService.getTopTracks(authHeader.getToken(), liked, size);
+
+        call.enqueue(new Callback<List<Track>>() {
+            @Override
+            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+                int code = response.code();
+
+                if (response.isSuccessful()) {
+                    trackCallback.onTracksReceived(response.body());
+                } else {
+                    Log.d(TAG, "Error Not Successful: " + code);
+                    trackCallback.onNoTracks(new Throwable("ERROR " + code + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Track>> call, Throwable t) {
+                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            }
+        });
+    }
+
+    public void getMoreTracksFollowed(final TrackCallback trackCallback, boolean popular, int size) {
+        if (size < 0) {
+            return;
+        }
+
+        Call<List<Track>> call = mTrackService.getMoreTracksFollowed(authHeader.getToken(), popular, size);
 
         call.enqueue(new Callback<List<Track>>() {
             @Override
