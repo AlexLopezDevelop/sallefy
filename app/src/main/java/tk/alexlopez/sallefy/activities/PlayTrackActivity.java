@@ -100,6 +100,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         mDuration = 0;
         initViews();
         getData();
+        searchDownload();
         tracksBox = ObjectBox.get().boxFor(SavedTracks.class);
        // tracksQuery = tracksBox.query().order(SavedTracks_.id_song).build();
     }
@@ -293,7 +294,8 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
                         SavedTracks save = new SavedTracks(cTrack.getId(),cTrack.getName(),filePath, cTrack.getThumbnail());
                         tracksBox.put(save);
-                        Log.d(TAG, "Inserted new note, ID: " + save.getId());
+                        btnDownload.setVisibility(View.INVISIBLE);
+
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -362,7 +364,16 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         updateTrack(track);
 
     }
+    private void searchDownload(){
+        int id= cTrack.getId();
+        String filename = id + "track.txt";
+        File filepath = new File(getFilesDir(),"mydir");
 
+        File file = new File(filepath,filename);
+        if(file.exists()){
+            btnDownload.setVisibility(View.INVISIBLE);
+        }
+    }
     @Override
     public void onTracksReceived(List<Track> tracks) {
 
