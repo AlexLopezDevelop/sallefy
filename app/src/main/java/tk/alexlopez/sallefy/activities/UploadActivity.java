@@ -24,6 +24,7 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.GenreCallback;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.CloudinaryManager;
@@ -235,6 +236,11 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     @Override
     public void onPlaylistsReceived(List<Playlist> playlists) {
+
+    }
+
+    @Override
+    public void onUserInfoReceived(User body) {
 
     }
 

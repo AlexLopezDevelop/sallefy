@@ -20,6 +20,7 @@ import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.databinding.ActivityTrackOptionsBinding
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
+import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
 import java.lang.Exception
@@ -221,6 +222,10 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onLikedTrack(response: Boolean?) {
+
+    }
+
+    override fun onUserInfoReceived(body: User?) {
 
     }
 

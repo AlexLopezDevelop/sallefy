@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorBlack"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:id="@+id/track_layout">
 
     <ImageView
         android:id="@+id/track_img"
@@ -22,7 +23,6 @@
         android:layout_marginLeft="50dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-
         <TextView
             android:id="@+id/track_title"
             android:layout_width="match_parent"

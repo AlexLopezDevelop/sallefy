@@ -18,8 +18,8 @@ import tk.alexlopez.sallefy.models.TrackLike;
 
 public interface TrackService {
 
-    @GET("me/tracks")
-    Call<List<Track>> getOwnTracks(@Header("Authorization") String token);
+    @GET("playbacks")
+    Call<List<Track>> getOwnTracks(@Header("Authorization") String token, @Query("username") String name);
 
     @GET("users/{login}/tracks")
     Call<List<Track>> getUserTracks(@Path("login") String login, @Header("Authorization") String token);

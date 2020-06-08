@@ -9,6 +9,7 @@ import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.adapters.TrackListAdapter
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
+import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
 import java.util.*
@@ -70,6 +71,10 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
     override fun onNoTracks(throwable: Throwable) {}
     override fun onLikedTrack(response: Boolean?) {
+
+    }
+
+    override fun onUserInfoReceived(body: User?) {
 
     }
 

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.objectbox'
 
 android {
     compileOptions {
@@ -20,6 +21,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
     dataBinding {
         enabled true
@@ -88,6 +91,9 @@ dependencies {
 
     // Image rounded
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //OKHTTP
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
 
     // Charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

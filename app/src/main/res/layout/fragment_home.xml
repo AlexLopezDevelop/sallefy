@@ -6,20 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
 
-    android:background="@color/colorGrayDark"
+    android:background="@drawable/background_animation"
     tools:context=".activities.MainActivity">
-
-    <com.scwang.wave.MultiWaveHeader
-        android:id="@+id/multiWaveHeader"
-        android:layout_width="470dp"
-        android:layout_height="423dp"
-        android:rotation="-20"
-        android:scaleX="2"
-        android:scaleY="1.7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mwhCloseColor="@color/colorGrayLight"
-        app:mwhStartColor="@color/colorGrayDark"
-        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,6 +63,7 @@
             android:layout_marginLeft="32dp">
 
         </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

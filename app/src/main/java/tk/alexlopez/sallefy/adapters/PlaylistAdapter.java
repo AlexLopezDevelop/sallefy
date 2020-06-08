@@ -66,11 +66,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         return mPlaylist != null ? mPlaylist.size():0;
     }
 
-   /* public void updateTrackLikeStateIcon(int position, boolean isLiked) {
-        mPlaylist.get(position).setLiked(isLiked);
-        notifyDataSetChanged();
-    }*/
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         ImageView ivPicture;

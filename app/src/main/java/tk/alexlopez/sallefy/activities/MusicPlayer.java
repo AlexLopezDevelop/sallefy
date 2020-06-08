@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import tk.alexlopez.sallefy.R;
 
-public class MusicPlayerActivity extends AppCompatActivity {
+public class MusicPlayer extends AppCompatActivity {
 
     ConstraintLayout clMainLayout;
     AnimationDrawable adAnimationDrawable;
