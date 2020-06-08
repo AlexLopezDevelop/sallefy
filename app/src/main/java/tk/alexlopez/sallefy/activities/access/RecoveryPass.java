@@ -2,12 +2,9 @@ package tk.alexlopez.sallefy.activities.access;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +14,7 @@ import tk.alexlopez.sallefy.R;
 public class RecoveryPass  extends AppCompatActivity {
 
     private EditText etEmail;
-    private Button send;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +27,7 @@ public class RecoveryPass  extends AppCompatActivity {
     }
 
     private void initViews() {
-        send = findViewById(R.id.recovery_button);
+        Button send = findViewById(R.id.recovery_button);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,16 +39,16 @@ public class RecoveryPass  extends AppCompatActivity {
                     sendMail(etEmail.getText().toString());
 
                 }else{
-                    dialog("Mail incorrect","Write a valid email");
+                    dialog();
                 }
             }
         });
     }
 
-    protected void dialog (String title, String msg){
+    protected void dialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title);
-        builder.setMessage(msg);
+        builder.setTitle("Mail incorrect");
+        builder.setMessage("Write a valid email");
         builder.setCancelable(false);
         builder.setPositiveButton("OK", (dialog, which) -> {
         });

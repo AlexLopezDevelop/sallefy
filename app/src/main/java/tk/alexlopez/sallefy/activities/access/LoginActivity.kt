@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), UserCallback {
         })
 
         model.doSignUp.observe(this, Observer {
-            val intent = Intent(applicationContext, SignupActivity::class.java)
+            val intent = Intent(applicationContext, SignActivity::class.java)
             startActivity(intent)
         })
 

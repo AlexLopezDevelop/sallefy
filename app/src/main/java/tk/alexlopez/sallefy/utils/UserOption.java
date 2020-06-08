@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import tk.alexlopez.sallefy.R;
 
-public class User_option extends AppCompatActivity {
+public class UserOption extends AppCompatActivity {
 
     private Intent sendIntent = new Intent();
     private LinearLayout linearLayout;

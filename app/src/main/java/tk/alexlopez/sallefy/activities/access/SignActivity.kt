@@ -15,7 +15,7 @@ import tk.alexlopez.sallefy.network.callback.UserCallback
 import tk.alexlopez.sallefy.network.manager.UserManager
 import tk.alexlopez.sallefy.utils.Session
 
-class SignupActivity : AppCompatActivity(), UserCallback {
+class SignActivity : AppCompatActivity(), UserCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class SignupActivity : AppCompatActivity(), UserCallback {
             val password = sign_up_password.text.toString()
             val email = recovery_email.text.toString()
             Session.getInstance(applicationContext as MainActivity?)!!.userRegister = UserRegister(email, username, password)
-            UserManager.getInstance(applicationContext).registerAttempt(email, username, password, this@SignupActivity)
+            UserManager.getInstance(applicationContext).registerAttempt(email, username, password, this@SignActivity)
         }
     }
 

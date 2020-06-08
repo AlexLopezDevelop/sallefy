@@ -52,7 +52,7 @@
             android:name=".activities.MyPlaylistsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.access.SignupActivity"
+            android:name=".activities.access.SignActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.access.LoginActivity"

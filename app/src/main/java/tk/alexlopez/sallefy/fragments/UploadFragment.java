@@ -1,5 +1,4 @@
 package tk.alexlopez.sallefy.fragments;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,13 +42,9 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     private EditText etTitle;
     private Spinner mSpinner;
     private TextView mFilename;
-    private Button btnFind, btnCancel, btnAccept, btnFindimg;
 
-    private ArrayList<String> mGenres;
     private ArrayList<Genre> mGenresObjs;
     private Uri mFileUri;
-    private ArrayList<Track> mTracksObjs;
-    private ArrayList<String> mTracks;
     private Context mContext;
 
     public static UploadFragment getInstance() {
@@ -82,16 +77,16 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
         mFilename = (TextView) view.findViewById(R.id.upload_song_file_name); // findViewById(R.id.upload_song_file_name);
         mSpinner = (Spinner) view.findViewById(R.id.upload_song_spinner); // findViewById(R.id.upload_song_spinner);
 
-        btnFind = (Button) view.findViewById(R.id.upload_song_find_file);  // findViewById(R.id.upload_song_find_file);
+        Button btnFind = (Button) view.findViewById(R.id.upload_song_find_file);  // findViewById(R.id.upload_song_find_file);
         btnFind.setOnClickListener(v -> getAudioFromStorage());
 
-        btnFindimg = (Button) view.findViewById(R.id.upload_song_find_img); // findViewById(R.id.upload_song_find_img);
-        btnFindimg.setOnClickListener(v -> getImageFromStorage());
+        Button btnFindImg = (Button) view.findViewById(R.id.upload_song_find_img); // findViewById(R.id.upload_song_find_img);
+        btnFindImg.setOnClickListener(v -> getImageFromStorage());
 
-        btnCancel = (Button) view.findViewById(R.id.upload_song_cancel); // findViewById(R.id.upload_song_cancel);
+        Button btnCancel = (Button) view.findViewById(R.id.upload_song_cancel); // findViewById(R.id.upload_song_cancel);
         btnCancel.setOnClickListener(v -> getActivity().getSupportFragmentManager().popBackStack());
 
-        btnAccept = (Button) view.findViewById(R.id.upload_song_done); // findViewById(R.id.upload_song_done);
+        Button btnAccept = (Button) view.findViewById(R.id.upload_song_done); // findViewById(R.id.upload_song_done);
         btnAccept.setOnClickListener(v -> {
             if (checkParameters()) {
                 etTitle.setFocusable(false);
@@ -170,7 +165,7 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     @Override
     public void onGenresReceive(ArrayList<Genre> genres) {
         mGenresObjs = genres;
-        mGenres = (ArrayList<String>) genres.stream().map(Genre -> Genre.getName()).collect(Collectors.toList());
+        ArrayList<String> mGenres = (ArrayList<String>) genres.stream().map(Genre -> Genre.getName()).collect(Collectors.toList());
 
         //ArrayAdapter adapter = new ArrayAdapter (this, R.layout.support_simple_spinner_dropdown_item, mGenres);
         mSpinner.setAdapter(new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, mGenres));
@@ -179,8 +174,7 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onTracksByGenre(ArrayList<Track> tracks) {
-        mTracksObjs = tracks;
-        mTracks = (ArrayList<String>) tracks.stream().map(Track->Track.getName()).collect(Collectors.toList());
+        ArrayList<String> mTracks = (ArrayList<String>) tracks.stream().map(Track -> Track.getName()).collect(Collectors.toList());
         // ikhasa ad hayagh recyclerview diis
     }
 
