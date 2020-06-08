@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_animation"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    tools:ignore="ExtraText">
     tools:context=".controller.activities.MainActivity">
 
     <com.scwang.wave.MultiWaveHeader
