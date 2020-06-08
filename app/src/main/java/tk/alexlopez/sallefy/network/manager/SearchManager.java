@@ -1,8 +1,11 @@
 package tk.alexlopez.sallefy.network.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextWatcher;
 import android.util.Log;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -26,8 +29,8 @@ import tk.alexlopez.sallefy.utils.Session;
 public class SearchManager {
     private static final String TAG = "PlaylistManager";
 
+    @SuppressLint("StaticFieldLeak")
     private static SearchManager sSearchManager;
-    private Retrofit mRetrofit;
     private Context mContext;
     private SearchService mSearchService;
     private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
@@ -42,7 +45,7 @@ public class SearchManager {
 
     private SearchManager(Context cntxt) {
         mContext = cntxt;
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -56,7 +59,7 @@ public class SearchManager {
 
         call.enqueue(new Callback<Search>() {
             @Override
-            public void onResponse(Call<Search> call, Response<Search> response) {
+            public void onResponse(@NotNull Call<Search> call, @NotNull Response<Search> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -66,7 +69,7 @@ public class SearchManager {
                 }
             }
             @Override
-            public void onFailure(Call<Search> call, Throwable t) {
+            public void onFailure(@NotNull Call<Search> call, @NotNull Throwable t) {
                 Log.d(TAG, "OnFailure");
             }
         });

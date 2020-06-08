@@ -1,5 +1,6 @@
 package tk.alexlopez.sallefy.network.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
@@ -7,6 +8,8 @@ import android.util.Log;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,8 +39,8 @@ public class UserManager {
 
     private static final String TAG = "UserManager";
 
+    @SuppressLint("StaticFieldLeak")
     private static UserManager sUserManager;
-    private Retrofit mRetrofit;
     private Context mContext;
     private UserService mService;
     private UserTokenService mTokenService;
@@ -56,7 +59,7 @@ public class UserManager {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -84,7 +87,7 @@ public class UserManager {
         Call<User> call = mService.getUserById(login, authHeader.getToken());
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -98,7 +101,7 @@ public class UserManager {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d(TAG, "Error: " + t.getMessage());
-                userCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+                userCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -111,7 +114,7 @@ public class UserManager {
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -122,7 +125,7 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 userCallback.onFailure(t);
             }
         });
@@ -133,7 +136,7 @@ public class UserManager {
         Call<User> call = mService.getUser(authHeader.getToken());
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -145,9 +148,9 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
                 Log.d(TAG, "Error: " + t.getMessage());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
