@@ -16,6 +16,7 @@ import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
 import tk.alexlopez.sallefy.network.service.PlaylistService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -27,12 +28,8 @@ public class PlaylistManager {
     private static PlaylistManager sPlaylistManager;
     private Retrofit mRetrofit;
     private Context mContext;
-
     private PlaylistService mPlaylistService;
-
-    //private UserService mService;
-    // private UserTokenService mTokenService;
-
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
     public static PlaylistManager getInstance(Context context) {
         if (sPlaylistManager == null) {
@@ -55,7 +52,7 @@ public class PlaylistManager {
     public synchronized void createPlaylist (String name, final PlaylistCallback playlistCallback) {
         UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
-        Call<Playlist> call = mPlaylistService.createPlaylist(new Playlist(name),"Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mPlaylistService.createPlaylist(new Playlist(name), authHeader.getToken());
 
         call.enqueue(new Callback<Playlist>() {
             @Override
@@ -84,7 +81,7 @@ public class PlaylistManager {
     public synchronized void updatePlaylist (Playlist playlist, final PlaylistCallback playlistCallback) {
         UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
-        Call<Playlist> call = mPlaylistService.updatePlaylist(playlist,"Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mPlaylistService.updatePlaylist(playlist,authHeader.getToken());
 
         call.enqueue(new Callback<Playlist>() {
             @Override
@@ -112,7 +109,7 @@ public class PlaylistManager {
     public synchronized void getAllPlaylists ( final PlaylistCallback playlistCallback) {
         UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
-        Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mPlaylistService.getAllPlaylists(authHeader.getToken());
 
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
@@ -123,7 +120,6 @@ public class PlaylistManager {
                     playlistCallback.onPlaylistReceived(response.body());
                 } else {
                     Log.d(TAG, "Error Not Successful: " + code);
-                    //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
 
@@ -139,7 +135,7 @@ public class PlaylistManager {
     public synchronized void getMyPlaylists ( final PlaylistCallback playlistCallback) {
         UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
-        Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mPlaylistService.getAllPlaylists(authHeader.getToken());
 
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
@@ -150,7 +146,6 @@ public class PlaylistManager {
                     playlistCallback.onPlaylistReceived(response.body());
                 } else {
                     Log.d(TAG, "Error Not Successful: " + code);
-                    //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
 
