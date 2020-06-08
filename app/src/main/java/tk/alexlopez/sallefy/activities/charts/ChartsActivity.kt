@@ -24,7 +24,7 @@ class ChartsActivity : AppCompatActivity() {
         }
 
         buttonRadarChart.setOnClickListener{
-            startActivity(Intent(this, RadarChartActivity::class.java))
+            startActivity(Intent(this, TracksMoreFollowedActivity::class.java))
         }
     }
 }

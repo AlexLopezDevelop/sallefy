@@ -95,5 +95,6 @@
     <string name="menu_share">Share</string>
     <string name="top_liked_tracks">Top liked tracks</string>
     <string name="my_most_played_songs">My most played songs</string>
+    <string name="most_followed_tracks">Most followed tracks</string>
 
 </resources>

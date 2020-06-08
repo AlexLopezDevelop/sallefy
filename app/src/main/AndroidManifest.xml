@@ -17,15 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.charts.TrackEvolutionActivity"></activity>
+        <activity
+            android:name=".activities.charts.TracksMoreFollowedActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.TopUserTracksActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.TopTracksActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.ChartsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.RadarChartActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -34,9 +38,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.charts.BarChartActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.MusicPlayer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.TrackOptionsActivity"

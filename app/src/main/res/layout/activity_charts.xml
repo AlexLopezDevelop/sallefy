@@ -30,7 +30,7 @@
         android:id="@+id/buttonRadarChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chart 3"
+        android:text="@string/most_followed_tracks"
         android:textColor="#fff"
         android:background="@drawable/button"/>
 

@@ -62,19 +62,19 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.popularPlaylists);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter = new TrackListAdapter(getContext(), null);
+        TrackListAdapter adapter = new TrackListAdapter(getContext(), null, -1);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(adapter);
 
         mMyPlaylists = (RecyclerView) v.findViewById(R.id.MyPlaylists);
         LinearLayoutManager manager_playlist = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter_playlist = new TrackListAdapter(getContext(), null);
+        TrackListAdapter adapter_playlist = new TrackListAdapter(getContext(), null, -1);
         mMyPlaylists.setLayoutManager(manager_playlist);
         mMyPlaylists.setAdapter(adapter_playlist);
 
         mListasSeguidas = (RecyclerView) v.findViewById(R.id.listas_seguidas);
         LinearLayoutManager manager_listas_seguidas = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter_listas_seguidas = new TrackListAdapter(getContext(), null);
+        TrackListAdapter adapter_listas_seguidas = new TrackListAdapter(getContext(), null, -1);
         mListasSeguidas.setLayoutManager(manager_listas_seguidas);
         mListasSeguidas.setAdapter(adapter_listas_seguidas);
     }

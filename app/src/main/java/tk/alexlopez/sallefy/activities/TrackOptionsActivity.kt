@@ -3,6 +3,7 @@ package tk.alexlopez.sallefy.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
+import com.tapadoo.alerter.OnHideAlertListener
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_track_options.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.databinding.ActivityTrackOptionsBinding
@@ -49,7 +53,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
         model.load(TrackManager.getInstance(application), 8)
 
         model.userLikeTrack.observe(this, Observer {
-
+            Log.d("LOG", "boolean: $it")
         })
 
         add_song_to_playlist_option.setOnClickListener {
@@ -64,20 +68,46 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
             bundle?.let { b ->
                 (b.getSerializable("trackData") as Track?)?.let { track ->
 
-                    val intent = Intent(this, TracksListActivity::class.java)
-                    intent.putExtra("artistId", track.user.id)
+                    val intent = Intent(this, ArtistProfileActivity::class.java)
+                    intent.putExtra("user", track.user as Parcelable)
                     this.startActivity(intent)
                 }
             }
-
-            val intent = Intent(applicationContext, ArtistProfileActivity::class.java)
-            startActivity(intent)
         }
 
         share_layout.setOnClickListener() {
             fun onClick(v: View?) {
                 //
             }
+        }
+
+        delete_layout.setOnClickListener() {
+            val playListId = intent.getIntExtra("playListId", -1)
+            TrackManager.getInstance(this).delete(playListId, track.id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        if (!it) {
+                            throw Exception("Un error inesperado ocurrio, intentalo mas tarde")
+                        }
+
+                        Alerter.create(this)
+                                .setTitle("Done")
+                                .setBackgroundColorRes(R.color.av_green)
+                                .setText("Eliminada correctamente")
+                                .setOnHideListener(OnHideAlertListener { finish() })
+                                .show()
+                    }, { e ->
+                        Alerter.create(this)
+                                .setTitle("Error")
+                                .setBackgroundColorRes(R.color.colorError)
+                                .setText(e.toString())
+                                .show()
+                    })
+        }
+
+        detail_cancel_button.setOnClickListener() {
+            finish()
         }
 
     }

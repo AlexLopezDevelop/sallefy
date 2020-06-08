@@ -1,8 +1,9 @@
+
+/*
 package tk.alexlopez.sallefy.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,9 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import tk.alexlopez.sallefy.R;
@@ -59,42 +58,22 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     private void initViews() {
         etTitle = (EditText) findViewById(R.id.upload_song_title);
         mFilename = (TextView) findViewById(R.id.upload_song_file_name);
-
         mSpinner = (Spinner) findViewById(R.id.upload_song_spinner);
 
         btnFind = (Button) findViewById(R.id.upload_song_find_file);
-        btnFind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getAudioFromStorage();
-            }
-        });
+        btnFind.setOnClickListener(v -> getAudioFromStorage());
 
         btnFindimg = (Button) findViewById(R.id.upload_song_find_img);
-        btnFindimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getImageFromStorage();
-            }
-        });
+        btnFindimg.setOnClickListener(v -> getImageFromStorage());
 
         btnCancel = (Button) findViewById(R.id.upload_song_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
 
         btnAccept = (Button) findViewById(R.id.upload_song_done);
-        btnAccept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkParameters()) {
-                    etTitle.setFocusable(false);
-                    //showStateDialog(false);
-                    uploadToCloudinary();
-                }
+        btnAccept.setOnClickListener(v -> {
+            if (checkParameters()) {
+                etTitle.setFocusable(false);
+                uploadToCloudinary();
             }
         });
 
@@ -114,8 +93,8 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         return false;
     }
 
-    /*private void showStateDialog(boolean completed) {
-    }*/
+    //private void showStateDialog(boolean completed) {
+    //}
     protected void uploadDialog (String title, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -140,7 +119,7 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
             }
         }
         CloudinaryManager.getInstance(this, this).uploadAudioFile(mFileUri, etTitle.getText().toString(), genre);
-        uploadDialog("Upload song to Cloudinary","The song has been uploaded correctly");
+        uploadDialog("Upload song to Sallefy","The song has been uploaded correctly");
     }
 
     @Override
@@ -149,27 +128,27 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         if (requestCode == Constants.STORAGE.SONG_SELECTED && resultCode == RESULT_OK) {
             mFileUri = data.getData();
             mFilename.setText(mFileUri.toString());
+
         }
     }
     private void getImageFromStorage() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/png");
-        startActivityForResult(Intent.createChooser(intent, "Choose a image"), Constants.STORAGE.SONG_SELECTED);
+        startActivityForResult(Intent.createChooser(intent, "Choose a image"), Constants.STORAGE.IMG_SELECTED);
     }
     @Override
     protected void onPause() {
         super.onPause();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    /**********************************************************************************************
-     *   *   *   *   *   *   *   *   GenreCallback   *   *   *   *   *   *   *   *   *
-     **********************************************************************************************/
+    //**********************************************************************************************
+    // *   *   *   *   *   *   *   *   GenreCallback   *   *   *   *   *   *   *   *   *
+     //*********************************************************************************************
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -179,6 +158,10 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, mGenres);
         mSpinner.setAdapter(adapter);
     }
+
+
+
+ /*
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -195,39 +178,28 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
      *   *   *   *   *   *   *   *   TrackCallback   *   *   *   *   *   *   *   *   *
      **********************************************************************************************/
 
+/*
     @Override
     public void onTracksReceived(List<Track> tracks) { }
-
     @Override
     public void onNoTracks(Throwable throwable) { }
-
     @Override
     public void onPersonalTracksReceived(List<Track> tracks) { }
-
     @Override
     public void onUserTracksReceived(List<Track> tracks) { }
-
     @Override
     public void onCreateTrack() { }
-
     @Override
     public void onTrackSelected(Track track) { }
-
     @Override
     public void onTrackSelected(int index) { }
-
     @Override
     public void onTracksReceivedByPlaylistId(Playlist playlist) { }
-
     @Override
     public void onNoLikedTrack(Boolean response) {
-
     }
-
     @Override
-    public void onLikedTrack(Boolean response) {
-
-    }
+    public void onLikedTrack(Boolean response) { }
 
     @Override
     public void onPlaylistUpdated(Boolean response) {
@@ -249,4 +221,6 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     }
 }
+
+*/
 
