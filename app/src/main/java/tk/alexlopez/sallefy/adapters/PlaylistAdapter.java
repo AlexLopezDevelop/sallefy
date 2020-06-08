@@ -53,7 +53,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         holder.ivPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Paco: ", String.valueOf(position));
                 int playlistId = mPlaylist.get(position).getId();
                 Intent intent = new Intent(mContext.getApplicationContext(), TracksListActivity.class);
                 intent.putExtra("id", playlistId);
@@ -66,11 +65,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
     public int getItemCount() {
         return mPlaylist != null ? mPlaylist.size():0;
     }
-
-   /* public void updateTrackLikeStateIcon(int position, boolean isLiked) {
-        mPlaylist.get(position).setLiked(isLiked);
-        notifyDataSetChanged();
-    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;

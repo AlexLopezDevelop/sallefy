@@ -41,6 +41,18 @@ public class Session {
         return result;
     }
 
+    public static Session instance() {
+        Session result = sSession;
+        if (result == null) {
+            synchronized (mutex) {
+                result = sSession;
+                if (result == null)
+                    sSession = result = new Session();
+            }
+        }
+        return result;
+    }
+
     private Session() {}
 
     public Session (Context context) {

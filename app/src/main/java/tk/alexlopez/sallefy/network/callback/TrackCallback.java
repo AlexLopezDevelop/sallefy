@@ -4,6 +4,7 @@ import java.util.List;
 
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.User;
 
 public interface TrackCallback extends FailureCallback {
     void onTracksReceived(List<Track> tracks);
@@ -19,4 +20,10 @@ public interface TrackCallback extends FailureCallback {
 
     void onNoLikedTrack(Boolean response);
     void onLikedTrack(Boolean response);
+
+    void onPlaylistUpdated(Boolean response);
+
+    void onPlaylistsReceived(List<Playlist> playlists);
+
+    void onUserInfoReceived(User body);
 }

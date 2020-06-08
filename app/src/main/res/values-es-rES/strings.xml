@@ -11,7 +11,7 @@
     <string name="i_already_have_an_account">Ya tengo una cuenta</string>
     <string name="name">Título</string>
     <string name="genre">Género</string>
-    <string name="selectFile">Seleccionar...</string>
+    <string name="selectFile">Seleccionar…</string>
     <string name="cancel">Cancelar</string>
     <string name="uploadSong">Subir</string>
     <string name="upload_info">Subir canción</string>
@@ -19,7 +19,7 @@
 
     <string name="songTitle">Nombre de la canción</string>
     <string name="selectFile_show">Fichero audio</string>
-    <string name="uploadImg">Seleccionar...</string>
+    <string name="uploadImg">Seleccionar…</string>
     <string name="selectImg_show">Fichero imagen</string>
     <string name="i_liked">Me gusta</string>
     <string name="add_to_playlist">Añadir a playlist</string>
@@ -38,7 +38,6 @@
     <string name="fragment_songs">Songs</string>
 
     <!-- ACTION -->
-    <string name="action_login_new">Login</string>
     <string name="action_login">Iniciar sesión</string>
     <string name="action_logout">Cerrar sesión</string>
     <string name="action_register">Registrarse</string>
