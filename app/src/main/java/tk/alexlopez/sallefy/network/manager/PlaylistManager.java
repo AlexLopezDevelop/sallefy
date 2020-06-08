@@ -53,7 +53,7 @@ public class PlaylistManager {
 
     /********************   CREATE PLAYLIST    ********************/
     public synchronized void createPlaylist (String name, final PlaylistCallback playlistCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
         Call<Playlist> call = mPlaylistService.createPlaylist(new Playlist(name),"Bearer " + userToken.getIdToken());
 
@@ -82,7 +82,7 @@ public class PlaylistManager {
     }
     /********************   ADD SONG TO PLAYLIST    ********************/
     public synchronized void updatePlaylist (Playlist playlist, final PlaylistCallback playlistCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
         Call<Playlist> call = mPlaylistService.updatePlaylist(playlist,"Bearer " + userToken.getIdToken());
 
@@ -110,7 +110,7 @@ public class PlaylistManager {
         });
     }
     public synchronized void getAllPlaylists ( final PlaylistCallback playlistCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
         Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
 
@@ -137,7 +137,7 @@ public class PlaylistManager {
     }
 
     public synchronized void getMyPlaylists ( final PlaylistCallback playlistCallback) {
-        UserToken userToken = Session.getInstance(mContext).getUserToken();
+        UserToken userToken = Session.getInstance((MainActivity) mContext).getUserToken();
 
         Call<List<Playlist>> call = mPlaylistService.getAllPlaylists("Bearer " + userToken.getIdToken());
 

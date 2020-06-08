@@ -1,6 +1,7 @@
 package tk.alexlopez.sallefy.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -48,7 +49,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
         mFragmentManager = getSupportFragmentManager();
         mTransaction = mFragmentManager.beginTransaction();
 
-        mNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mNav = findViewById(R.id.bottom_navigation);
         mNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -59,18 +60,16 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         break;
                     case R.id.action_songs:
                         fragment = SongsFragment.getInstance();
-                    break;
-                    case R.id.action_search :
+                        break;
+                    case R.id.action_search:
                         fragment = SearchFragment.getInstance();
                         break;
-                    case R.id.action_upload :
-                        Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
-                        startActivity(intent);
-                         break;
+                    case R.id.action_upload:
+                        fragment = UploadFragment.getInstance();
+                        break;
                     case R.id.action_content:
                         fragment = ChartsFragment.getInstance();
                         break;
-
                 }
                 replaceFragment(fragment);
                 return true;
