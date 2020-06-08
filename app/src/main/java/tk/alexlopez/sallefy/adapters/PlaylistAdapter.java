@@ -38,7 +38,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called.");
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_playlist, parent, false);
-        return new PlaylistAdapter.ViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
@@ -66,7 +66,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.ViewHo
         return mPlaylist != null ? mPlaylist.size():0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         ImageView ivPicture;
 

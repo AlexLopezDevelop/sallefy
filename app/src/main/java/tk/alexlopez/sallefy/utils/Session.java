@@ -1,5 +1,6 @@
 package tk.alexlopez.sallefy.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import tk.alexlopez.sallefy.models.UserToken;
 
 public class Session {
 
+    @SuppressLint("StaticFieldLeak")
     public static Session sSession;
     private static Object mutex = new Object();
 

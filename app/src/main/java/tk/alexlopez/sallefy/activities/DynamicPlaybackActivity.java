@@ -46,7 +46,6 @@ public class DynamicPlaybackActivity extends Activity implements TrackCallback {
 
 
     private Handler mHandler;
-    private Runnable mRunnable;
 
     private BarVisualizer mVisualizer;
     private int mDuration;
@@ -191,7 +190,7 @@ public class DynamicPlaybackActivity extends Activity implements TrackCallback {
         mSeekBar.setProgress(mPlayer.getCurrentPosition());
 
         if(mPlayer.isPlaying()) {
-            mRunnable = new Runnable() {
+            Runnable mRunnable = new Runnable() {
                 @Override
                 public void run() {
                     updateSeekBar();
@@ -213,16 +212,6 @@ public class DynamicPlaybackActivity extends Activity implements TrackCallback {
         } catch(Exception e) {
         }
     }
-
-    public void updateSessionMusicData(int offset) {
-        /*int oldIndex = Session.getInstance(getApplicationContext()).getIndex();
-        int size = Session.getInstance(getApplicationContext()).getTracks().size();
-        int newIndex = (oldIndex + offset)%size;
-        Session.getInstance(getApplicationContext()).setIndex(newIndex);
-        Track newTrack = Session.getInstance(getApplicationContext()).getTracks().get(newIndex);
-        Session.getInstance(getApplicationContext()).setTrack(newTrack);*/
-    }
-
 
     private void getData() {
         TrackManager.getInstance(this).getAllTracks(this);

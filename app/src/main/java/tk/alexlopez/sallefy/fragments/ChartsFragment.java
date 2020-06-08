@@ -21,10 +21,6 @@ import tk.alexlopez.sallefy.activities.charts.TracksMoreFollowedActivity;
 public class ChartsFragment extends Fragment {
 
     public static final String TAG = ChartsFragment.class.getName();
-    private Button btTopLikedTracks;
-    private Button btMostPlayedSongs;
-    private Button btMostFollowedTracks;
-    private Button btTrackEvolution;
 
     public static ChartsFragment getInstance() {
         return new ChartsFragment();
@@ -45,7 +41,7 @@ public class ChartsFragment extends Fragment {
 
     private void initView(View view) {
 
-        btTopLikedTracks =  view.findViewById(R.id.buttonTopLikedTracks);
+        Button btTopLikedTracks = view.findViewById(R.id.buttonTopLikedTracks);
         btTopLikedTracks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,13 +50,13 @@ public class ChartsFragment extends Fragment {
             }
         });
 
-        btMostPlayedSongs =  view.findViewById(R.id.buttonMostPlayedSongs);
+        Button btMostPlayedSongs = view.findViewById(R.id.buttonMostPlayedSongs);
         btMostPlayedSongs.setOnClickListener(v ->  startActivity(new Intent(getActivity(), TopUserTracksActivity.class)));
 
-        btMostFollowedTracks =  view.findViewById(R.id.buttonMostFollowedTracks);
+        Button btMostFollowedTracks = view.findViewById(R.id.buttonMostFollowedTracks);
         btMostFollowedTracks.setOnClickListener(v -> startActivity(new Intent(getActivity(), TracksMoreFollowedActivity.class)));
 
-        btTrackEvolution =  view.findViewById(R.id.buttonTrackEvolution);
+        Button btTrackEvolution = view.findViewById(R.id.buttonTrackEvolution);
         btTrackEvolution.setOnClickListener(v -> startActivity(new Intent(getActivity(), TrackEvolutionActivity.class)));
 
 

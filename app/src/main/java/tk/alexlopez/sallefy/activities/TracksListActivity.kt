@@ -39,14 +39,11 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
 
     private val data: Unit
-        private get() {
+        get() {
             val intent = intent
             val id = intent.getIntExtra("id", -1)
             if (id != -1) {
                 TrackManager.getInstance(this).getAllTracksByPlaylistId(id, this)
-            } else {
-                //TrackManager.getInstance(this).getAllTracks(this);
-                //
             }
             mTracks = ArrayList()
         }
