@@ -53,7 +53,7 @@ public class CloudinaryManager extends AppCompatActivity {
                 .options(options)
                 .callback(new CloudinaryCallback())
                 .dispatch();
-    }
+        }
 
     private class CloudinaryCallback implements UploadCallback {
 
@@ -75,15 +75,12 @@ public class CloudinaryManager extends AppCompatActivity {
             genres.add(mGenre);
             track.setGenres(genres);
             TrackManager.getInstance(mContext).createTrack(track, mCallback);
-
-
         }
         @Override
         public void onError(String requestId, ErrorInfo error) {
         }
         @Override
-        public void onReschedule(String requestId, ErrorInfo error) {
-        }
+        public void onReschedule(String requestId, ErrorInfo error) {}
     }
 
 

@@ -67,25 +67,17 @@ public class MeManager {
                     //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
-
             @Override
             public void onFailure(Call<List<Playlist>> call, Throwable t) {
-
-
             }
         });
     }
-
     public synchronized void getMyFollowingPlaylist ( final MeCallback meCallback) {
-
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-
         Call<List<Playlist>> call = mMeService.getMyFollowingPlaylist("Bearer " + userToken.getIdToken());
-
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
-
                 int code = response.code();
                 if (response.isSuccessful()) {
                     meCallback.myFollowingPlaylistReceived(response.body());
@@ -94,11 +86,8 @@ public class MeManager {
                     //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
-
             @Override
             public void onFailure(Call<List<Playlist>> call, Throwable t) {
-
-
             }
         });
     }

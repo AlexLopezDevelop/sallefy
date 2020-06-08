@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         break;
 
                 }
-                replaceFragment(fragment);
+                 replaceFragment(fragment);
                 return true;
             }
         });
