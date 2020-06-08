@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:gravity="center"
-        android:text="Biblioteca de canciones"
+        android:text="@string/library_songs"
         android:textColor="@color/colorWhite"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/downloadSongs"

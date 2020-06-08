@@ -12,8 +12,8 @@
 
     <!--ayda hayagh nakkijd -->
 
-    <string name="action_decline" translatable="false" />
-    <string name="action_accept" translatable="false" />
+    <string name="action_decline" translatable="false" >Decline</string>
+    <string name="action_accept" translatable="false" >Accept</string>
     <string name="create_song_file" translatable="false" />
     <string name="action_cloudinary" translatable="false" />
     <string name="create_song_titulo" translatable="false" />
@@ -99,7 +99,19 @@
     <string name="track_evolution">Track evolution</string>
     <string name="featured">Featured</string>
     <string name="my_playlists">My playlists</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_song_to_playlist">Add song to PlayList</string>
+    <string name="select_a_song">Select a song</string>
+    <string name="add">Add</string>
+    <string name="add_playlist">Add playList</string>
+    <string name="the_sound_starts_here">The sound starts here</string>
+    <string name="song_title">Song title</string>
+    <string name="artist_name">Artist name</string>
+    <string name="search_tracks">Search tracks</string>
+    <string name="Search">Search</string>
+    <string name="library_songs">Library songs</string>
+    <string name="cover">Cover</string>
+    <string name="playlist_title">Playlist title</string>
+    <string name="options">Opciones</string>
 
 </resources>

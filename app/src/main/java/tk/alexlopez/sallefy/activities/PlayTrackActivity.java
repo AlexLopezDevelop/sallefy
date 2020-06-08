@@ -101,7 +101,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_playback);
+        setContentView(R.layout.activity_music_player);
         mDuration = 0;
         initViews();
         getData();
