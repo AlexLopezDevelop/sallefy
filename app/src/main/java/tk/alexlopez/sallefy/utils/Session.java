@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import tk.alexlopez.sallefy.activities.MainActivity;
+import tk.alexlopez.sallefy.fragments.UploadFragment;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.User;

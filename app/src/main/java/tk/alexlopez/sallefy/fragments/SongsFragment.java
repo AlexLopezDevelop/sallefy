@@ -29,7 +29,7 @@ import tk.alexlopez.sallefy.models.Track;
 public class SongsFragment extends Fragment{
 
     public static final String TAG = SongsFragment.class.getName();
-    private Box<SavedTracks> tracksBox;
+    private Box <SavedTracks> tracksBox;
     private Query<SavedTracks> tracksQuery;
     private RecyclerView mRecyclerView;
     private ArrayList<SavedTracks> mPlaylist;

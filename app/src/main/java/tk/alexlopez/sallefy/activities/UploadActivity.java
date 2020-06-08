@@ -1,3 +1,5 @@
+
+/*
 package tk.alexlopez.sallefy.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -91,8 +93,8 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         return false;
     }
 
-    /*private void showStateDialog(boolean completed) {
-    }*/
+    //private void showStateDialog(boolean completed) {
+    //}
     protected void uploadDialog (String title, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -144,9 +146,9 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         super.onDestroy();
     }
 
-    /**********************************************************************************************
-     *   *   *   *   *   *   *   *   GenreCallback   *   *   *   *   *   *   *   *   *
-     **********************************************************************************************/
+    //**********************************************************************************************
+    // *   *   *   *   *   *   *   *   GenreCallback   *   *   *   *   *   *   *   *   *
+     //*********************************************************************************************
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -156,6 +158,10 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
         ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, mGenres);
         mSpinner.setAdapter(adapter);
     }
+
+
+
+ /*
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -171,6 +177,8 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
     /**********************************************************************************************
      *   *   *   *   *   *   *   *   TrackCallback   *   *   *   *   *   *   *   *   *
      **********************************************************************************************/
+
+/*
     @Override
     public void onTracksReceived(List<Track> tracks) { }
     @Override
@@ -213,4 +221,6 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     }
 }
+
+*/
 

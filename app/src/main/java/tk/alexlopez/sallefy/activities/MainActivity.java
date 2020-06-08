@@ -1,36 +1,28 @@
 package tk.alexlopez.sallefy.activities;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import io.objectbox.BoxStore;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.activities.charts.ChartsActivity;
-import tk.alexlopez.sallefy.activities.charts.TopTracksActivity;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
 import tk.alexlopez.sallefy.fragments.SongsFragment;
-import tk.alexlopez.sallefy.models.MyObjectBox;
+import tk.alexlopez.sallefy.fragments.UploadFragment;
 import tk.alexlopez.sallefy.models.ObjectBox;
 import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
@@ -60,7 +52,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
         mFragmentManager = getSupportFragmentManager();
         mTransaction = mFragmentManager.beginTransaction();
 
-        mNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mNav = findViewById(R.id.bottom_navigation);
         mNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -71,29 +63,24 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         break;
                     case R.id.action_songs:
                         fragment = SongsFragment.getInstance();
-                    break;
-                    case R.id.action_search :
+                        break;
+                    case R.id.action_search:
                         fragment = SearchFragment.getInstance();
                         break;
-                    case R.id.action_upload :
-                        Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
-                        startActivity(intent);
-                         break;
-                    case R.id.action_content:
-                        // fragment = UploadFramnet.getInstance();
-                        // fragment = ContentFragment.getInstance();
-                        // fragment = HomeFragment.getInstance(UploadActivity);
+                    case R.id.action_upload:
+                        fragment = UploadFragment.getInstance();
                         break;
-
+                    case R.id.action_content:
+                        break;
                 }
-                 replaceFragment(fragment);
+                replaceFragment(fragment);
                 return true;
             }
         });
 
         btCharts = findViewById(R.id.charts);
         btCharts.setOnClickListener(v -> {
-            Intent tarea= new Intent(this, ChartsActivity.class);
+            Intent tarea = new Intent(this, ChartsActivity.class);
             startActivity(tarea);
         });
 
@@ -175,7 +162,6 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     public void onChangeFragment(Fragment fragment) {
         replaceFragment(fragment);
     }
-
 
 
 }
