@@ -20,8 +20,9 @@
             android:id="@+id/track_img"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/ic_playlist_add"
+            android:src="@drawable/ic_default_cover"
             android:scaleType="centerCrop"
+            android:tint="@color/colorWhite"
             app:riv_corner_radius="7dp" />
 
         <!-- <TextView

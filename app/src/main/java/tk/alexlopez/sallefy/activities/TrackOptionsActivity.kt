@@ -18,6 +18,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_track_options.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.databinding.ActivityTrackOptionsBinding
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
@@ -169,6 +170,10 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                 // Playlist no selected
             }
         }
+    }
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
+
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {

@@ -10,6 +10,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_top_tracks.*
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
@@ -53,6 +54,11 @@ class TracksMoreFollowedActivity : AppCompatActivity(), TrackCallback {
         pieChart.centerText = "Top Followed"
         pieChart.animate()
         pieChart.invalidate()
+    }
+
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
+
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {

@@ -1,13 +1,7 @@
 package tk.alexlopez.sallefy.activities;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -15,10 +9,16 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import tk.alexlopez.sallefy.fragments.ChartsFragment;
 import tk.alexlopez.sallefy.R;
-import tk.alexlopez.sallefy.activities.charts.ChartsActivity;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
 import tk.alexlopez.sallefy.fragments.SongsFragment;
@@ -34,8 +34,6 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     private FragmentTransaction mTransaction;
 
     private BottomNavigationView mNav;
-
-    private Button btCharts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +69,13 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         fragment = UploadFragment.getInstance();
                         break;
                     case R.id.action_content:
+                        fragment = ChartsFragment.getInstance();
                         break;
                 }
                 replaceFragment(fragment);
                 return true;
             }
         });
-
-        btCharts = findViewById(R.id.charts);
-        btCharts.setOnClickListener(v -> {
-            Intent tarea = new Intent(this, ChartsActivity.class);
-            startActivity(tarea);
-        });
-
     }
 
 
@@ -135,12 +127,15 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
             } else {
                 if (fragment instanceof SearchFragment) {
                     return SearchFragment.TAG;
+                } else if(fragment instanceof ChartsFragment) {
+                    return ChartsFragment.TAG;
+                } else if (fragment instanceof UploadFragment) {
+                    return UploadFragment.TAG;
                 } else {
-                    //return ContentFragment.TAG;
+                    return HomeFragment.TAG;
                 }
             }
         }
-        return HomeFragment.TAG;
     }
 
     @Override
@@ -162,6 +157,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     public void onChangeFragment(Fragment fragment) {
         replaceFragment(fragment);
     }
+
 
 
 }
