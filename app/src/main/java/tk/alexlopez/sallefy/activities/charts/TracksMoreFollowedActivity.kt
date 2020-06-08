@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_top_tracks.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
+import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
 
@@ -91,6 +92,10 @@ class TracksMoreFollowedActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onLikedTrack(response: Boolean?) {
+
+    }
+
+    override fun onUserInfoReceived(body: User?) {
 
     }
 
