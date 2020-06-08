@@ -13,6 +13,7 @@ import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_bar_chart.*
 import kotlinx.android.synthetic.main.activity_top_tracks.*
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
@@ -46,7 +47,7 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         }
 
 
-        val pieDataSet = PieDataSet(visitors, "Visitors")
+        val pieDataSet = PieDataSet(visitors, "Top liked tracks")
         pieDataSet.colors = colors
         pieDataSet.valueTextColor = Color.BLACK
 
@@ -54,10 +55,14 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         pieDataSet.valueTextSize = 16f
         val pieData = PieData(pieDataSet)
         pieChart.data = pieData
-        pieChart.description.text = "Bar Chart Example"
-        pieChart.centerText = "Top tracks"
+        pieChart.description.text = "Top liked tracks"
+        pieChart.centerText = "Top liked tracks"
         pieChart.animate()
         pieChart.invalidate()
+    }
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
+
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {

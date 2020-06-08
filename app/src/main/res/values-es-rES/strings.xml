@@ -81,5 +81,25 @@
 
     <!--menu songs -->
     <string name="menu_share">Compartir</string>
+    <string name="top_liked_tracks">Canciones que mas gustan</string>
+    <string name="my_most_played_songs">Canciones mas reproducidas</string>
+    <string name="most_followed_tracks">Canciones mas seguidas</string>
+    <string name="track_evolution">Evolucion de la cancion</string>
+    <string name="featured">Destacado</string>
+    <string name="my_playlists">Mis playlists</string>
+    <string name="hello_blank_fragment">Hola fragment vacio</string>
+    <string name="add_song_to_playlist">Añadir cancion a la playlist</string>
+    <string name="select_a_song">Seleccionar cancion</string>
+    <string name="add">Añadir</string>
+    <string name="add_playlist">Añadir a la playlist</string>
+    <string name="the_sound_starts_here">El sonido empieza aqui</string>
+    <string name="song_title">Titulo de la cancion</string>
+    <string name="artist_name">Nombre del artista</string>
+    <string name="search_tracks">Buscar canciones</string>
+    <string name="Search">Buscador</string>
+    <string name="library_songs">Biblioteca de canciones</string>
+    <string name="cover">Cover</string>
+    <string name="playlist_title">Nombre de la playlist</string>
+    <string name="options">Opciones</string>
 
 </resources>

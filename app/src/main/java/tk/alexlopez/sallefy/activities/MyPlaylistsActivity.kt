@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_tracks_list.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.adapters.MyPlaylistsAdapter
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
@@ -30,6 +31,10 @@ class MyPlaylistsActivity : AppCompatActivity(), TrackCallback{
         recycler_view.adapter = adapter
 
         TrackManager.getInstance(this).getAllMyPlaylists(this)
+    }
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
+
     }
 
     override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {

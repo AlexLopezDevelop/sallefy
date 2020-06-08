@@ -3,28 +3,26 @@ package tk.alexlopez.sallefy.activities.charts
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.tapadoo.alerter.Alerter
-import kotlinx.android.synthetic.main.activity_top_user_tracks.*
-
+import kotlinx.android.synthetic.main.activity_top_tracks.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
-import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.models.User
+import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
 
-class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
+class TracksMoreFollowedActivity : AppCompatActivity(), TrackCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_top_user_tracks)
+        setContentView(R.layout.activity_tracks_more_followed)
 
-        TrackManager.getInstance(this).getOwnTracks(this)
+        TrackManager.getInstance(this).getMoreTracksFollowed(this, true, 10)
     }
 
     private fun buildChart(tracks: List<Track>) {
@@ -34,10 +32,8 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         val colorTemplates = ColorTemplate.COLORFUL_COLORS + ColorTemplate.MATERIAL_COLORS + ColorTemplate.PASTEL_COLORS + ColorTemplate.COLOR_SKIP + ColorTemplate.LIBERTY_COLORS + ColorTemplate.VORDIPLOM_COLORS
         val totalPastelColors = colorTemplates.count() - 1
 
-        val topTracksPlayed = tracks.sortedBy { it.plays }
-
-        topTracksPlayed.forEachIndexed { idx, track ->
-            rank = track.plays.toFloat()
+        tracks.forEachIndexed { idx, track ->
+            rank = track.followers.toFloat()
             visitors.add(PieEntry(rank, track.name))
 
             val randIdxColor = (0..totalPastelColors).random()
@@ -46,7 +42,7 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         }
 
 
-        val pieDataSet = PieDataSet(visitors, "Most played")
+        val pieDataSet = PieDataSet(visitors, "Top Followed")
         pieDataSet.colors = colors
         pieDataSet.valueTextColor = Color.BLACK
 
@@ -54,18 +50,19 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         pieDataSet.valueTextSize = 16f
         val pieData = PieData(pieDataSet)
         pieChart.data = pieData
-        pieChart.description.text = "User most played tracks"
-        pieChart.centerText = "Most played"
+        pieChart.description.text = "Tracks more followed"
+        pieChart.centerText = "Top Followed"
         pieChart.animate()
         pieChart.invalidate()
     }
+
 
     override fun onPlaybackReceived(body: MutableList<Playback>?) {
 
     }
 
-    override fun onPersonalTracksReceived(tracks: List<Track>) {
-        buildChart(tracks)
+    override fun onPersonalTracksReceived(tracks: MutableList<Track>?) {
+
     }
 
     override fun onPlaylistsReceived(playlists: MutableList<Playlist>?) {
@@ -100,12 +97,11 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
                 .show()
     }
 
-
     override fun onLikedTrack(response: Boolean?) {
 
     }
 
-    override fun onUserInfoReceived(user: User) {
+    override fun onUserInfoReceived(body: User?) {
 
     }
 
@@ -121,7 +117,7 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
 
     }
 
-    override fun onTracksReceived(tracks: MutableList<Track>?) {
-
+    override fun onTracksReceived(tracks: List<Track>) {
+        buildChart(tracks)
     }
 }

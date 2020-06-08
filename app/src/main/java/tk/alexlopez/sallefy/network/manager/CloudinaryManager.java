@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import tk.alexlopez.sallefy.activities.UploadActivity;
+import tk.alexlopez.sallefy.fragments.UploadFragment;
 import tk.alexlopez.sallefy.models.Genre;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
@@ -27,9 +27,9 @@ public class CloudinaryManager extends AppCompatActivity {
     private Genre mGenre;
     private TrackCallback mCallback;
 
-    public static CloudinaryManager getInstance(UploadActivity context, TrackCallback callback) {
+    public static CloudinaryManager getInstance(UploadFragment context, TrackCallback callback) {
         if (sManager == null) {
-            sManager = new CloudinaryManager(context, callback);
+            sManager = new CloudinaryManager(context.getActivity(), callback);
         }
         return sManager;
     }
@@ -53,7 +53,7 @@ public class CloudinaryManager extends AppCompatActivity {
                 .options(options)
                 .callback(new CloudinaryCallback())
                 .dispatch();
-    }
+        }
 
     private class CloudinaryCallback implements UploadCallback {
 
@@ -75,15 +75,12 @@ public class CloudinaryManager extends AppCompatActivity {
             genres.add(mGenre);
             track.setGenres(genres);
             TrackManager.getInstance(mContext).createTrack(track, mCallback);
-
-
         }
         @Override
         public void onError(String requestId, ErrorInfo error) {
         }
         @Override
-        public void onReschedule(String requestId, ErrorInfo error) {
-        }
+        public void onReschedule(String requestId, ErrorInfo error) {}
     }
 
 

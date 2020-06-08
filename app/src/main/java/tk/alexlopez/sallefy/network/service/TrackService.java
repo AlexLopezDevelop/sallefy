@@ -12,6 +12,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.TrackLike;
@@ -19,7 +20,7 @@ import tk.alexlopez.sallefy.models.TrackLike;
 public interface TrackService {
 
     @GET("playbacks")
-    Call<List<Track>> getOwnTracks(@Header("Authorization") String token, @Query("username") String name);
+    Call<List<Track>> getOwnTracks(@Header("Authorization") String token);
 
     @GET("users/{login}/tracks")
     Call<List<Track>> getUserTracks(@Path("login") String login, @Header("Authorization") String token);
@@ -30,6 +31,9 @@ public interface TrackService {
     @GET("playlists/{id}/")
     Call<Playlist> getAllTracksByPlaylistId(@Path("id") int id, @Header("Authorization") String token);
 
+    @GET("playlists/{id}/")
+    Observable<Playlist> getAllTracksByPlaylistIdStream(@Path("id") int id, @Header("Authorization") String token);
+
     @PUT("tracks/{id}/like")
     Observable<TrackLike> userLikeTrack(@Path("id") int id, @Header("Authorization") String token);
 
@@ -38,6 +42,9 @@ public interface TrackService {
 
     @PUT("playlists")
     Call<Playlist> updatePlaylist(@Header("Authorization") String authToken, @Body Playlist playlist);
+
+    @PUT("playlists")
+    Observable<Playlist> updatePlaylistStream(@Header("Authorization") String authToken, @Body Playlist playlist);
 
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String authToken);
@@ -50,4 +57,10 @@ public interface TrackService {
 
     @GET("tracks")
     Call<List<Track>> getTopTracks(@Header("Authorization") String token, @Query("liked") boolean liked, @Query("size") int size);
+
+    @GET("playlists")
+    Call<List<Track>> getMoreTracksFollowed(@Header("Authorization") String token, @Query("popular") boolean popular, @Query("size") int size);
+
+    @GET("playbacks")
+    Call<List<Playback>> getPlaybackByTrackId(@Header("Authorization") String token, @Query("trackId") int trackId);
 }

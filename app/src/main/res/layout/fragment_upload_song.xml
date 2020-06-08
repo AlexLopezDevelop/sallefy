@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/signup"
@@ -13,7 +14,7 @@
         android:text="@string/upload_info"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle=" "
         android:textColor="@android:color/white"
         />
@@ -42,7 +43,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:autofillHints=""
+            tools:ignore="LabelFor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -73,13 +76,16 @@
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="30dp"
-                android:background="@mipmap/ic_launcher_upload" />
+                android:background="@mipmap/ic_launcher_upload"
+                tools:ignore="ButtonStyle"
+                android:layout_marginEnd="30dp" />
 
             <Button
                 android:id="@+id/upload_song_find_img"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
-                 android:background="@mipmap/ic_launcher_foreground" />
+                 android:background="@mipmap/ic_launcher_foreground"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 
@@ -96,13 +102,16 @@
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="30dp"
-                android:background="@mipmap/ic_launcher_upload_return" />
+                android:background="@mipmap/ic_launcher_upload_return"
+                android:layout_marginEnd="30dp"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/upload_song_done"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
-                android:background="@mipmap/ic_launcher_done_upload" />
+                android:background="@mipmap/ic_launcher_done_upload"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
         <TextView

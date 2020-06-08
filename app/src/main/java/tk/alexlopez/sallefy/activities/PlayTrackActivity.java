@@ -3,6 +3,7 @@ package tk.alexlopez.sallefy.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,7 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.MyObjectBox;
 import tk.alexlopez.sallefy.models.ObjectBox;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.SavedTracks;
 import tk.alexlopez.sallefy.models.SavedTracks_;
@@ -73,6 +76,8 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private ImageButton btnForward;
     private SeekBar mSeekBar;
 
+    private ConstraintLayout clMainLayout;
+    private AnimationDrawable adAnimationDrawable;
 
     private Handler mHandler;
     private Runnable mRunnable;
@@ -96,7 +101,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_playback);
+        setContentView(R.layout.activity_music_player);
         mDuration = 0;
         initViews();
         getData();
@@ -142,6 +147,8 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         return finalTimerString;
     }
     private void initViews() {
+
+        layoutAnimation();
 
         mPlayer = new MediaPlayer();
 
@@ -236,13 +243,26 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
             }
         });
     }
+
+    private void layoutAnimation() {
+
+        clMainLayout = findViewById(R.id.music_player);
+
+        adAnimationDrawable = (AnimationDrawable) clMainLayout.getBackground();
+        adAnimationDrawable.setEnterFadeDuration(4500);
+        adAnimationDrawable.setExitFadeDuration(4500);
+    }
+
+
     private void playAudio() {
+        adAnimationDrawable.start();
         mPlayer.start();
         updateSeekBar();
         btnPlayStop.setImageResource(R.drawable.ic_pause);
         btnPlayStop.setTag(STOP_VIEW);
     }
     private void pauseAudio() {
+        adAnimationDrawable.stop();
         mPlayer.pause();
         btnPlayStop.setImageResource(R.drawable.ic_play);
         btnPlayStop.setTag(PLAY_VIEW);
@@ -436,6 +456,11 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
     @Override
     public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
+    public void onPlaybackReceived(List<Playback> body) {
 
     }
 
