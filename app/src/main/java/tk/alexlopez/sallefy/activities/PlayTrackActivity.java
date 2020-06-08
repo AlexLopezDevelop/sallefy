@@ -49,6 +49,7 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.MyObjectBox;
 import tk.alexlopez.sallefy.models.ObjectBox;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.SavedTracks;
 import tk.alexlopez.sallefy.models.SavedTracks_;
@@ -455,6 +456,11 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
 
     @Override
     public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
+    public void onPlaybackReceived(List<Playback> body) {
 
     }
 

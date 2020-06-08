@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_tracks_list.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.adapters.TrackListAdapter
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
@@ -75,6 +76,10 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
     }
 
     override fun onUserInfoReceived(body: User?) {
+
+    }
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
 
     }
 

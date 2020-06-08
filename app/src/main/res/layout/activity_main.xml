@@ -8,15 +8,6 @@
     tools:context=".activities.MainActivity">
     tools:context=".controller.activities.MainActivity">
 
-
-
-    <Button
-        android:id="@+id/charts"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="charts"
-        tools:ignore="MissingConstraints" />
-
     <com.scwang.wave.MultiWaveHeader
         android:layout_width="match_parent"
         android:layout_height="200dp"

@@ -12,6 +12,7 @@ import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.activity_top_user_tracks.*
 
 import tk.alexlopez.sallefy.R
+import tk.alexlopez.sallefy.models.Playback
 import tk.alexlopez.sallefy.models.Playlist
 import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.network.callback.TrackCallback
@@ -57,6 +58,10 @@ class TopUserTracksActivity : AppCompatActivity(), TrackCallback {
         pieChart.centerText = "Most played"
         pieChart.animate()
         pieChart.invalidate()
+    }
+
+    override fun onPlaybackReceived(body: MutableList<Playback>?) {
+
     }
 
     override fun onPersonalTracksReceived(tracks: List<Track>) {

@@ -96,5 +96,10 @@
     <string name="top_liked_tracks">Top liked tracks</string>
     <string name="my_most_played_songs">My most played songs</string>
     <string name="most_followed_tracks">Most followed tracks</string>
+    <string name="track_evolution">Track evolution</string>
+    <string name="featured">Featured</string>
+    <string name="my_playlists">My playlists</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

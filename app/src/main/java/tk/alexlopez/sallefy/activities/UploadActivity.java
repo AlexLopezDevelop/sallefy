@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Genre;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.User;
@@ -241,6 +242,11 @@ public class UploadActivity extends Activity implements GenreCallback, TrackCall
 
     @Override
     public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
+    public void onPlaybackReceived(List<Playback> body) {
 
     }
 

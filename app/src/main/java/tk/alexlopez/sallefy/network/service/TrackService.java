@@ -12,6 +12,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.TrackLike;
@@ -59,4 +60,7 @@ public interface TrackService {
 
     @GET("playlists")
     Call<List<Track>> getMoreTracksFollowed(@Header("Authorization") String token, @Query("popular") boolean popular, @Query("size") int size);
+
+    @GET("playbacks")
+    Call<List<Playback>> getPlaybackByTrackId(@Header("Authorization") String token, @Query("trackId") int trackId);
 }
