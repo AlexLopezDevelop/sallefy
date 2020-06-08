@@ -1,13 +1,16 @@
 package tk.alexlopez.sallefy.network.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -38,8 +41,8 @@ public class TrackManager {
 
     private static final String TAG = "TrackManager";
     private Context mContext;
+    @SuppressLint("StaticFieldLeak")
     private static TrackManager sTrackManager;
-    private Retrofit mRetrofit;
     private TrackService mTrackService;
     private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
@@ -58,7 +61,7 @@ public class TrackManager {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -71,10 +74,10 @@ public class TrackManager {
     public synchronized void getAllTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mTrackService.getAllTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getAllTracks(authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -86,9 +89,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -96,11 +99,11 @@ public class TrackManager {
     public synchronized void getAllMyPlaylists(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Playlist>> call = mTrackService.getAllMyPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mTrackService.getAllMyPlaylists(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
 
             @Override
-            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+            public void onResponse(@NotNull Call<List<Playlist>> call, @NotNull Response<List<Playlist>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -112,9 +115,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Playlist>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Playlist>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -122,10 +125,10 @@ public class TrackManager {
     public synchronized void getAllTracksByPlaylistId(int playlistId, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId, "Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId, authHeader.getToken());
         call.enqueue(new Callback<Playlist>() {
             @Override
-            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
+            public void onResponse(@NotNull Call<Playlist> call, @NotNull Response<Playlist> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -138,26 +141,26 @@ public class TrackManager {
 
 
             @Override
-            public void onFailure(Call<Playlist> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<Playlist> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
 
     public synchronized void getAllPlaylists(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Playlist>> call = mTrackService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mTrackService.getAllPlaylists(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
-            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+            public void onResponse(@NotNull Call<List<Playlist>> call, @NotNull Response<List<Playlist>> response) {
                 trackCallback.onPlaylistsReceived(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Playlist>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Playlist>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -167,7 +170,7 @@ public class TrackManager {
         Call<Playlist> call = mTrackService.updatePlaylist("Bearer " + userToken.getIdToken(), playlist);
         call.enqueue(new Callback<Playlist>() {
             @Override
-            public void onResponse(Call<Playlist> call, Response<Playlist> response) {
+            public void onResponse(@NotNull Call<Playlist> call, @NotNull Response<Playlist> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -179,9 +182,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<Playlist> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<Playlist> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -189,10 +192,10 @@ public class TrackManager {
     public synchronized void getUserTracks(String login, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mTrackService.getUserTracks(login, "Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getUserTracks(login, authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -204,9 +207,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -221,10 +224,10 @@ public class TrackManager {
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Track>> call = mTrackService.getOwnTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getOwnTracks(authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -236,9 +239,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -246,10 +249,10 @@ public class TrackManager {
     public synchronized void createTrack(Track track, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<ResponseBody> call = mTrackService.createTrack(track, "Bearer " + userToken.getIdToken());
+        Call<ResponseBody> call = mTrackService.createTrack(track, authHeader.getToken());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 int code = response.code();
                 if (response.isSuccessful()) {
                     trackCallback.onCreateTrack();
@@ -260,9 +263,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -290,7 +293,7 @@ public class TrackManager {
 
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -302,9 +305,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -318,7 +321,7 @@ public class TrackManager {
 
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -330,8 +333,8 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
                 trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
             }
         });
@@ -341,7 +344,7 @@ public class TrackManager {
         Call<List<Playback>> call = mTrackService.getPlaybackByTrackId(authHeader.getToken(), trackId);
         call.enqueue(new Callback<List<Playback>>() {
             @Override
-            public void onResponse(Call<List<Playback>> call, Response<List<Playback>> response) {
+            public void onResponse(@NotNull Call<List<Playback>> call, @NotNull Response<List<Playback>> response) {
                 int code = response.code();
 
                 if (response.isSuccessful()) {
@@ -353,9 +356,9 @@ public class TrackManager {
             }
 
             @Override
-            public void onFailure(Call<List<Playback>> call, Throwable t) {
-                Log.d(TAG, "Error Failure: " + t.getStackTrace());
-                trackCallback.onFailure(new Throwable("ERROR " + t.getStackTrace()));
+            public void onFailure(@NotNull Call<List<Playback>> call, @NotNull Throwable t) {
+                Log.d(TAG, "Error Failure: " + Arrays.toString(t.getStackTrace()));
+                trackCallback.onFailure(new Throwable("ERROR " + Arrays.toString(t.getStackTrace())));
             }
         });
     }
@@ -388,13 +391,9 @@ public class TrackManager {
 
                                 emitter.onNext(updatedPlaylist != null);
                                 emitter.onComplete();
-                            }, err -> {
-                                emitter.onError(err);
-                            });
+                            }, emitter::onError);
 
-                }, err -> {
-                    emitter.onError(err);
-                });
+                }, emitter::onError);
             }
         });
 
