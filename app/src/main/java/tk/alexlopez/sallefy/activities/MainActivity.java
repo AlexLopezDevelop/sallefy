@@ -22,6 +22,7 @@ import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
 import tk.alexlopez.sallefy.fragments.SongsFragment;
+import tk.alexlopez.sallefy.fragments.UploadFragment;
 import tk.alexlopez.sallefy.models.ObjectBox;
 import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
@@ -126,8 +127,12 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
             } else {
                 if (fragment instanceof SearchFragment) {
                     return SearchFragment.TAG;
-                } else {
+                } else if(fragment instanceof ChartsFragment) {
                     return ChartsFragment.TAG;
+                } else if (fragment instanceof UploadFragment) {
+                    return UploadFragment.TAG;
+                } else {
+                    return HomeFragment.TAG;
                 }
             }
         }

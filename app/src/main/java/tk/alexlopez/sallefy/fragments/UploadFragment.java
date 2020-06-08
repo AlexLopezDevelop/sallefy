@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.models.Genre;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.User;
@@ -38,6 +39,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class UploadFragment extends Fragment implements GenreCallback, TrackCallback {
 
+    public static final String TAG = UploadFragment.class.getName();
     private EditText etTitle;
     private Spinner mSpinner;
     private TextView mFilename;
@@ -222,6 +224,11 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
 
     @Override
     public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
+    public void onPlaybackReceived(List<Playback> body) {
 
     }
 }
