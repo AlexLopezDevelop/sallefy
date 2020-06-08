@@ -71,7 +71,7 @@ public class TrackManager {
     public synchronized void getAllTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mTrackService.getAllTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getAllTracks(authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
@@ -96,7 +96,7 @@ public class TrackManager {
     public synchronized void getAllMyPlaylists(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Playlist>> call = mTrackService.getAllMyPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mTrackService.getAllMyPlaylists(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
 
             @Override
@@ -122,7 +122,7 @@ public class TrackManager {
     public synchronized void getAllTracksByPlaylistId(int playlistId, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId, "Bearer " + userToken.getIdToken());
+        Call<Playlist> call = mTrackService.getAllTracksByPlaylistId(playlistId, authHeader.getToken());
         call.enqueue(new Callback<Playlist>() {
             @Override
             public void onResponse(Call<Playlist> call, Response<Playlist> response) {
@@ -147,7 +147,7 @@ public class TrackManager {
 
     public synchronized void getAllPlaylists(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Playlist>> call = mTrackService.getAllPlaylists("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mTrackService.getAllPlaylists(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
@@ -189,7 +189,7 @@ public class TrackManager {
     public synchronized void getUserTracks(String login, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mTrackService.getUserTracks(login, "Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getUserTracks(login, authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
@@ -221,7 +221,7 @@ public class TrackManager {
 
     public synchronized void getOwnTracks(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Track>> call = mTrackService.getOwnTracks("Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mTrackService.getOwnTracks(authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
@@ -246,7 +246,7 @@ public class TrackManager {
     public synchronized void createTrack(Track track, final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<ResponseBody> call = mTrackService.createTrack(track, "Bearer " + userToken.getIdToken());
+        Call<ResponseBody> call = mTrackService.createTrack(track, authHeader.getToken());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

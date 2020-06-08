@@ -19,6 +19,7 @@ import tk.alexlopez.sallefy.network.callback.PlaylistCallback;
 import tk.alexlopez.sallefy.network.callback.SearchCallback;
 import tk.alexlopez.sallefy.network.service.PlaylistService;
 import tk.alexlopez.sallefy.network.service.SearchService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -28,8 +29,8 @@ public class SearchManager {
     private static SearchManager sSearchManager;
     private Retrofit mRetrofit;
     private Context mContext;
-
     private SearchService mSearchService;
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
 
     public static SearchManager getInstance(Context context) {
@@ -51,7 +52,7 @@ public class SearchManager {
     public synchronized void searchByKeyword ( String keyword, final SearchCallback searchCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<Search> call = mSearchService.searchByKeyword( keyword,"Bearer " + userToken.getIdToken());
+        Call<Search> call = mSearchService.searchByKeyword( keyword,authHeader.getToken());
 
         call.enqueue(new Callback<Search>() {
             @Override

@@ -17,6 +17,7 @@ import tk.alexlopez.sallefy.models.Track;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.GenreCallback;
 import tk.alexlopez.sallefy.network.service.GenreService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -27,8 +28,8 @@ public class GenreManager {
     private static GenreManager sGenreManager;
     private Retrofit mRetrofit;
     private Context mContext;
-
     private GenreService mService;
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
     public static GenreManager getInstance(Context context) {
         if (sGenreManager == null) {
@@ -50,7 +51,7 @@ public class GenreManager {
     public synchronized void getAllGenres(final GenreCallback genreCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Genre>> call = mService.getAllGenres("Bearer " + userToken.getIdToken());
+        Call<List<Genre>> call = mService.getAllGenres(authHeader.getToken());
         call.enqueue(new Callback<List<Genre>>() {
             @Override
             public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
@@ -77,7 +78,7 @@ public class GenreManager {
     public synchronized void getTracksByGenre(int genreId, final GenreCallback genreCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Track>> call = mService.getTracksByGenre( genreId, "Bearer " + userToken.getIdToken());
+        Call<List<Track>> call = mService.getTracksByGenre( genreId, authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
             public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {

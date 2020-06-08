@@ -15,6 +15,7 @@ import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.UserToken;
 import tk.alexlopez.sallefy.network.callback.MeCallback;
 import tk.alexlopez.sallefy.network.service.MeService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -25,12 +26,8 @@ public class MeManager {
     private static MeManager sMeManager;
     private Retrofit mRetrofit;
     private Context mContext;
-
     private MeService mMeService;
-
-    //private UserService mService;
-    // private UserTokenService mTokenService;
-
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
     public static MeManager getInstance(Context context) {
         if (sMeManager == null) {
@@ -53,7 +50,7 @@ public class MeManager {
 
         UserToken userToken = Session.getInstance(mContext).getUserToken();
 
-        Call<List<Playlist>> call = mMeService.getMyPlaylist("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mMeService.getMyPlaylist(authHeader.getToken());
 
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
@@ -64,7 +61,6 @@ public class MeManager {
                     meCallback.myPlaylistReceived(response.body());
                 } else {
                     Log.d(TAG, "Error Not Successful: " + code);
-                    //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
             @Override
@@ -74,7 +70,7 @@ public class MeManager {
     }
     public synchronized void getMyFollowingPlaylist ( final MeCallback meCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<List<Playlist>> call = mMeService.getMyFollowingPlaylist("Bearer " + userToken.getIdToken());
+        Call<List<Playlist>> call = mMeService.getMyFollowingPlaylist(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
@@ -83,7 +79,6 @@ public class MeManager {
                     meCallback.myFollowingPlaylistReceived(response.body());
                 } else {
                     Log.d(TAG, "Error Not Successful: " + code);
-                    //userCallback.onRegisterFailure(new Throwable("ERROR " + code + ", " + response.raw().message()));
                 }
             }
             @Override

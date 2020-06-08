@@ -28,6 +28,7 @@ import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.callback.UserCallback;
 import tk.alexlopez.sallefy.network.service.UserService;
 import tk.alexlopez.sallefy.network.service.UserTokenService;
+import tk.alexlopez.sallefy.utils.AuthenticationHeader;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -38,10 +39,9 @@ public class UserManager {
     private static UserManager sUserManager;
     private Retrofit mRetrofit;
     private Context mContext;
-
     private UserService mService;
     private UserTokenService mTokenService;
-
+    private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
 
     public static UserManager getInstance(Context context) {
         if (sUserManager == null) {
@@ -81,7 +81,7 @@ public class UserManager {
     /********************   USER INFO    ********************/
     public synchronized void getUserData(String login, final UserCallback userCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<User> call = mService.getUserById(login, "Bearer " + userToken.getIdToken());
+        Call<User> call = mService.getUserById(login, authHeader.getToken());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -130,7 +130,7 @@ public class UserManager {
 
     public void getAccount(final TrackCallback trackCallback) {
         UserToken userToken = Session.getInstance(mContext).getUserToken();
-        Call<User> call = mService.getUser("Bearer " + userToken.getIdToken());
+        Call<User> call = mService.getUser(authHeader.getToken());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
