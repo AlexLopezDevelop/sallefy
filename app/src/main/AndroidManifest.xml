@@ -40,9 +40,6 @@
             android:name=".activities.charts.BarChartActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MusicPlayer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activities.TrackOptionsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
