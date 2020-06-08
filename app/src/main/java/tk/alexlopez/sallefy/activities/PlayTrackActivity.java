@@ -297,7 +297,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    response.body();
+//                    response.body();
                     //final byte[] input = response.body().bytes();
 
                     Log.i(TAG, getFilesDir().toString());
