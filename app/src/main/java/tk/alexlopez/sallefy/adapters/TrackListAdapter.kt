@@ -62,11 +62,6 @@ class TrackListAdapter(private val mContext: Context, private val mTracks: Array
         return mTracks?.size ?: 0
     }
 
-    fun updateTrackLikeStateIcon(position: Int, isLiked: Boolean) {
-        mTracks!![position].isLiked = isLiked
-        notifyDataSetChanged()
-    }
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvTitle: TextView = itemView.findViewById<TextView>(R.id.track_title)
         var tvAuthor: TextView = itemView.findViewById(R.id.track_author)

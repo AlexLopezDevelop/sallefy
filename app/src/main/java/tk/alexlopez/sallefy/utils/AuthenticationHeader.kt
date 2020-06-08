@@ -6,7 +6,7 @@ class AuthenticationHeader {
         val instance = AuthenticationHeader()
     }
 
-    val session = Session.instance()
+    val session: Session = Session.instance()
 
     val token: String
             get() = "Bearer ${session.userToken.idToken}"

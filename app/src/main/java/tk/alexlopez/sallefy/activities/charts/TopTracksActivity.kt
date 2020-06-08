@@ -10,7 +10,6 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.ViewPortHandler
 import com.tapadoo.alerter.Alerter
-import kotlinx.android.synthetic.main.activity_bar_chart.*
 import kotlinx.android.synthetic.main.activity_top_tracks.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playback
@@ -37,10 +36,12 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         val colorTemplates = ColorTemplate.COLORFUL_COLORS + ColorTemplate.MATERIAL_COLORS + ColorTemplate.PASTEL_COLORS + ColorTemplate.COLOR_SKIP + ColorTemplate.LIBERTY_COLORS + ColorTemplate.VORDIPLOM_COLORS
         val totalPastelColors = colorTemplates.count() - 1
 
+        // select data
         tracks.forEachIndexed { idx, track ->
             rank = track.likes.toFloat()
             visitors.add(PieEntry(rank, track.name))
 
+            // add random color
             val randIdxColor = (0..totalPastelColors).random()
             val color = colorTemplates[randIdxColor]
             colors.add(color)

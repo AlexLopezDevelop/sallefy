@@ -29,8 +29,6 @@ import tk.alexlopez.sallefy.models.Track;
 public class SongsFragment extends Fragment{
 
     public static final String TAG = SongsFragment.class.getName();
-    private Box <SavedTracks> tracksBox;
-    private Query<SavedTracks> tracksQuery;
     private RecyclerView mRecyclerView;
     private ArrayList<SavedTracks> mPlaylist;
 
@@ -54,8 +52,8 @@ public class SongsFragment extends Fragment{
 
     private void initViews(View v) {
 
-        tracksBox = ObjectBox.get().boxFor(SavedTracks.class);
-        tracksQuery = tracksBox.query().order(SavedTracks_.id).build();
+        Box<SavedTracks> tracksBox = ObjectBox.get().boxFor(SavedTracks.class);
+        Query<SavedTracks> tracksQuery = tracksBox.query().order(SavedTracks_.id).build();
         List<SavedTracks> downloadTracks = tracksQuery.find();
 
         mPlaylist = (ArrayList<SavedTracks>) downloadTracks;

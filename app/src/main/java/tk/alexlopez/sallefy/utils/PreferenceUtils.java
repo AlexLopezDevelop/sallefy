@@ -13,8 +13,6 @@ public class PreferenceUtils {
     public PreferenceUtils() {
     }
 
-
-
     public static boolean saveUser (Context context, String login) {
         SharedPreferences prefs = context.getSharedPreferences(LOGIN_COLLECTION, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
