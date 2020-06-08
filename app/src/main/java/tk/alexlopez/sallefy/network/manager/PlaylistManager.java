@@ -63,8 +63,7 @@ public class PlaylistManager {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
-                    playlistCallback.onPlaylistcreated();
-                    Toast.makeText (mContext.getApplicationContext(), "¡Playlist creada!" , Toast.LENGTH_SHORT) .show ();
+                    playlistCallback.onPlaylistCreated();
 
                 } else {
                     assert response.errorBody() != null;
@@ -94,7 +93,7 @@ public class PlaylistManager {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
-                    playlistCallback.onPlaylistcreated();
+                    playlistCallback.onPlaylistCreated();
                     Toast.makeText (mContext.getApplicationContext(), "¡Cancion añadida!" , Toast.LENGTH_SHORT) .show ();
 
                 } else {

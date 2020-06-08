@@ -95,7 +95,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
     }
 
     @Override
-    public void onPlaylistcreated() {
+    public void onPlaylistCreated() {
 
     }
 

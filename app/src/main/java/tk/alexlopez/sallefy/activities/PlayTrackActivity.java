@@ -317,7 +317,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                         tracksBox.put(save);
                         btnDownload.setVisibility(View.INVISIBLE);
 
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
