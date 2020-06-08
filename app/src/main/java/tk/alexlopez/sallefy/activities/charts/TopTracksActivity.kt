@@ -46,7 +46,7 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         }
 
 
-        val pieDataSet = PieDataSet(visitors, "Visitors")
+        val pieDataSet = PieDataSet(visitors, "Top liked tracks")
         pieDataSet.colors = colors
         pieDataSet.valueTextColor = Color.BLACK
 
@@ -54,8 +54,8 @@ class TopTracksActivity : AppCompatActivity(), TrackCallback {
         pieDataSet.valueTextSize = 16f
         val pieData = PieData(pieDataSet)
         pieChart.data = pieData
-        pieChart.description.text = "Bar Chart Example"
-        pieChart.centerText = "Top tracks"
+        pieChart.description.text = "Top liked tracks"
+        pieChart.centerText = "Top liked tracks"
         pieChart.animate()
         pieChart.invalidate()
     }

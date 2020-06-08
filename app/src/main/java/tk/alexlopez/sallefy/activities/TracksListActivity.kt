@@ -1,7 +1,6 @@
 package tk.alexlopez.sallefy.activities
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,13 +27,16 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
     private fun iniViews() {
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        val adapter = TrackListAdapter(this, null)
+        val adapter = TrackListAdapter(this, null, playListId)
         recycler_view.layoutManager = manager
         recycler_view.adapter = adapter
     }
 
-    //TrackManager.getInstance(this).getAllTracks(this);
-    //
+    private val playListId: Int
+        get() = intent.getIntExtra("id", -1)
+
+
+
     private val data: Unit
         private get() {
             val intent = intent
@@ -50,7 +52,7 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
 
     override fun onTracksReceived(tracks: List<Track>) {
         mTracks = tracks as ArrayList<Track>
-        val adapter = TrackListAdapter(this, mTracks)
+        val adapter = TrackListAdapter(this, mTracks, playListId)
         recycler_view?.adapter = adapter
     }
 
@@ -58,8 +60,13 @@ class TracksListActivity : AppCompatActivity(), TrackCallback {
         // set title
         playlist_title?.text = playlist.name
         mTracks = playlist.tracks as ArrayList<Track>
-        val adapter = TrackListAdapter(this, mTracks)
+        val adapter = TrackListAdapter(this, mTracks, playListId)
         recycler_view?.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        data
     }
 
     override fun onNoTracks(throwable: Throwable) {}
