@@ -1,7 +1,10 @@
 package tk.alexlopez.sallefy.network.manager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,8 @@ import tk.alexlopez.sallefy.utils.Session;
 public class GenreManager {
 
     private static final String TAG = "genreManager";
+    @SuppressLint("StaticFieldLeak")
     private static GenreManager sGenreManager;
-    private Retrofit mRetrofit;
     private Context mContext;
     private GenreService mService;
     private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
@@ -40,7 +43,7 @@ public class GenreManager {
 
     private GenreManager(Context cntxt) {
         mContext = cntxt;
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -54,7 +57,7 @@ public class GenreManager {
         Call<List<Genre>> call = mService.getAllGenres(authHeader.getToken());
         call.enqueue(new Callback<List<Genre>>() {
             @Override
-            public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
+            public void onResponse(@NotNull Call<List<Genre>> call, @NotNull Response<List<Genre>> response) {
                 int code = response.code();
                 ArrayList<Genre> data = (ArrayList<Genre>) response.body();
 
@@ -68,7 +71,7 @@ public class GenreManager {
             }
 
             @Override
-            public void onFailure(Call<List<Genre>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Genre>> call, @NotNull Throwable t) {
                 Log.d(TAG, "Error: " + t);
                 genreCallback.onFailure(new Throwable("ERROR " + t.getMessage() ));
             }
@@ -81,7 +84,7 @@ public class GenreManager {
         Call<List<Track>> call = mService.getTracksByGenre( genreId, authHeader.getToken());
         call.enqueue(new Callback<List<Track>>() {
             @Override
-            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+            public void onResponse(@NotNull Call<List<Track>> call, @NotNull Response<List<Track>> response) {
                 int code = response.code();
                 ArrayList<Track> data = (ArrayList<Track>) response.body();
 
@@ -95,7 +98,7 @@ public class GenreManager {
             }
 
             @Override
-            public void onFailure(Call<List<Track>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Track>> call, @NotNull Throwable t) {
                 Log.d(TAG, "Error: " + t);
                 genreCallback.onFailure(new Throwable("ERROR " + t.getMessage() ));
             }

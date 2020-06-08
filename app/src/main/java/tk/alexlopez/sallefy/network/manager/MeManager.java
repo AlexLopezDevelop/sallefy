@@ -1,8 +1,11 @@
 package tk.alexlopez.sallefy.network.manager;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -23,8 +26,8 @@ public class MeManager {
 
     private static final String TAG = "PlaylistManager";
 
+    @SuppressLint("StaticFieldLeak")
     private static MeManager sMeManager;
-    private Retrofit mRetrofit;
     private Context mContext;
     private MeService mMeService;
     private AuthenticationHeader authHeader = AuthenticationHeader.Companion.getInstance();
@@ -38,7 +41,7 @@ public class MeManager {
 
     private MeManager(Context cntxt) {
         mContext = cntxt;
-        mRetrofit = new Retrofit.Builder()
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.NETWORK.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -54,7 +57,7 @@ public class MeManager {
 
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
-            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+            public void onResponse(@NotNull Call<List<Playlist>> call, @NotNull Response<List<Playlist>> response) {
 
                 int code = response.code();
                 if (response.isSuccessful()) {
@@ -64,7 +67,7 @@ public class MeManager {
                 }
             }
             @Override
-            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Playlist>> call, @NotNull Throwable t) {
             }
         });
     }
@@ -73,7 +76,7 @@ public class MeManager {
         Call<List<Playlist>> call = mMeService.getMyFollowingPlaylist(authHeader.getToken());
         call.enqueue(new Callback<List<Playlist>>() {
             @Override
-            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+            public void onResponse(@NotNull Call<List<Playlist>> call, @NotNull Response<List<Playlist>> response) {
                 int code = response.code();
                 if (response.isSuccessful()) {
                     meCallback.myFollowingPlaylistReceived(response.body());
@@ -82,7 +85,7 @@ public class MeManager {
                 }
             }
             @Override
-            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Playlist>> call, @NotNull Throwable t) {
             }
         });
     }
