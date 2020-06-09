@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".activities.charts.BarChartActivity">
+    tools:context=".activities.charts.TrackEvolutionActivity">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
