@@ -75,12 +75,19 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                 }
             }
         }
-
+        // compartir laurl ente otras apps com sm
         share_layout.setOnClickListener() {
-            fun onClick(v: View?) {
-                //
+            val sendIntent: Intent = Intent().apply {
+                val complete = "tracknoseq";
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "http://sallefy.eu-west-3.elasticbeanstalk.com/"+complete)
+                type = "text/plain"
             }
+
+            val shareIntent = Intent.createChooser(sendIntent, "Share")
+            startActivity(shareIntent)
         }
+
 
         delete_layout.setOnClickListener() {
             val playListId = intent.getIntExtra("playListId", -1)
@@ -110,6 +117,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
         detail_cancel_button.setOnClickListener() {
             finish()
         }
+
 
     }
 
