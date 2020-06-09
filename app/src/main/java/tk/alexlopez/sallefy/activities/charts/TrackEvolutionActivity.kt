@@ -1,12 +1,17 @@
 package tk.alexlopez.sallefy.activities.charts
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.activity_track_evolution.*
 import tk.alexlopez.sallefy.R
 import tk.alexlopez.sallefy.models.Playback
@@ -15,6 +20,8 @@ import tk.alexlopez.sallefy.models.Track
 import tk.alexlopez.sallefy.models.User
 import tk.alexlopez.sallefy.network.callback.TrackCallback
 import tk.alexlopez.sallefy.network.manager.TrackManager
+import java.time.LocalDateTime
+
 
 class TrackEvolutionActivity : AppCompatActivity(), TrackCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +31,34 @@ class TrackEvolutionActivity : AppCompatActivity(), TrackCallback {
         TrackManager.getInstance(this).getPlaybackByTrackId(this, 8)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun buildChart(playbacks: List<Playback>) {
-        val visitors = arrayListOf<BarEntry>()
-        visitors.add(BarEntry(2014f, 420f))
-        visitors.add(BarEntry(2015f, 475f))
-        visitors.add(BarEntry(2016f, 508f))
-        visitors.add(BarEntry(2017f, 660f))
-        visitors.add(BarEntry(2018f, 550f))
-        visitors.add(BarEntry(2019f, 630f))
-        visitors.add(BarEntry(2020f, 470f))
+
+
+        val visitors = playbacks.groupBy { item ->
+            LocalDateTime.parse(item.time).monthValue
+        }.map {
+            val total = it.value.sumBy { e -> e.track.likes }
+            it.key to total
+        }.map { it ->
+            Log.e("pene", "Moth: ${it.first}; Total: ${it.second}")
+            Entry(it.first.toFloat(), it.second.toFloat())
+        }
+
+        val xAxis = lineChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dic")
+        val formatter: ValueFormatter = object : ValueFormatter() {
+            override fun getAxisLabel(value: Float, axis: AxisBase): String {
+                return months[value.toInt()]
+            }
+        }
+        xAxis.granularity = 1f
+        xAxis.valueFormatter = formatter
+        val yAxisRight = lineChart.axisRight
+        yAxisRight.isEnabled = false
+        val yAxisLeft = lineChart.axisLeft
+        yAxisLeft.granularity = 1f
 
         // Set colors
         val colors = ArrayList<Int>()
@@ -42,20 +68,20 @@ class TrackEvolutionActivity : AppCompatActivity(), TrackCallback {
         colors.add(Color.rgb(191, 134, 134))
         colors.add(android.graphics.Color.rgb(179, 48, 80))
 
-        val barDataSet = BarDataSet(visitors, "Reproductions per month")
-        barDataSet.colors = colors
-        barDataSet.valueTextColor = Color.BLACK
+        val lineDataSet = LineDataSet(visitors, "Reproductions per month")
+        lineDataSet.colors = colors
+        lineDataSet.valueTextColor = Color.BLACK
 
         // Set chart
-        barDataSet.valueTextSize = 16f
-        val barData = BarData(barDataSet)
-        barChart.setFitBars(true)
-        barChart.data = barData
-        barChart.description.text = "Reproductions per month"
-        barChart.animateY(2000)
-        barChart.invalidate()
+        lineDataSet.valueTextSize = 16f
+        val lineData = LineData(lineDataSet)
+        lineChart.data = lineData
+        lineChart.description.text = "Reproductions per month"
+        lineChart.animateY(2000)
+        lineChart.invalidate()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onPlaybackReceived(playbacks: List<Playback>) {
         buildChart(playbacks)
     }
