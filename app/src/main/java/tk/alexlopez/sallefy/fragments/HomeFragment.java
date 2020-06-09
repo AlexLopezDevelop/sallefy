@@ -1,9 +1,12 @@
 package tk.alexlopez.sallefy.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.AddPlayListActivity;
+import tk.alexlopez.sallefy.activities.charts.TopTracksActivity;
 import tk.alexlopez.sallefy.adapters.PlaylistAdapter;
 import tk.alexlopez.sallefy.adapters.TrackListAdapter;
 import tk.alexlopez.sallefy.models.Playlist;
@@ -77,6 +82,16 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
         TrackListAdapter adapter_listas_seguidas = new TrackListAdapter(getContext(), null, -1);
         mListasSeguidas.setLayoutManager(manager_listas_seguidas);
         mListasSeguidas.setAdapter(adapter_listas_seguidas);
+
+        /*Onclick create playlist*/
+        ImageButton btnCreate = v.findViewById(R.id.createPlaylist);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddPlayListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData() {
@@ -89,7 +104,7 @@ public class HomeFragment extends Fragment implements PlaylistCallback, MeCallba
 
 
     @Override
-    public void onPlaylistcreated() {
+    public void onPlaylistCreated() {
 
     }
 

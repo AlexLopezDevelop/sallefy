@@ -4,34 +4,34 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:7707024918385554693",
-      "lastPropertyId": "5:1453177539505906275",
+      "id": "1:6790743761397596057",
+      "lastPropertyId": "5:7489580130222047340",
       "name": "SavedTracks",
       "properties": [
         {
-          "id": "1:3910490953563438725",
+          "id": "1:4866882929262124011",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:6584724279947599220",
+          "id": "2:6646351679337994668",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:3260629270166696957",
+          "name": "urlFile",
+          "type": 9
+        },
+        {
+          "id": "4:8781749918081008118",
           "name": "id_song",
           "type": 6,
           "flags": 4
         },
         {
-          "id": "3:4155116117200627137",
-          "name": "name",
-          "type": 9
-        },
-        {
-          "id": "4:5720185609004071106",
-          "name": "urlFile",
-          "type": 9
-        },
-        {
-          "id": "5:1453177539505906275",
+          "id": "5:7489580130222047340",
           "name": "thumbnail",
           "type": 9
         }
@@ -39,7 +39,7 @@
       "relations": []
     }
   ],
-  "lastEntityId": "1:7707024918385554693",
+  "lastEntityId": "1:6790743761397596057",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-
     android:background="@drawable/background_animation"
     tools:context=".activities.MainActivity">
 
@@ -41,16 +40,34 @@
             app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader">
 
         </androidx.recyclerview.widget.RecyclerView>
-        <TextView
+        <RelativeLayout
+            android:id="@+id/relative_myplaylist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/my_playlists"
-            android:textColor="@color/colorWhite"
-            android:textSize="28sp"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/my_playlists"
+                android:textColor="@color/colorWhite"
+                android:textSize="28sp"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/createPlaylist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/relative_myplaylist"
+                android:layout_alignBottom="@id/relative_myplaylist"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_playlist_add"
+                tools:ignore="NotSibling" />
+        </RelativeLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MyPlaylists"

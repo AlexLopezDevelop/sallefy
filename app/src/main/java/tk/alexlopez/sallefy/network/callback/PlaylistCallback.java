@@ -6,7 +6,7 @@ import tk.alexlopez.sallefy.models.Playlist;
 
 public interface PlaylistCallback {
 
-    void onPlaylistcreated();
+    void onPlaylistCreated();
     void onPlaylistReceived(List<Playlist> tracks);
 
 }

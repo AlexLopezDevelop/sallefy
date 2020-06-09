@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,11 +27,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +64,7 @@ import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
 
-public class PlayTrackActivity extends Activity implements TrackCallback {
+public class PlayDownloadTrackActivity extends Activity implements TrackCallback {
     private static final String TAG = "DynamicPlaybackActivity";
     private static final String PLAY_VIEW = "PlayIcon";
     private static final String STOP_VIEW = "StopIcon";
@@ -88,9 +94,9 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private RecyclerView mRecyclerView;
 
     private MediaPlayer mPlayer;
-    private ArrayList<Track> mTracks;
+    private ArrayList<SavedTracks> mTracks;
     private int currentTrack = 0;
-    private Track cTrack;
+    private SavedTracks cTrack;
     private Box<SavedTracks> tracksBox;
     private Query<SavedTracks> tracksQuery;
 
@@ -105,9 +111,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         mDuration = 0;
         initViews();
         getData();
-        searchDownload();
-        tracksBox = ObjectBox.get().boxFor(SavedTracks.class);
-       // tracksQuery = tracksBox.query().order(SavedTracks_.id_song).build();
+        //searchDownload();
     }
 
     @Override
@@ -172,18 +176,6 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         timeTotal = findViewById(R.id.textTotalTime);
         timeCurrent = findViewById(R.id.textCurrentTime);
         ivPhoto = findViewById(R.id.roundedImageView2);
-
-        btnDownload = (ImageButton)findViewById(R.id.dynamic_download_btn);
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    downloadSong(cTrack.getUrl());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         btnBackward = (ImageButton)findViewById(R.id.dynamic_backward_btn);
         btnBackward.setOnClickListener(new View.OnClickListener() {
@@ -281,49 +273,7 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         });
         connection.start();
     }
-    private void downloadSong(String URL) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(cTrack.getUrl())
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
 
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
-//                    response.body();
-                    //final byte[] input = response.body().bytes();
-
-                    Log.i(TAG, getFilesDir().toString());
-                    File file = new File(getFilesDir(),"mydir");
-                    if(!file.exists()){
-                        file.mkdir();
-                    }
-                    try{
-                        String filePath = cTrack.getId()+"track.mpeg";
-                        File gpxfile = new File(file, filePath);
-                        FileWriter writer = new FileWriter(gpxfile);
-                        writer.write(String.valueOf(response.body()));
-                        writer.flush();
-                        writer.close();
-
-                        SavedTracks save = new SavedTracks(cTrack.getId(),cTrack.getName(),filePath, cTrack.getThumbnail());
-                        tracksBox.put(save);
-                        btnDownload.setVisibility(View.INVISIBLE);
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
     public void updateSeekBar() {
         mSeekBar.setProgress(mPlayer.getCurrentPosition());
         timeCurrent.setText(milliSecondsToTimer(mPlayer.getCurrentPosition()));
@@ -348,9 +298,9 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
         }
         return super.onKeyDown(keyCode, event);
     }
-    public void updateTrack(Track track) {
+    public void updateTrack(SavedTracks track) {
         //updateSessionMusicData(offset);
-        tvAuthor.setText(track.getUserLogin());
+        //tvAuthor.setText(track.getUserLogin());
         tvTitle.setText(track.getName());
         if (track.getThumbnail() != null) {
             Glide.with(this)
@@ -364,13 +314,24 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
                     .into(ivPhoto);
         }
         try {
+
+            int id= (int) cTrack.getId_song();
+            String filename =getFilesDir()+"/mydir/"+ id + "track.txt";
+            File filepath = new File(getFilesDir(),"mydir");
+
+           // File file = new File(filepath,filename);
+
             mPlayer.reset();
-            mPlayer.setDataSource(track.getUrl());
-            //mediaPlayer.pause();
+
+            String content = readUsingBufferedReaderCharArray(filename);
+            byte[] b = content.getBytes();
+            mPlayer.setDataSource(filename);
+
             mPlayer.prepare();
+            mPlayer.start();
 
         } catch(Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -378,14 +339,14 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     private void getData() {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        Track track = (Track) bundle.getSerializable("trackData");
+        SavedTracks track = (SavedTracks) bundle.getSerializable("trackData");
         cTrack = track;
-        mTracks = (ArrayList<Track>) bundle.getSerializable("playlist");
+        mTracks = (ArrayList<SavedTracks>) bundle.getSerializable("playlist");
         updateTrack(track);
 
     }
     private void searchDownload(){
-        int id= cTrack.getId();
+        int id= (int)cTrack.getId_song();
         String filename = id + "track.txt";
         File filepath = new File(getFilesDir(),"mydir");
 
@@ -468,5 +429,27 @@ public class PlayTrackActivity extends Activity implements TrackCallback {
     public void onFailure(Throwable throwable) {
 
     }
+    private static String readUsingBufferedReaderCharArray(String fileName) {
+        BufferedReader reader = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        char[] buffer = new char[10];
+        try {
+            reader = new BufferedReader(new FileReader(fileName));
+            while (reader.read(buffer) != -1) {
+                stringBuilder.append(new String(buffer));
+                buffer = new char[10];
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null)
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
 
+        return stringBuilder.toString();
+    }
 }

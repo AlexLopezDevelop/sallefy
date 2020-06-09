@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.activities.DownloadSongActivity;
+import tk.alexlopez.sallefy.activities.PlayDownloadTrackActivity;
 import tk.alexlopez.sallefy.activities.PlayTrackActivity;
 import tk.alexlopez.sallefy.activities.TracksListActivity;
 import tk.alexlopez.sallefy.models.SavedTracks;
@@ -58,13 +60,15 @@ public class DownloadsAdapter extends RecyclerView.Adapter<DownloadsAdapter.View
             @Override
             public void onClick(View v) {
 
-               /* Bundle bundle = new Bundle();
-                int playlistId = (int) mTracks.get(position).getId_song();
-                Intent intent = new Intent(mContext.getApplicationContext(), PlayTrackActivity.class);
-                bundle.putSerializable("trackData", track);
+                Bundle bundle = new Bundle();
+                SavedTracks mTrack = mTracks.get(position);
+                Intent intent = new Intent(mContext.getApplicationContext(), PlayDownloadTrackActivity.class);
+                bundle.putSerializable("trackData",  mTrack);
                 bundle.putSerializable("playlist", mTracks);
-                intent.putExtra("id", playlistId);
-                mContext.startActivity(intent);*/
+                intent.putExtra("trackData",mTrack);
+                intent.putExtra("playlist",mTracks);
+                //intent.putExtra("id", playlistId);
+                mContext.startActivity(intent);
             }
         });
     }

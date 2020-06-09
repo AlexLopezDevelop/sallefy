@@ -1,10 +1,12 @@
 package tk.alexlopez.sallefy.models;
 
+import java.io.Serializable;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
 @Entity
-public class SavedTracks {
+public class SavedTracks implements Serializable {
     @Id
     public long id;
     public long id_song;
