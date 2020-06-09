@@ -78,7 +78,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
         // compartir laurl ente otras apps com sm
         share_layout.setOnClickListener() {
             val sendIntent: Intent = Intent().apply {
-                val complete = "tracknoseq";
+                val complete = "track/23"; // asogargh api ~~ track user playlist
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, "http://sallefy.eu-west-3.elasticbeanstalk.com/"+complete)
                 type = "text/plain"
