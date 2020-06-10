@@ -27,7 +27,7 @@ import tk.alexlopez.sallefy.network.manager.TrackManager
 import java.lang.Exception
 
 class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
-
+    var trackID = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,12 +75,23 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                 }
             }
         }
+        // compartir laurl ente otras apps com redesS
 
         share_layout.setOnClickListener() {
-            fun onClick(v: View?) {
-                //
+            // val playListId = intent.getIntExtra("playListId", -1)
+            // val userId = intent.getIntExtra("playListId", -1)
+
+            val sendIntent: Intent = Intent().apply {
+                val complete = "track/23" // test asogargh api ~~ track user playlist
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "http://sallefy.eu-west-3.elasticbeanstalk.com/track/"+trackID)
+                type = "text/plain"
             }
+
+            val shareIntent = Intent.createChooser(sendIntent, "Share")
+            startActivity(shareIntent)
         }
+
 
         delete_layout.setOnClickListener() {
             val playListId = intent.getIntExtra("playListId", -1)
@@ -111,6 +122,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
             finish()
         }
 
+
     }
 
     private var playlistId: Int = 0
@@ -130,7 +142,7 @@ class TrackOptionsActivity : AppCompatActivity(), TrackCallback {
                     }
                     track_title?.text = track.name
                     track_author?.text = track.userLogin
-
+                    trackID = track.id
                 }
             }
 
