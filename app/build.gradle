@@ -104,4 +104,11 @@ dependencies {
 
     // jetpack-preference
     implementation "androidx.preference:preference:$preference_version"
+
+    // ChromeCast
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.mediarouter:mediarouter:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.gms:play-services-cast-framework:18.1.0'
+    implementation 'com.android.volley:volley:1.1.1'
 }

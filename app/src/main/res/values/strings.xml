@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Sallefy</string>
+    <string name="app_id" translatable="false">4F8B3483</string>
     <string name="welcome_to_sallefy">Welcome to Sallefy</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -113,5 +114,8 @@
     <string name="cover">Cover</string>
     <string name="playlist_title">Playlist title</string>
     <string name="options">Opciones</string>
+
+
+
 
 </resources>
