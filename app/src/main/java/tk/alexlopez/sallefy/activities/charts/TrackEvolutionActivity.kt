@@ -34,14 +34,12 @@ class TrackEvolutionActivity : AppCompatActivity(), TrackCallback {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun buildChart(playbacks: List<Playback>) {
 
-
         val visitors = playbacks.groupBy { item ->
             LocalDateTime.parse(item.time).monthValue
         }.map {
             val total = it.value.sumBy { e -> e.track.likes }
             it.key to total
         }.map { it ->
-            Log.e("pene", "Moth: ${it.first}; Total: ${it.second}")
             Entry(it.first.toFloat(), it.second.toFloat())
         }
 
