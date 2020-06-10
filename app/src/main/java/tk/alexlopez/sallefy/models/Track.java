@@ -36,7 +36,33 @@ public class Track implements Serializable {
 
     private boolean selected = false;
 
+    @SerializedName("liked")
     private boolean liked;
+
+    @SerializedName("likes")
+    private int likes;
+
+    @SerializedName("plays")
+    private int plays;
+
+    @SerializedName("followers")
+    private int followers;
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public int getPlays() {
+        return plays;
+    }
+
+    public void setPlays(int plays) {
+        this.plays = plays;
+    }
 
     public String getColor() {
         return color;
@@ -132,5 +158,13 @@ public class Track implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

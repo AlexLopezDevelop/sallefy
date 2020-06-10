@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tk.alexlopez.sallefy.R;
+import tk.alexlopez.sallefy.models.Playback;
 import tk.alexlopez.sallefy.models.Playlist;
 import tk.alexlopez.sallefy.models.Track;
+import tk.alexlopez.sallefy.models.User;
 import tk.alexlopez.sallefy.network.callback.TrackCallback;
 import tk.alexlopez.sallefy.network.manager.TrackManager;
- public class DynamicPlaybackActivity extends Activity implements TrackCallback {
+public class DynamicPlaybackActivity extends Activity implements TrackCallback {
 
     private static final String TAG = "DynamicPlaybackActivity";
     private static final String PLAY_VIEW = "PlayIcon";
@@ -44,7 +46,6 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
 
 
     private Handler mHandler;
-    private Runnable mRunnable;
 
     private BarVisualizer mVisualizer;
     private int mDuration;
@@ -189,7 +190,7 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
         mSeekBar.setProgress(mPlayer.getCurrentPosition());
 
         if(mPlayer.isPlaying()) {
-            mRunnable = new Runnable() {
+            Runnable mRunnable = new Runnable() {
                 @Override
                 public void run() {
                     updateSeekBar();
@@ -212,62 +213,46 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
         }
     }
 
-    public void updateSessionMusicData(int offset) {
-        /*int oldIndex = Session.getInstance(getApplicationContext()).getIndex();
-        int size = Session.getInstance(getApplicationContext()).getTracks().size();
-        int newIndex = (oldIndex + offset)%size;
-        Session.getInstance(getApplicationContext()).setIndex(newIndex);
-        Track newTrack = Session.getInstance(getApplicationContext()).getTracks().get(newIndex);
-        Session.getInstance(getApplicationContext()).setTrack(newTrack);*/
-    }
-
-
     private void getData() {
         TrackManager.getInstance(this).getAllTracks(this);
         mTracks = new ArrayList<>();
     }
 
-    @Override
-    public void onTracksReceived(List<Track> tracks) {
-        mTracks = (ArrayList) tracks;
-      }
+     @Override
+     public void onTracksReceived(List<Track> tracks) {
 
-    @Override
-    public void onNoTracks(Throwable throwable) {
+     }
 
-    }
+     @Override
+     public void onNoTracks(Throwable throwable) {
 
-    @Override
-    public void onPersonalTracksReceived(List<Track> tracks) {
+     }
 
-    }
+     @Override
+     public void onPersonalTracksReceived(List<Track> tracks) {
 
-    @Override
-    public void onUserTracksReceived(List<Track> tracks) {
+     }
 
-    }
+     @Override
+     public void onUserTracksReceived(List<Track> tracks) {
 
-    @Override
-    public void onCreateTrack() {
+     }
 
-    }
+     @Override
+     public void onCreateTrack() {
 
-    @Override
-    public void onFailure(Throwable throwable) {
+     }
 
-    }
+     @Override
+     public void onTrackSelected(Track track) {
 
-    @Override
-    public void onTrackSelected(Track track) {
-        updateTrack(track);
-    }
+     }
 
-    @Override
-    public void onTrackSelected(int index) {
-        currentTrack = index;
-        updateTrack(mTracks.get(currentTrack));
-    }
-
+     @Override
+     public void onTrackSelected(int index) {
+         currentTrack = index;
+         updateTrack(mTracks.get(currentTrack));
+     }
      @Override
      public void onTracksReceivedByPlaylistId(Playlist playlist) {
 
@@ -284,7 +269,27 @@ import tk.alexlopez.sallefy.network.manager.TrackManager;
      }
 
      @Override
-     public void onPointerCaptureChanged(boolean hasCapture) {
+     public void onPlaylistUpdated(Boolean response) {
+
+     }
+
+     @Override
+     public void onPlaylistsReceived(List<Playlist> playlists) {
+
+     }
+
+    @Override
+    public void onUserInfoReceived(User body) {
+
+    }
+
+    @Override
+    public void onPlaybackReceived(List<Playback> body) {
+
+    }
+
+    @Override
+     public void onFailure(Throwable throwable) {
 
      }
  }

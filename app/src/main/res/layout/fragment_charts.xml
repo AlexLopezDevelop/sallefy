@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ChartsFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonTopLikedTracks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/top_liked_tracks"
+        android:textColor="#fff"
+        android:background="@drawable/button"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/buttonMostPlayedSongs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_most_played_songs"
+        android:textColor="#fff"
+        android:background="@drawable/button"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/buttonMostFollowedTracks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/most_followed_tracks"
+        android:textColor="#fff"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button"/>
+
+    <Button
+        android:id="@+id/buttonTrackEvolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/track_evolution"
+        android:textColor="#fff"
+        android:background="@drawable/button"/>
+
+    </LinearLayout>
+
+</FrameLayout>

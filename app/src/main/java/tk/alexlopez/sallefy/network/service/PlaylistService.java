@@ -15,10 +15,13 @@ public interface PlaylistService {
 
     @GET("playlists")
     Call<Playlist> getPlaylist(@Body int id, @Header("Authorization") String token);
+
     @PUT("playlists")
     Call<Playlist> updatePlaylist(@Body Playlist playlist, @Header("Authorization") String token);
+
     @POST("playlists")
     Call<Playlist> createPlaylist(@Body Playlist playlist, @Header("Authorization") String token);
+
     @GET("playlists")
     Call<List<Playlist>> getAllPlaylists(@Header("Authorization") String token);
 }

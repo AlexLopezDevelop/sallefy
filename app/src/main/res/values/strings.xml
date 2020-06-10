@@ -12,27 +12,27 @@
 
     <!--ayda hayagh nakkijd -->
 
-    <string name="action_decline" translatable="false" />
-    <string name="action_accept" translatable="false" />
-    <string name="create_song_file" translatable="false"/>
-    <string name="action_cloudinary" translatable="false"/>
-    <string name="create_song_titulo" translatable="false"/>
-    <string name="create_song_genre" translatable="false"/>
-    <string name="url_static" translatable="false"/>
-    <string name="action_static_playback" translatable="false"/>
-    <string name="state_with_connection" translatable="false"/>
-    <string name="action_login" translatable="false"/>
-    <string name="action_backend_playback" translatable="false"/>
+    <string name="action_decline" translatable="false" >Decline</string>
+    <string name="action_accept" translatable="false" >Accept</string>
+    <string name="create_song_file" translatable="false" />
+    <string name="action_cloudinary" translatable="false" />
+    <string name="create_song_titulo" translatable="false" />
+    <string name="create_song_genre" translatable="false" />
+    <string name="url_static" translatable="false" />
+    <string name="action_static_playback" translatable="false" />
+    <string name="state_with_connection" translatable="false" />
+    <string name="action_login">Login</string>
+    <string name="action_backend_playback" translatable="false" />
 
     <string name="name">Title</string>
     <string name="genre">Genre</string>
-    <string name="selectFile">Select...</string>
+    <string name="selectFile">Select…</string>
     <string name="cancel">Cancel</string>
     <string name="uploadSong">Upload</string>
     <string name="upload_info">Upload Song</string>
     <string name="songTitle">Song name</string>
     <string name="selectFile_show">Song file</string>
-    <string name="uploadImg">Select...</string>
+    <string name="uploadImg">Select…</string>
     <string name="selectImg_show">Image file</string>
 
 
@@ -46,14 +46,13 @@
 
     <!-- DEFAULT TRACK -->
     <string name="default_track_title">Título canción</string>
-    <string name="default_track_author">Autor/a</string>
+    <string name="default_track_author">Author/a</string>
 
     <!-- FRAGMENTS (LABELS) -->
     <string name="fragment_playlists">Playlists</string>
     <string name="fragment_songs">Songs</string>
 
     <!-- ACTION -->
-    <string name="action_login_new">Login</string>
     <string name="action_logout">Cerrar sesión</string>
     <string name="action_register">Registrarse</string>
     <string name="action_advance_list">Mostrat Tracks (avanzado)</string>
@@ -94,6 +93,25 @@
     <string name="menu_library">Contenido</string>
     <string name="menu_upload">Subir canción</string>
     <string name="menu_share">Share</string>
-    <string name="error_problem_to_get_info">Ups! hemos tenido un problema a la hora de recuperar la información</string>
+    <string name="top_liked_tracks">Top liked tracks</string>
+    <string name="my_most_played_songs">My most played songs</string>
+    <string name="most_followed_tracks">Most followed tracks</string>
+    <string name="track_evolution">Track evolution</string>
+    <string name="featured">Featured</string>
+    <string name="my_playlists">My playlists</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_song_to_playlist">Add song to PlayList</string>
+    <string name="select_a_song">Select a song</string>
+    <string name="add">Add</string>
+    <string name="add_playlist">Add playList</string>
+    <string name="the_sound_starts_here">The sound starts here</string>
+    <string name="song_title">Song title</string>
+    <string name="artist_name">Artist name</string>
+    <string name="search_tracks">Search tracks</string>
+    <string name="Search">Search</string>
+    <string name="library_songs">Library songs</string>
+    <string name="cover">Cover</string>
+    <string name="playlist_title">Playlist title</string>
+    <string name="options">Opciones</string>
 
 </resources>

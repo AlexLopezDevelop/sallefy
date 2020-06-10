@@ -15,7 +15,7 @@ import tk.alexlopez.sallefy.network.callback.UserCallback
 import tk.alexlopez.sallefy.network.manager.UserManager
 import tk.alexlopez.sallefy.utils.Session
 
-class SignupActivity : AppCompatActivity(), UserCallback {
+class SignActivity : AppCompatActivity(), UserCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,8 @@ class SignupActivity : AppCompatActivity(), UserCallback {
             val username = sign_up_username.text.toString()
             val password = sign_up_password.text.toString()
             val email = recovery_email.text.toString()
-            Session.getInstance(applicationContext).userRegister = UserRegister(email, username, password)
-            UserManager.getInstance(applicationContext).registerAttempt(email, username, password, this@SignupActivity)
+            Session.getInstance(applicationContext as MainActivity?)!!.userRegister = UserRegister(email, username, password)
+            UserManager.getInstance(applicationContext).registerAttempt(email, username, password, this@SignActivity)
         }
     }
 
@@ -47,22 +47,22 @@ class SignupActivity : AppCompatActivity(), UserCallback {
     }
 
     override fun onLoginSuccess(userToken: UserToken) {
-        Session.getInstance(applicationContext).userToken = userToken
+        Session.getInstance(applicationContext as MainActivity?)!!.userToken = userToken
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
     }
 
     override fun onLoginFailure(throwable: Throwable) {
-        Session.getInstance(applicationContext).userRegister = null
+        Session.getInstance(applicationContext as MainActivity?)!!.userRegister = null
     }
 
     override fun onRegisterSuccess() {
-        val userData = Session.getInstance(applicationContext).userRegister
+        val userData = Session.getInstance(applicationContext as MainActivity?)!!.userRegister
         doLogin(userData.login, userData.password)
     }
 
     override fun onRegisterFailure(throwable: Throwable) {
-        Session.getInstance(applicationContext).userRegister = null
+        Session.getInstance(applicationContext as MainActivity?)!!.userRegister = null
         Toast.makeText(applicationContext, "Register failed", Toast.LENGTH_LONG).show()
     }
 

@@ -5,21 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-
-    android:background="@color/colorGrayDark"
+    android:background="@drawable/background_animation"
     tools:context=".activities.MainActivity">
-
-    <com.scwang.wave.MultiWaveHeader
-        android:id="@+id/multiWaveHeader"
-        android:layout_width="470dp"
-        android:layout_height="423dp"
-        android:rotation="-20"
-        android:scaleX="2"
-        android:scaleY="1.7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mwhCloseColor="@color/colorGrayLight"
-        app:mwhStartColor="@color/colorGrayDark"
-        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,8 +21,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="32dp"
             android:textColor="@color/colorWhite"
-            android:textSize="28dp"
-            android:text="Todas las listas"
+            android:textSize="28sp"
+            android:text="@string/featured"
             app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
@@ -48,19 +35,39 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:scrollbars="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="32dp"
             app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader">
 
         </androidx.recyclerview.widget.RecyclerView>
-        <TextView
+        <RelativeLayout
+            android:id="@+id/relative_myplaylist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="10dp"
-            android:text="Mis Listas"
-            android:textColor="@color/colorWhite"
-            android:textSize="28dp"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/my_playlists"
+                android:textColor="@color/colorWhite"
+                android:textSize="28sp"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/createPlaylist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/relative_myplaylist"
+                android:layout_alignBottom="@id/relative_myplaylist"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_playlist_add"
+                tools:ignore="NotSibling" />
+        </RelativeLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MyPlaylists"
@@ -68,18 +75,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:scrollbars="horizontal"
-            android:textColor="@color/colorWhite">
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="32dp">
 
         </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="10dp"
-            android:text="Mis favoritas"
+            android:text=""
             android:textColor="@color/colorWhite"
-            android:textSize="28dp"
+            android:textSize="28sp"
             tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -87,44 +97,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
+            android:layout_marginLeft="32dp"
             android:scrollbars="vertical"
-            android:textColor="@color/colorWhite">
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="10dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
-
-
-
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:text="Tus playlist favoritas"
-                android:textColor="@color/colorWhite"
-                android:textSize="28dp"
-                app:layout_constraintBottom_toTopOf="@+id/multiWaveHeader"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader"
-                app:layout_constraintVertical_bias="0.8"
-                tools:ignore="MissingConstraints" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/favoritePlaylists"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/multiWaveHeader">
-
-            </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

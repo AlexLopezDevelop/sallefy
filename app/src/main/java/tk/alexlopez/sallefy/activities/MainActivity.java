@@ -1,6 +1,7 @@
 package tk.alexlopez.sallefy.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -13,14 +14,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import tk.alexlopez.sallefy.fragments.ChartsFragment;
 import tk.alexlopez.sallefy.R;
 import tk.alexlopez.sallefy.fragments.HomeFragment;
 import tk.alexlopez.sallefy.fragments.SearchFragment;
- import tk.alexlopez.sallefy.network.callback.FragmentCallback;
+import tk.alexlopez.sallefy.fragments.SongsFragment;
+import tk.alexlopez.sallefy.fragments.UploadFragment;
+import tk.alexlopez.sallefy.models.ObjectBox;
+import tk.alexlopez.sallefy.network.callback.FragmentCallback;
 import tk.alexlopez.sallefy.utils.Constants;
 import tk.alexlopez.sallefy.utils.Session;
 
@@ -38,13 +42,15 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
         initViews();
         setInitialFragment();
         requestPermissions();
+        ObjectBox.init(this);
+
     }
 
     private void initViews() {
         mFragmentManager = getSupportFragmentManager();
         mTransaction = mFragmentManager.beginTransaction();
 
-        mNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mNav = findViewById(R.id.bottom_navigation);
         mNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -54,21 +60,17 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         fragment = HomeFragment.getInstance();
                         break;
                     case R.id.action_songs:
-                        //fragment = SongsFragment.getInstance();
+                        fragment = SongsFragment.getInstance();
                         break;
-                    case R.id.action_search :
+                    case R.id.action_search:
                         fragment = SearchFragment.getInstance();
                         break;
-                    case R.id.action_upload :
-                        Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
-                        startActivity(intent);
-                         break;
-                    case R.id.action_content:
-                        // fragment = UploadFramnet.getInstance();
-                        // fragment = ContentFragment.getInstance();
-                        // fragment = HomeFragment.getInstance(UploadActivity);
+                    case R.id.action_upload:
+                        fragment = UploadFragment.getInstance();
                         break;
-
+                    case R.id.action_content:
+                        fragment = ChartsFragment.getInstance();
+                        break;
                 }
                 replaceFragment(fragment);
                 return true;
@@ -100,7 +102,6 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
         Fragment currentFragment = mFragmentManager.findFragmentByTag(fragmentTag);
         if (currentFragment != null) {
             if (!currentFragment.isVisible()) {
-
                 if (fragment.getArguments() != null) {
                     currentFragment.setArguments(fragment.getArguments());
                 }
@@ -108,7 +109,6 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
                         .replace(R.id.fragment_container, currentFragment, fragmentTag)
                         .addToBackStack(null)
                         .commit();
-
             }
         } else {
             mFragmentManager.beginTransaction()
@@ -121,9 +121,21 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     private String getFragmentTag(Fragment fragment) {
         if (fragment instanceof HomeFragment) {
             return HomeFragment.TAG;
+        } else {
+            if (fragment instanceof SongsFragment) {
+                return SongsFragment.TAG;
+            } else {
+                if (fragment instanceof SearchFragment) {
+                    return SearchFragment.TAG;
+                } else if(fragment instanceof ChartsFragment) {
+                    return ChartsFragment.TAG;
+                } else if (fragment instanceof UploadFragment) {
+                    return UploadFragment.TAG;
+                } else {
+                    return HomeFragment.TAG;
+                }
+            }
         }
-        return HomeFragment.TAG; // PROVISIONAL
-
     }
 
     @Override
@@ -145,6 +157,7 @@ public class MainActivity extends FragmentActivity implements FragmentCallback {
     public void onChangeFragment(Fragment fragment) {
         replaceFragment(fragment);
     }
+
 
 
 }

@@ -37,7 +37,6 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
         return new SearchFragment();
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +64,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.searchPlaylist);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        TrackListAdapter adapter = new TrackListAdapter(getContext(), null);
+        TrackListAdapter adapter = new TrackListAdapter(getContext(), null, -1);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(adapter);
 
@@ -84,11 +83,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
             @Override
             public void afterTextChanged(Editable s) {
                 String keyword = input_search.getText().toString();
-                Log.d(TAG, "HAY CAMBIOOOOOOOOOOOOOOOOOOOOO " + input_search.getText());
                 getData(keyword);
-                // you can call or do what you want with your EditText here
-
-                // yourEditText...
             }
         });
     }
@@ -100,7 +95,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
     }
 
     @Override
-    public void onPlaylistcreated() {
+    public void onPlaylistCreated() {
 
     }
 
@@ -112,7 +107,7 @@ public class SearchFragment extends Fragment implements PlaylistCallback, Search
     @Override
     public void onTracksReceived(Search search) {
         mSearch = search;
-        TrackListAdapter adapter = new TrackListAdapter(getContext(), mSearch.getTracks());
+        TrackListAdapter adapter = new TrackListAdapter(getContext(), mSearch.getTracks(), -1);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }

@@ -17,7 +17,8 @@
         <ImageView
             android:id="@+id/track_img"
             android:layout_width="70dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:contentDescription="@string/cover" />
 
     </LinearLayout>
 
@@ -31,7 +32,7 @@
             android:id="@+id/track_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Título playlist"
+            android:text="@string/playlist_title"
             android:textColor="@color/colorWhite" />
 
     </LinearLayout>
