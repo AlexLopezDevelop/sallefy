@@ -8,9 +8,9 @@ _____________________________________________________________
 
 # sallefy images
 
-![alt text](https://github.com/AlexLopezDevelop/sallefy/blob/master/app/images/1.PNG)
+![alt text](https://github.com/AlexLopezDevelop/sallefy/blob/master/app/images/1.PNG)  ![alt text](https://github.com/AlexLopezDevelop/sallefy/blob/master/app/images/1_1.PNG)
 
-![alt text](https://github.com/AlexLopezDevelop/sallefy/blob/master/app/images/1_1.PNG)
+
 
 ![alt text](https://github.com/AlexLopezDevelop/sallefy/blob/master/app/images/2.PNG)
 
