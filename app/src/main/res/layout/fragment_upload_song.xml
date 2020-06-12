@@ -121,5 +121,13 @@
             android:layout_marginTop="5dp"
             android:textColor="@android:color/white"
             android:layout_margin="12dp"/>
+        <TextView
+            android:id="@+id/upload_song_file_img"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"
+            android:layout_margin="12dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 </LinearLayout>

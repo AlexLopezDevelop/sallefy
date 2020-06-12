@@ -40,7 +40,7 @@ public class CloudinaryManager extends AppCompatActivity {
         MediaManager.init(mContext, CloudinaryParam.getConfigurations());
     }
 
-    public synchronized void uploadAudioFile(Uri fileUri, String fileName, Genre genre) {
+    public synchronized void uploadAudioFile(Uri fileUri,Uri fileIMG, String fileName, Genre genre) {
         mGenre = genre;
         mFileName = fileName;
         Map<String, Object> options = new HashMap<>();
@@ -51,6 +51,17 @@ public class CloudinaryManager extends AppCompatActivity {
         MediaManager.get().upload(fileUri)
                 .unsigned(fileName)
                 .options(options)
+                .callback(new CloudinaryCallback())
+                .dispatch();
+
+        Map<String, Object> optionsIMG = new HashMap<>();
+        optionsIMG.put("public_id", fileName+"_img");
+        optionsIMG.put("folder", "sallefy/img/mobile");
+        optionsIMG.put("resource_type", "image");
+
+        MediaManager.get().upload(fileIMG)
+                .unsigned(fileName+"_img")
+                .options(optionsIMG)
                 .callback(new CloudinaryCallback())
                 .dispatch();
         }
@@ -71,6 +82,7 @@ public class CloudinaryManager extends AppCompatActivity {
             track.setId(null);
             track.setName(mFileName);
             track.setUrl((String) resultData.get("url"));
+            track.setThumbnail((String) resultData.get("url_img"));
             ArrayList<Genre> genres = new ArrayList<>();
             genres.add(mGenre);
             track.setGenres(genres);

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ import tk.alexlopez.sallefy.network.manager.GenreManager;
 import tk.alexlopez.sallefy.utils.Constants;
 
 import static android.app.Activity.RESULT_OK;
+import static io.objectbox.BoxStore.context;
 
 
 public class UploadFragment extends Fragment implements GenreCallback, TrackCallback {
@@ -42,9 +44,11 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     private EditText etTitle;
     private Spinner mSpinner;
     private TextView mFilename;
+    private TextView mIMGfileName;
 
     private ArrayList<Genre> mGenresObjs;
     private Uri mFileUri;
+    private Uri mIMGUri;
     private Context mContext;
 
     public static UploadFragment getInstance() {
@@ -75,6 +79,7 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     private void initViews(View view) {
         etTitle = (EditText) view.findViewById(R.id.upload_song_title);
         mFilename = (TextView) view.findViewById(R.id.upload_song_file_name); // findViewById(R.id.upload_song_file_name);
+        mIMGfileName = (TextView) view.findViewById(R.id.upload_song_file_img);
         mSpinner = (Spinner) view.findViewById(R.id.upload_song_spinner); // findViewById(R.id.upload_song_spinner);
 
         Button btnFind = (Button) view.findViewById(R.id.upload_song_find_file);  // findViewById(R.id.upload_song_find_file);
@@ -103,7 +108,7 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
 
     private boolean checkParameters() {
         if (!etTitle.getText().toString().equals("")) {
-            if (mFileUri != null) {
+            if (mFileUri != null && mIMGUri != null) {
                 return true;
             }
         }
@@ -136,8 +141,14 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
                 genre = g;
             }
         }
-        CloudinaryManager.getInstance(this, this).uploadAudioFile(mFileUri, etTitle.getText().toString(), genre);
-        uploadDialog("Upload song to Sallefy","The song has been uploaded correctly");
+        CloudinaryManager.getInstance(this, this).uploadAudioFile(mFileUri, mIMGUri, etTitle.getText().toString(), genre);
+        String text = "Uploading";
+        Context context = getContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        //uploadDialog("Upload song to Sallefy","The song has been uploaded correctly");
     }
 
     @Override
@@ -145,14 +156,16 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.STORAGE.SONG_SELECTED && resultCode == RESULT_OK) {
             mFileUri = data.getData();
+            mIMGUri = data.getData();
             mFilename.setText(mFileUri.toString());
+            mIMGfileName.setText(mIMGUri.toString());
 
         }
     }
     private void getImageFromStorage() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/png");
+        intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Choose a image"), Constants.STORAGE.IMG_SELECTED);
     }
 
@@ -166,7 +179,6 @@ public class UploadFragment extends Fragment implements GenreCallback, TrackCall
     public void onGenresReceive(ArrayList<Genre> genres) {
         mGenresObjs = genres;
         ArrayList<String> mGenres = (ArrayList<String>) genres.stream().map(Genre -> Genre.getName()).collect(Collectors.toList());
-
         //ArrayAdapter adapter = new ArrayAdapter (this, R.layout.support_simple_spinner_dropdown_item, mGenres);
         mSpinner.setAdapter(new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, mGenres));
     }
